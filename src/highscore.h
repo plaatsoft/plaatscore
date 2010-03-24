@@ -1,6 +1,8 @@
 #ifndef HIGHSCORE_H
 #define HIGHSCORE_H
 
+#include <time.h>
+#include <QtGui>
 #include <QMainWindow>
 #include <QtNetwork>
 
@@ -14,6 +16,8 @@ class HighScore : public QMainWindow {
 public:
     HighScore(QWidget *parent = 0);
     ~HighScore();
+    void updateEditorGeometry(QWidget *editor,
+         const QStyleOptionViewItem &option, const QModelIndex &) const;
 
 private slots:
     void on_actionAbout_triggered();
@@ -38,6 +42,7 @@ private:
     void closeEvent(QCloseEvent *event);
     void readSettings();
     void writeSettings();
+    const char * getDate(time_t date);
 };
 
 #endif // HIGHSCORE_H
