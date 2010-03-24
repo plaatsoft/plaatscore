@@ -30,12 +30,14 @@
  *  - Build with QtCreator v1.3.1
  */
 
-#include "highscore.h"
-#include "ui_highscore.h"
+#include <time.h>
 
 #include <QtGui>
 #include <QtXml>
 #include <QtNetwork>
+
+#include "highscore.h"
+#include "ui_highscore.h"
 
 HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScore)
 {
@@ -49,6 +51,12 @@ HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScor
 
     fetch();
 }
+
+void HighScore::updateEditorGeometry(QWidget *editor,
+     const QStyleOptionViewItem &option, const QModelIndex &/* index */) const
+ {
+     ui->tableWidget->setGeometry(option.rect);
+ }
 
 HighScore::~HighScore()
 {
@@ -84,23 +92,49 @@ void HighScore::parseXML(QString response)
    QString score;
    QString dt;
    QString location;
+   QTableWidgetItem *column;
+   QTableWidgetItem *item;
 
    QXmlStreamReader reader(response);
 
    ui->tableWidget->setColumnCount(5);
    ui->tableWidget->setRowCount(response.count("/>"));
 
-   ui->tableWidget->setHorizontalHeaderItem(0, new QTableWidgetItem("Name"));
-   ui->tableWidget->setHorizontalHeaderItem(1, new QTableWidgetItem("Level"));
-   ui->tableWidget->setHorizontalHeaderItem(2, new QTableWidgetItem("Score"));
-   ui->tableWidget->setHorizontalHeaderItem(3, new QTableWidgetItem("Timestamp"));
-   ui->tableWidget->setHorizontalHeaderItem(4, new QTableWidgetItem("Location"));
+   ui->tableWidget->setColumnWidth(0,60);
+   column = new QTableWidgetItem("Name");
+   ui->tableWidget->setHorizontalHeaderItem(0, column);
 
+   ui->tableWidget->setColumnWidth(1,40);
+   column = new QTableWidgetItem("Level");
+   ui->tableWidget->setHorizontalHeaderItem(1, column);
+
+   ui->tableWidget->setColumnWidth(2,70);
+   column = new QTableWidgetItem("Score");
+   ui->tableWidget->setHorizontalHeaderItem(2, column);
+
+   ui->tableWidget->setColumnWidth(3,120);
+   column = new QTableWidgetItem("Timestamp");
+   ui->tableWidget->setHorizontalHeaderItem(3, column);
+
+   ui->tableWidget->setColumnWidth(4,150);
+   column = new QTableWidgetItem("Location");
+   ui->tableWidget->setHorizontalHeaderItem(4, column);
+
+   // Temporary code
+   //ui->tableWidget->setRowCount(1);
+   //ui->tableWidget->setItem(0, 0, new QTableWidgetItem("WPLAAT"));
+   //ui->tableWidget->setItem(0, 1, new QTableWidgetItem("2"));
+   //ui->tableWidget->setItem(0, 2, new QTableWidgetItem("100"));
+   //ui->tableWidget->setItem(0, 3, new QTableWidgetItem("943493849324"));
+   //ui->tableWidget->setItem(0, 4, new QTableWidgetItem("Amsterdam"));
+
+   //ui->tableWidget->
    int id=0;
    while (!reader.atEnd()) {
       reader.readNext();
       if (reader.isStartElement()) {
           if(reader.name() == "item") {
+            bool ok;
 
             name = reader.attributes().value("name").toString();
             level = reader.attributes().value("level").toString();
@@ -110,13 +144,17 @@ void HighScore::parseXML(QString response)
 
             ui->tableWidget->setItem(id, 0, new QTableWidgetItem(name));
 
-
-            QTableWidgetItem *item = new QTableWidgetItem(level);
-            item->setTextAlignment(Qt::AlignRight);
-
+            item = new QTableWidgetItem(level);
+            //item->setTextAlignment(Qt::AlignLeft);
             ui->tableWidget->setItem(id, 1, item);
+
             ui->tableWidget->setItem(id, 2, new QTableWidgetItem(score));
-            ui->tableWidget->setItem(id, 3, new QTableWidgetItem(dt));
+
+
+            //QDate date = QDate::fromString("1MM12car2003", "d'MM'MMcaryyyy");
+
+            int value = dt.toInt(&ok, 10);
+            ui->tableWidget->setItem(id, 3, new QTableWidgetItem(getDate(value)));
             ui->tableWidget->setItem(id, 4, new QTableWidgetItem(location));
             id++;
           }
@@ -250,6 +288,22 @@ void HighScore::on_actionAbout_triggered()
           "internet and let the user modified the data<br><br>"
           "All copyrights reserved (c) "
           "<a href='http://www.plaatsoft.nl'>PlaatSoft</a> 2008-2010"));
+}
+
+const char * HighScore::getDate(time_t date)
+{
+  struct tm *now = NULL;
+  static char buf[ 50 ] ;
+
+  /* Get time and date structure */
+  now = localtime(&date);
+
+  // Create time stamp
+  sprintf(buf,"%02d-%02d-%04d %02d:%02d:%02d",
+        now->tm_mday, now->tm_mon+1, now->tm_year+1900,
+        now->tm_hour,now->tm_min,now->tm_sec);
+
+  return buf;
 }
 
 // ********************************************
