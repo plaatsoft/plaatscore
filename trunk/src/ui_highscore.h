@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'highscore.ui'
 **
-** Created: Wed 24. Mar 19:47:29 2010
+** Created: Wed 24. Mar 20:01:15 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -82,7 +82,7 @@ public:
         frame->setMidLineWidth(2);
         tableWidget = new QTableWidget(frame);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        tableWidget->setGeometry(QRect(10, 10, 541, 141));
+        tableWidget->setGeometry(QRect(3, 3, 555, 155));
         tableWidget->setMinimumSize(QSize(351, 0));
         tableWidget->setFrameShape(QFrame::NoFrame);
         tableWidget->setSortingEnabled(true);
