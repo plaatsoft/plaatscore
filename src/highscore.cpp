@@ -20,6 +20,9 @@
  *
  *  Release Notes
  *
+ *  Issues:
+ *  - Sorting is not working correct on Date and number field
+ *
  *  24-03-2010 Version 0.1
  *  - Start building.
  *  - Created GUI.
@@ -97,28 +100,34 @@ void HighScore::parseXML(QString response)
 
    QXmlStreamReader reader(response);
 
-   ui->tableWidget->setColumnCount(5);
+   ui->tableWidget->setColumnCount(6);
    ui->tableWidget->setRowCount(response.count("/>"));
 
-   ui->tableWidget->setColumnWidth(0,60);
-   column = new QTableWidgetItem("Name");
+   ui->tableWidget->setColumnWidth(0,25);
+   column = new QTableWidgetItem("");
    ui->tableWidget->setHorizontalHeaderItem(0, column);
 
-   ui->tableWidget->setColumnWidth(1,40);
-   column = new QTableWidgetItem("Level");
+   ui->tableWidget->setColumnWidth(1,60);
+   column = new QTableWidgetItem("Name");
    ui->tableWidget->setHorizontalHeaderItem(1, column);
 
-   ui->tableWidget->setColumnWidth(2,70);
-   column = new QTableWidgetItem("Score");
+   ui->tableWidget->setColumnWidth(2,40);
+   column = new QTableWidgetItem("Level");
    ui->tableWidget->setHorizontalHeaderItem(2, column);
 
-   ui->tableWidget->setColumnWidth(3,120);
-   column = new QTableWidgetItem("Timestamp");
+   ui->tableWidget->setColumnWidth(3,70);
+   column = new QTableWidgetItem("Score");
    ui->tableWidget->setHorizontalHeaderItem(3, column);
 
-   ui->tableWidget->setColumnWidth(4,150);
-   column = new QTableWidgetItem("Location");
+   ui->tableWidget->setColumnWidth(4,120);
+   column = new QTableWidgetItem("Timestamp");
    ui->tableWidget->setHorizontalHeaderItem(4, column);
+
+   ui->tableWidget->setColumnWidth(5,150);
+   column = new QTableWidgetItem("Location");
+   ui->tableWidget->setHorizontalHeaderItem(5, column);
+
+
 
    // Temporary code
    //ui->tableWidget->setRowCount(1);
@@ -142,20 +151,22 @@ void HighScore::parseXML(QString response)
             dt = reader.attributes().value("dt").toString();
             location = reader.attributes().value("location").toString();
 
-            ui->tableWidget->setItem(id, 0, new QTableWidgetItem(name));
+            QTableWidgetItem* chkBoxItem = new QTableWidgetItem();
+            chkBoxItem->setCheckState(Qt::Unchecked);
+            ui->tableWidget->setItem(id, 0, chkBoxItem);
+
+            ui->tableWidget->setItem(id, 1, new QTableWidgetItem(name));
 
             item = new QTableWidgetItem(level);
             //item->setTextAlignment(Qt::AlignLeft);
-            ui->tableWidget->setItem(id, 1, item);
+            ui->tableWidget->setItem(id, 2, item);
 
-            ui->tableWidget->setItem(id, 2, new QTableWidgetItem(score));
-
-
-            //QDate date = QDate::fromString("1MM12car2003", "d'MM'MMcaryyyy");
+            ui->tableWidget->setItem(id, 3, new QTableWidgetItem(score));
 
             int value = dt.toInt(&ok, 10);
-            ui->tableWidget->setItem(id, 3, new QTableWidgetItem(getDate(value)));
-            ui->tableWidget->setItem(id, 4, new QTableWidgetItem(location));
+            ui->tableWidget->setItem(id, 4, new QTableWidgetItem(getDate(value)));
+            ui->tableWidget->setItem(id, 5, new QTableWidgetItem(location));
+
             id++;
           }
       }
@@ -166,6 +177,15 @@ void HighScore::parseXML(QString response)
           << reader.errorString() << endl << endl << endl;
    }
 }
+
+
+//for ( int i = 0; i < theTable->rowCount(); i++ ) {
+//         if( theTable->item(i,0)->checkState() == Qt::Checked )
+//         {
+//           currentLine = theTable->item( i, 1 )->text();
+//           currentLine.remove( 4, currentLine.length() );
+//        }
+
 
 void HighScore::fetch()
 {
