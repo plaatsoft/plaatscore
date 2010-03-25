@@ -19,6 +19,8 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include <QtGui>
+
 #include "settings.h"
 #include "ui_settings.h"
 
@@ -27,8 +29,11 @@ Settings::Settings(QWidget *parent): QWidget(parent), ui(new Ui::Settings)
     ui->setupUi(this);
 
     // Set fix windows form size.
-    setMinimumSize(400,150);
-    setMaximumSize(400,150);
+    setMinimumSize(390,260);
+    setMaximumSize(390,260);
+
+    readSettings();
+    updateScreen();
 
     setWindowTitle("Settings");
 }
@@ -52,10 +57,65 @@ void Settings::changeEvent(QEvent *e)
 
 void Settings::on_cancelButton_pressed()
 {
+    readSettings();
     close();
 }
 
 void Settings::on_OkButton_pressed()
 {
+    writeSettings();
     close();
+}
+
+void Settings::readSettings()
+{
+    // Fetch configuration
+    QSettings settings("PlaatSoft", "PlaatScore");
+
+    ui->webServiceUrlEdit->setText(settings.value("webServiceUrl","").toString());
+    ui->webServiceKeyEdit->setText(settings.value("webServiceKey","").toString());
+
+    ui->LoginNameEdit->setText(settings.value("loginName","").toString());
+    ui->passwordEdit->setText( settings.value("password","").toString());
+    ui->proxyAddressEdit->setText( settings.value("proxyAddress","").toString());
+    ui->proxyPortEdit->setText( settings.value("proxyPort","").toString());
+    ui->enabledCheckBox->setChecked(settings.value("proxyEnabled",false).toBool());
+}
+
+void Settings::writeSettings()
+{
+    // Store configuration
+    QSettings settings("PlaatSoft", "PlaatScore");
+
+    settings.setValue("webServiceUrl", ui->webServiceUrlEdit->text());
+    settings.setValue("webServiceKey", ui->webServiceKeyEdit->text());
+
+    settings.setValue("loginName", ui->LoginNameEdit->text());
+    settings.setValue("password", ui->passwordEdit->text());
+    settings.setValue("proxyAddress", ui->proxyAddressEdit->text());
+    settings.setValue("proxyPort", ui->proxyPortEdit->text());
+    settings.setValue("proxyEnabled", ui->enabledCheckBox->isChecked());
+}
+
+void Settings::updateScreen()
+{
+    if (ui->enabledCheckBox->isChecked())
+    {
+        ui->LoginNameEdit->setEnabled(true);
+        ui->passwordEdit->setEnabled(true);
+        ui->proxyAddressEdit->setEnabled(true);
+        ui->proxyPortEdit->setEnabled(true);
+    }
+    else
+    {
+        ui->LoginNameEdit->setEnabled(false);
+        ui->passwordEdit->setEnabled(false);
+        ui->proxyAddressEdit->setEnabled(false);
+        ui->proxyPortEdit->setEnabled(false);
+    }
+}
+
+void Settings::on_enabledCheckBox_clicked()
+{
+    updateScreen();
 }

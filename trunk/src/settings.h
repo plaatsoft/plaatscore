@@ -39,8 +39,12 @@ protected:
 
 private:
     Ui::Settings *ui;
+    void readSettings();
+    void writeSettings();
+    void updateScreen();
 
 private slots:
+    void on_enabledCheckBox_clicked();
     void on_OkButton_pressed();
     void on_cancelButton_pressed();
 };

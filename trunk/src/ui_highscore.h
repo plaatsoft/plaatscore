@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'highscore.ui'
 **
-** Created: Thu 25. Mar 09:09:51 2010
+** Created: Thu 25. Mar 22:19:27 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -102,6 +102,7 @@ public:
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
         HighScore->setMenuBar(menuBar);
+        QWidget::setTabOrder(tableWidget, pushButton);
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuActions->menuAction());
