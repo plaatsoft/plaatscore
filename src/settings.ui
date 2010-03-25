@@ -64,7 +64,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Web Services key (Optional)</string>
+     <string>Web Service key</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="webServiceKeyEdit">
@@ -72,7 +72,7 @@
      <rect>
       <x>11</x>
       <y>73</y>
-      <width>349</width>
+      <width>138</width>
       <height>20</height>
      </rect>
     </property>
@@ -126,7 +126,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Login name</string>
+     <string>Proxy Login</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -134,12 +134,12 @@
      <rect>
       <x>13</x>
       <y>57</y>
-      <width>46</width>
-      <height>13</height>
+      <width>97</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Password</string>
+     <string>Proxy Password</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
@@ -201,8 +201,8 @@
    <widget class="QLineEdit" name="proxyPortEdit">
     <property name="geometry">
      <rect>
-      <x>198</x>
-      <y>74</y>
+      <x>199</x>
+      <y>73</y>
       <width>160</width>
       <height>20</height>
      </rect>

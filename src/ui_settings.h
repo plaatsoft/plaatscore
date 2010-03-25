@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'settings.ui'
 **
-** Created: Thu 25. Mar 22:31:17 2010
+** Created: Thu 25. Mar 23:02:45 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -65,7 +65,7 @@ public:
         label_2->setGeometry(QRect(12, 57, 148, 16));
         webServiceKeyEdit = new QLineEdit(groupBox);
         webServiceKeyEdit->setObjectName(QString::fromUtf8("webServiceKeyEdit"));
-        webServiceKeyEdit->setGeometry(QRect(11, 73, 349, 20));
+        webServiceKeyEdit->setGeometry(QRect(11, 73, 138, 20));
         cancelButton = new QPushButton(Settings);
         cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
         cancelButton->setGeometry(QRect(224, 230, 75, 23));
@@ -80,7 +80,7 @@ public:
         label_3->setGeometry(QRect(14, 19, 62, 16));
         label_4 = new QLabel(groupBox_2);
         label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setGeometry(QRect(13, 57, 46, 13));
+        label_4->setGeometry(QRect(13, 57, 97, 16));
         label_5 = new QLabel(groupBox_2);
         label_5->setObjectName(QString::fromUtf8("label_5"));
         label_5->setGeometry(QRect(202, 18, 124, 16));
@@ -98,7 +98,7 @@ public:
         proxyAddressEdit->setGeometry(QRect(199, 35, 158, 20));
         proxyPortEdit = new QLineEdit(groupBox_2);
         proxyPortEdit->setObjectName(QString::fromUtf8("proxyPortEdit"));
-        proxyPortEdit->setGeometry(QRect(198, 74, 160, 20));
+        proxyPortEdit->setGeometry(QRect(199, 73, 160, 20));
         enabledCheckBox = new QCheckBox(groupBox_2);
         enabledCheckBox->setObjectName(QString::fromUtf8("enabledCheckBox"));
         enabledCheckBox->setGeometry(QRect(115, 13, 70, 17));
@@ -124,8 +124,8 @@ public:
         cancelButton->setText(QApplication::translate("Settings", "Cancel", 0, QApplication::UnicodeUTF8));
         OkButton->setText(QApplication::translate("Settings", "Ok", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("Settings", "HTTP Proxy settings", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("Settings", "Login name", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("Settings", "Password", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("Settings", "Proxy Login", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("Settings", "Proxy Password", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("Settings", "Proxy Address", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("Settings", "Proxy Port", 0, QApplication::UnicodeUTF8));
         enabledCheckBox->setText(QApplication::translate("Settings", "Enabled", 0, QApplication::UnicodeUTF8));
