@@ -1,6 +1,6 @@
 /**
  *  @file
- *  @brief The file contain the PlaatSoft HighScore tool
+ *  @brief The file contain the highscore window
  *  @author wplaat
  *
  *  Copyright (C) 2008-2010 PlaatSoft
@@ -20,8 +20,13 @@
  *
  *  Release Notes
  *
- *  Issues:
+ *  Todo:
  *  - Sorting is not working correct on Date and number field
+ *
+ *  25-03-2010 Version 0.2
+ *  - Add settings page.
+ *  - Cleanup code
+ *  - Build with QtCreator v1.3.1
  *
  *  24-03-2010 Version 0.1
  *  - Start building.
@@ -40,6 +45,7 @@
 #include <QtNetwork>
 
 #include "highscore.h"
+#include "settings.h"
 #include "ui_highscore.h"
 
 HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScore)
@@ -49,8 +55,13 @@ HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScor
     readSettings();
 
     manager = new QNetworkAccessManager(this);
-    connect( manager, SIGNAL(finished(QNetworkReply*)),
-                this, SLOT(replyFinished(QNetworkReply*)) );
+
+    connect( manager,
+                SIGNAL(finished(QNetworkReply*)),
+                this,
+                SLOT(replyFinished(QNetworkReply*)) );
+
+    setWindowTitle("PlaatSoft HighScore v0.2");
 
     fetch();
 }
@@ -127,17 +138,28 @@ void HighScore::parseXML(QString response)
    column = new QTableWidgetItem("Location");
    ui->tableWidget->setHorizontalHeaderItem(5, column);
 
+   // Temporary data
+   /*ui->tableWidget->setRowCount(2);
+   QTableWidgetItem* chkBoxItem = new QTableWidgetItem();
+   chkBoxItem->setCheckState(Qt::Unchecked);
+   ui->tableWidget->setItem(0, 0, chkBoxItem);
 
+   ui->tableWidget->setItem(0, 1, new QTableWidgetItem("WPLAAT"));
+   ui->tableWidget->setItem(0, 2, new QTableWidgetItem("2"));
+   ui->tableWidget->setItem(0, 3, new QTableWidgetItem("100"));
+   ui->tableWidget->setItem(0, 4, new QTableWidgetItem("22-02-2010 13:00:00"));
+   ui->tableWidget->setItem(0, 5, new QTableWidgetItem("Amsterdam"));
 
-   // Temporary code
-   //ui->tableWidget->setRowCount(1);
-   //ui->tableWidget->setItem(0, 0, new QTableWidgetItem("WPLAAT"));
-   //ui->tableWidget->setItem(0, 1, new QTableWidgetItem("2"));
-   //ui->tableWidget->setItem(0, 2, new QTableWidgetItem("100"));
-   //ui->tableWidget->setItem(0, 3, new QTableWidgetItem("943493849324"));
-   //ui->tableWidget->setItem(0, 4, new QTableWidgetItem("Amsterdam"));
+   chkBoxItem = new QTableWidgetItem();
+   chkBoxItem->setCheckState(Qt::Unchecked);
+   ui->tableWidget->setItem(1, 0, chkBoxItem);
 
-   //ui->tableWidget->
+   ui->tableWidget->setItem(1, 1, new QTableWidgetItem("SONJA"));
+   ui->tableWidget->setItem(1, 2, new QTableWidgetItem("4"));
+   ui->tableWidget->setItem(1, 3, new QTableWidgetItem("102"));
+   ui->tableWidget->setItem(1, 4, new QTableWidgetItem("23-02-2010 14:00:00"));
+   ui->tableWidget->setItem(1, 5, new QTableWidgetItem("Gouda"));*/
+
    int id=0;
    while (!reader.atEnd()) {
       reader.readNext();
@@ -155,17 +177,21 @@ void HighScore::parseXML(QString response)
             chkBoxItem->setCheckState(Qt::Unchecked);
             ui->tableWidget->setItem(id, 0, chkBoxItem);
 
-            ui->tableWidget->setItem(id, 1, new QTableWidgetItem(name));
+            item = new QTableWidgetItem(level);
+            ui->tableWidget->setItem(id, 1, item);
 
             item = new QTableWidgetItem(level);
-            //item->setTextAlignment(Qt::AlignLeft);
             ui->tableWidget->setItem(id, 2, item);
 
-            ui->tableWidget->setItem(id, 3, new QTableWidgetItem(score));
+            item = new QTableWidgetItem(score);
+            ui->tableWidget->setItem(id, 3, item);
 
             int value = dt.toInt(&ok, 10);
-            ui->tableWidget->setItem(id, 4, new QTableWidgetItem(getDate(value)));
-            ui->tableWidget->setItem(id, 5, new QTableWidgetItem(location));
+            item = new QTableWidgetItem(getDate(value));
+            ui->tableWidget->setItem(id, 4, item);
+
+            item = new QTableWidgetItem(location);
+            ui->tableWidget->setItem(id, 5, item);
 
             id++;
           }
@@ -177,15 +203,6 @@ void HighScore::parseXML(QString response)
           << reader.errorString() << endl << endl << endl;
    }
 }
-
-
-//for ( int i = 0; i < theTable->rowCount(); i++ ) {
-//         if( theTable->item(i,0)->checkState() == Qt::Checked )
-//         {
-//           currentLine = theTable->item( i, 1 )->text();
-//           currentLine.remove( 4, currentLine.length() );
-//        }
-
 
 void HighScore::fetch()
 {
@@ -300,7 +317,7 @@ void HighScore::on_actionAbout_triggered()
 {
     QMessageBox::about(this, tr("About"),
        tr("<b>PlaatSoft HighScore</b><br>"
-          "Version 0.1 (Build 24-03-2010)<br>"
+          "Version 0.2 (Build 25-03-2010)<br>"
           "<br>"
           "Created by <i>wplaat</i><br>"
           "<br>"
@@ -326,6 +343,28 @@ const char * HighScore::getDate(time_t date)
   return buf;
 }
 
+
+void HighScore::on_actionSettings_triggered()
+{
+    QPoint position = QPoint(pos());
+    //position.setX(position.x+10);
+    //position.setY(position.y+10);
+    settings.move(position);
+    settings.show();
+}
+
+void HighScore::on_pushButton_pressed()
+{
+    for ( int i = 0; i < ui->tableWidget->rowCount(); i++ ) {
+      if( ui->tableWidget->item(i,0)->checkState() == Qt::Checked ) {
+          qDebug() << ui->tableWidget->item( i, 1 )->text();
+      }
+    }
+}
+
 // ********************************************
 // The end
 // ********************************************
+
+
+

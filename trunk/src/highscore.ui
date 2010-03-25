@@ -102,6 +102,8 @@
     <addaction name="actionRedSquare"/>
     <addaction name="actionSpaceBubble"/>
     <addaction name="actionTowerDefense"/>
+    <addaction name="separator"/>
+    <addaction name="actionSettings"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -161,6 +163,11 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
    </property>
   </action>
  </widget>
