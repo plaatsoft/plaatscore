@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>152</height>
+    <width>391</width>
+    <height>261</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>391</width>
+    <height>16777215</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -16,34 +22,34 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>8</x>
-     <y>8</y>
-     <width>383</width>
+     <x>10</x>
+     <y>10</y>
+     <width>371</width>
      <height>103</height>
     </rect>
    </property>
    <property name="title">
-    <string/>
+    <string>General</string>
    </property>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>14</x>
-      <y>11</y>
+      <x>13</x>
+      <y>16</y>
       <width>105</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Edit access key</string>
+     <string>Web Service Url</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="keyEdit">
+   <widget class="QLineEdit" name="webServiceUrlEdit">
     <property name="geometry">
      <rect>
-      <x>13</x>
-      <y>27</y>
-      <width>356</width>
+      <x>10</x>
+      <y>33</y>
+      <width>351</width>
       <height>20</height>
      </rect>
     </property>
@@ -51,22 +57,22 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>13</x>
-      <y>52</y>
-      <width>97</width>
+      <x>12</x>
+      <y>57</y>
+      <width>148</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Web Services URL</string>
+     <string>Web Services key (Optional)</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="webServiceUrlEdit">
+   <widget class="QLineEdit" name="webServiceKeyEdit">
     <property name="geometry">
      <rect>
-      <x>13</x>
-      <y>71</y>
-      <width>356</width>
+      <x>11</x>
+      <y>73</y>
+      <width>349</width>
       <height>20</height>
      </rect>
     </property>
@@ -75,8 +81,8 @@
   <widget class="QPushButton" name="cancelButton">
    <property name="geometry">
     <rect>
-     <x>233</x>
-     <y>123</y>
+     <x>224</x>
+     <y>230</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -88,8 +94,8 @@
   <widget class="QPushButton" name="OkButton">
    <property name="geometry">
     <rect>
-     <x>315</x>
-     <y>122</y>
+     <x>308</x>
+     <y>231</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -98,7 +104,135 @@
     <string>Ok</string>
    </property>
   </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>117</y>
+     <width>371</width>
+     <height>105</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>HTTP Proxy settings</string>
+   </property>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>14</x>
+      <y>19</y>
+      <width>62</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Login name</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>13</x>
+      <y>57</y>
+      <width>46</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Password</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>202</x>
+      <y>18</y>
+      <width>124</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Proxy Address</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>59</y>
+      <width>70</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Proxy Port</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LoginNameEdit">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>34</y>
+      <width>169</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="passwordEdit">
+    <property name="geometry">
+     <rect>
+      <x>12</x>
+      <y>72</y>
+      <width>168</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="proxyAddressEdit">
+    <property name="geometry">
+     <rect>
+      <x>199</x>
+      <y>35</y>
+      <width>158</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="proxyPortEdit">
+    <property name="geometry">
+     <rect>
+      <x>198</x>
+      <y>74</y>
+      <width>160</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="enabledCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>115</x>
+      <y>13</y>
+      <width>70</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Enabled</string>
+    </property>
+   </widget>
+  </widget>
  </widget>
+ <tabstops>
+  <tabstop>webServiceUrlEdit</tabstop>
+  <tabstop>webServiceKeyEdit</tabstop>
+  <tabstop>LoginNameEdit</tabstop>
+  <tabstop>passwordEdit</tabstop>
+  <tabstop>proxyAddressEdit</tabstop>
+  <tabstop>proxyPortEdit</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>OkButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

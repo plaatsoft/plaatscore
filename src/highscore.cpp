@@ -236,7 +236,7 @@ void HighScore::replyFinished(QNetworkReply *reply)
 void HighScore::readSettings()
 {
     // Fetch previous window position
-    QSettings settings("PlaatSoft", "HighScore");
+    QSettings settings("PlaatSoft", "PlaatScore");
     QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
     move(pos);
 }
@@ -244,7 +244,7 @@ void HighScore::readSettings()
 void HighScore::writeSettings()
 {
     // Store current window position
-    QSettings settings("PlaatSoft", "HighScore");
+    QSettings settings("PlaatSoft", "PlaatScore");
     settings.setValue("pos", pos());
 }
 
@@ -300,7 +300,6 @@ void HighScore::on_actionSpaceBubble_triggered()
     ui->actionTowerDefense->setChecked(false);
     fetch();
 }
-
 
 void HighScore::on_actionTowerDefense_triggered()
 {
