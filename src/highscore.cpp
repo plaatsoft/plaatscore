@@ -23,8 +23,9 @@
  *  Todo:
  *  - Sorting is not working correct on Date and number field
  *
- *  25-03-2010 Version 0.2
- *  - Add settings page.
+ *  26-03-2010 Version 0.2
+ *  - Added settings page.
+ *  - Added Http Proxy support
  *  - Cleanup code
  *  - Build with QtCreator v1.3.1
  *
@@ -206,8 +207,28 @@ void HighScore::parseXML(QString response)
 
 void HighScore::fetch()
 {
-    qDebug() << "Fetch " << address;
-    manager->get(QNetworkRequest(address));
+    QSettings settings("PlaatSoft", "PlaatScore");
+    QString address(settings.value("webServiceUrl","").toString());
+
+    // Proxy support
+    bool enabled = settings.value("proxyEnabled",false).toBool();
+    QNetworkProxy proxy;
+    if (enabled)
+    {
+        qDebug() << "Proxy enabled";
+        bool ok;
+        proxy.setUser(settings.value("loginName","").toString());
+        proxy.setPassword(settings.value("password","").toString());
+        proxy.setPort(settings.value("proxyPort","").toString().toInt(&ok, 10));
+        proxy.setHostName(settings.value("proxyAddress","").toString());
+        proxy.setType(QNetworkProxy::HttpProxy);
+    } else {
+        proxy.setType(QNetworkProxy::NoProxy);
+    }
+    manager->setProxy(proxy);
+
+    qDebug() << "Fetch " << address << parameters ;
+    manager->post(QNetworkRequest(address),parameters);
 }
 
 void HighScore::replyFinished(QNetworkReply *reply)
@@ -248,6 +269,22 @@ void HighScore::writeSettings()
     settings.setValue("pos", pos());
 }
 
+const char * HighScore::getDate(time_t date)
+{
+  struct tm *now = NULL;
+  static char buf[ 50 ] ;
+
+  /* Get time and date structure */
+  now = localtime(&date);
+
+  // Create time stamp
+  sprintf(buf,"%02d-%02d-%04d %02d:%02d:%02d",
+        now->tm_mday, now->tm_mon+1, now->tm_year+1900,
+        now->tm_hour,now->tm_min,now->tm_sec);
+
+  return buf;
+}
+
 // ********************************************
 // User actions.
 // ********************************************
@@ -259,7 +296,9 @@ void HighScore::on_actionExit_triggered()
 
 void HighScore::on_actionPong2_triggered()
 {
-    address = QString("http://www.plaatsoft.nl/service/score_set_global.php?appl=pong2");
+    // Request HTTP Parameters
+    parameters = QByteArray("appl=pong2");
+
     ui->actionPong2->setCheckable(true);
     ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(false);
@@ -270,7 +309,9 @@ void HighScore::on_actionPong2_triggered()
 
 void HighScore::on_actionBibleQuiz_triggered()
 {
-    address = QString("http://www.plaatsoft.nl/service/score_set_global.php?appl=biblequiz");
+    // Request HTTP Parameters
+    parameters = QByteArray("appl=biblequiz");
+
     ui->actionPong2->setCheckable(false);
     ui->actionBibleQuiz->setChecked(true);
     ui->actionRedSquare->setChecked(false);
@@ -281,7 +322,9 @@ void HighScore::on_actionBibleQuiz_triggered()
 
 void HighScore::on_actionRedSquare_triggered()
 {
-    address = QString("http://www.plaatsoft.nl/service/score_set_global.php?appl=redsquare");
+    // Request HTTP Parameters
+    parameters = QByteArray("appl=redsquare");
+
     ui->actionPong2->setCheckable(false);
     ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(true);
@@ -292,7 +335,9 @@ void HighScore::on_actionRedSquare_triggered()
 
 void HighScore::on_actionSpaceBubble_triggered()
 {
-    address = QString("http://www.plaatsoft.nl/service/score_set_global.php?appl=spacebubble");
+    // Request HTTP Parameters
+    parameters = QByteArray("appl=spacebubble");
+
     ui->actionPong2->setCheckable(false);
     ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(false);
@@ -303,7 +348,9 @@ void HighScore::on_actionSpaceBubble_triggered()
 
 void HighScore::on_actionTowerDefense_triggered()
 {
-    address = QString("http://www.plaatsoft.nl/service/score_set_global.php?appl=towerdefense");
+    // Request HTTP Parameters
+    parameters = QByteArray("appl=towerdefense");
+
     ui->actionPong2->setCheckable(false);
     ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(false);
@@ -326,32 +373,24 @@ void HighScore::on_actionAbout_triggered()
           "<a href='http://www.plaatsoft.nl'>PlaatSoft</a> 2008-2010"));
 }
 
-const char * HighScore::getDate(time_t date)
-{
-  struct tm *now = NULL;
-  static char buf[ 50 ] ;
-
-  /* Get time and date structure */
-  now = localtime(&date);
-
-  // Create time stamp
-  sprintf(buf,"%02d-%02d-%04d %02d:%02d:%02d",
-        now->tm_mday, now->tm_mon+1, now->tm_year+1900,
-        now->tm_hour,now->tm_min,now->tm_sec);
-
-  return buf;
-}
-
-
+/**
+ * Process open setting window action
+ */
 void HighScore::on_actionSettings_triggered()
 {
+    // Set settings window position related to Main window.
     QPoint position = QPoint(pos());
-    //position.setX(position.x+10);
-    //position.setY(position.y+10);
+    position.setX(position.x()+100);
+    position.setY(position.y()+20);
     settings.move(position);
+
+    // Make settings window visible
     settings.show();
 }
 
+/**
+ * Process remove button action
+ */
 void HighScore::on_pushButton_pressed()
 {
     for ( int i = 0; i < ui->tableWidget->rowCount(); i++ ) {
