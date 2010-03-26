@@ -17,26 +17,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- *  Release Notes
- *
- *  Todo:
- *  - Sorting is not working correct on Date and number field
- *
- *  26-03-2010 Version 0.2
- *  - Added settings page.
- *  - Added Http Proxy support
- *  - Cleanup code
- *  - Build with QtCreator v1.3.1
- *
- *  24-03-2010 Version 0.1
- *  - Start building.
- *  - Created GUI.
- *  - Added basic menu.
- *  - Added basic about box.
- *  - Load / Save window position on start / exit.
- *  - Added application icon.
- *  - Build with QtCreator v1.3.1
  */
 
 #include <time.h>
@@ -64,7 +44,9 @@ HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScor
 
     setWindowTitle("PlaatSoft HighScore v0.2");
 
-    fetch();
+    // Set fix windows form size.
+    setMinimumSize(614,390);
+    setMaximumSize(614,390);
 }
 
 void HighScore::updateEditorGeometry(QWidget *editor,
@@ -102,6 +84,7 @@ void HighScore::closeEvent(QCloseEvent *event)
 
 void HighScore::parseXML(QString response)
 {
+   QString id;
    QString name;
    QString level;
    QString score;
@@ -112,7 +95,7 @@ void HighScore::parseXML(QString response)
 
    QXmlStreamReader reader(response);
 
-   ui->tableWidget->setColumnCount(6);
+   ui->tableWidget->setColumnCount(7);
    ui->tableWidget->setRowCount(response.count("/>"));
 
    ui->tableWidget->setColumnWidth(0,25);
@@ -120,54 +103,37 @@ void HighScore::parseXML(QString response)
    ui->tableWidget->setHorizontalHeaderItem(0, column);
 
    ui->tableWidget->setColumnWidth(1,60);
-   column = new QTableWidgetItem("Name");
+   column = new QTableWidgetItem("Id");
    ui->tableWidget->setHorizontalHeaderItem(1, column);
 
-   ui->tableWidget->setColumnWidth(2,40);
-   column = new QTableWidgetItem("Level");
+   ui->tableWidget->setColumnWidth(2,60);
+   column = new QTableWidgetItem("Name");
    ui->tableWidget->setHorizontalHeaderItem(2, column);
 
-   ui->tableWidget->setColumnWidth(3,70);
-   column = new QTableWidgetItem("Score");
+   ui->tableWidget->setColumnWidth(3,40);
+   column = new QTableWidgetItem("Level");
    ui->tableWidget->setHorizontalHeaderItem(3, column);
 
-   ui->tableWidget->setColumnWidth(4,120);
-   column = new QTableWidgetItem("Timestamp");
+   ui->tableWidget->setColumnWidth(4,50);
+   column = new QTableWidgetItem("Score");
    ui->tableWidget->setHorizontalHeaderItem(4, column);
 
-   ui->tableWidget->setColumnWidth(5,150);
-   column = new QTableWidgetItem("Location");
+   ui->tableWidget->setColumnWidth(5,120);
+   column = new QTableWidgetItem("Timestamp");
    ui->tableWidget->setHorizontalHeaderItem(5, column);
 
-   // Temporary data
-   /*ui->tableWidget->setRowCount(2);
-   QTableWidgetItem* chkBoxItem = new QTableWidgetItem();
-   chkBoxItem->setCheckState(Qt::Unchecked);
-   ui->tableWidget->setItem(0, 0, chkBoxItem);
+   ui->tableWidget->setColumnWidth(6,150);
+   column = new QTableWidgetItem("Location");
+   ui->tableWidget->setHorizontalHeaderItem(6, column);
 
-   ui->tableWidget->setItem(0, 1, new QTableWidgetItem("WPLAAT"));
-   ui->tableWidget->setItem(0, 2, new QTableWidgetItem("2"));
-   ui->tableWidget->setItem(0, 3, new QTableWidgetItem("100"));
-   ui->tableWidget->setItem(0, 4, new QTableWidgetItem("22-02-2010 13:00:00"));
-   ui->tableWidget->setItem(0, 5, new QTableWidgetItem("Amsterdam"));
-
-   chkBoxItem = new QTableWidgetItem();
-   chkBoxItem->setCheckState(Qt::Unchecked);
-   ui->tableWidget->setItem(1, 0, chkBoxItem);
-
-   ui->tableWidget->setItem(1, 1, new QTableWidgetItem("SONJA"));
-   ui->tableWidget->setItem(1, 2, new QTableWidgetItem("4"));
-   ui->tableWidget->setItem(1, 3, new QTableWidgetItem("102"));
-   ui->tableWidget->setItem(1, 4, new QTableWidgetItem("23-02-2010 14:00:00"));
-   ui->tableWidget->setItem(1, 5, new QTableWidgetItem("Gouda"));*/
-
-   int id=0;
+   int i=0;
    while (!reader.atEnd()) {
       reader.readNext();
       if (reader.isStartElement()) {
           if(reader.name() == "item") {
             bool ok;
 
+            id = reader.attributes().value("id").toString();
             name = reader.attributes().value("name").toString();
             level = reader.attributes().value("level").toString();
             score = reader.attributes().value("score").toString();
@@ -176,25 +142,28 @@ void HighScore::parseXML(QString response)
 
             QTableWidgetItem* chkBoxItem = new QTableWidgetItem();
             chkBoxItem->setCheckState(Qt::Unchecked);
-            ui->tableWidget->setItem(id, 0, chkBoxItem);
+            ui->tableWidget->setItem(i, 0, chkBoxItem);
+
+            item = new QTableWidgetItem(id);
+            ui->tableWidget->setItem(i, 1, item);
+
+            item = new QTableWidgetItem(name);
+            ui->tableWidget->setItem(i, 2, item);
 
             item = new QTableWidgetItem(level);
-            ui->tableWidget->setItem(id, 1, item);
-
-            item = new QTableWidgetItem(level);
-            ui->tableWidget->setItem(id, 2, item);
+            ui->tableWidget->setItem(i, 3, item);
 
             item = new QTableWidgetItem(score);
-            ui->tableWidget->setItem(id, 3, item);
+            ui->tableWidget->setItem(i, 4, item);
 
             int value = dt.toInt(&ok, 10);
             item = new QTableWidgetItem(getDate(value));
-            ui->tableWidget->setItem(id, 4, item);
+            ui->tableWidget->setItem(i, 5, item);
 
             item = new QTableWidgetItem(location);
-            ui->tableWidget->setItem(id, 5, item);
+            ui->tableWidget->setItem(i, 6, item);
 
-            id++;
+            i++;
           }
       }
    }
@@ -208,7 +177,6 @@ void HighScore::parseXML(QString response)
 void HighScore::fetch()
 {
     QSettings settings("PlaatSoft", "PlaatScore");
-    QString address(settings.value("webServiceUrl","").toString());
 
     // Proxy support
     bool enabled = settings.value("proxyEnabled",false).toBool();
@@ -227,8 +195,15 @@ void HighScore::fetch()
     }
     manager->setProxy(proxy);
 
-    qDebug() << "Fetch " << address << parameters ;
-    manager->post(QNetworkRequest(address),parameters);
+    QNetworkRequest request;
+    request.setUrl(QUrl(settings.value("webServiceUrl","").toString()));
+    request.setRawHeader("KEY", settings.value("webServiceKey","").toByteArray());
+    request.setRawHeader("APPL", applValue);
+    request.setRawHeader("ACTION", applAction);
+    request.setRawHeader("ID", applId);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "text/xml");
+
+    manager->get(request);
 }
 
 void HighScore::replyFinished(QNetworkReply *reply)
@@ -239,16 +214,12 @@ void HighScore::replyFinished(QNetworkReply *reply)
 
     qDebug() << sA << "Bytes received ";
 
-    // Correct itemXX tag and filter out illigal characters.
-    int count = result.count("/>")+1;
-    for (int i=0; i<count; i++) {
-       item  = "item";
-       item += QString::number(i);
-       item += " ";
-       result=result.replace(item,"item ");
-       result=result.replace("&","");
-       result=result.replace(";","");
-    }
+    // Filter out illigal characters.
+    result=result.replace("&","");
+    result=result.replace(";","");
+    int pos = result.indexOf("<highscore>");
+    result=result.remove(0, pos);
+
     qDebug() << result;
 
     parseXML(result);
@@ -297,65 +268,90 @@ void HighScore::on_actionExit_triggered()
 void HighScore::on_actionPong2_triggered()
 {
     // Request HTTP Parameters
-    parameters = QByteArray("appl=pong2");
+    applValue = QByteArray("pong2");
+    applAction= QByteArray("");
+    applId = QByteArray("");
 
     ui->actionPong2->setCheckable(true);
     ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(false);
     ui->actionSpaceBubble->setChecked(false);
     ui->actionTowerDefense->setChecked(false);
+
+    ui->tableWidget->setRowCount(0);
+
     fetch();
 }
 
 void HighScore::on_actionBibleQuiz_triggered()
 {
     // Request HTTP Parameters
-    parameters = QByteArray("appl=biblequiz");
+    applValue = QByteArray("biblequiz");
+    applAction= QByteArray("");
+    applId = QByteArray("");
 
     ui->actionPong2->setCheckable(false);
     ui->actionBibleQuiz->setChecked(true);
     ui->actionRedSquare->setChecked(false);
     ui->actionSpaceBubble->setChecked(false);
     ui->actionTowerDefense->setChecked(false);
+
+    ui->tableWidget->setRowCount(0);
+
     fetch();
 }
 
 void HighScore::on_actionRedSquare_triggered()
 {
     // Request HTTP Parameters
-    parameters = QByteArray("appl=redsquare");
+    applValue = QByteArray("redsquare");
+    applAction= QByteArray("");
+    applId = QByteArray("");
 
     ui->actionPong2->setCheckable(false);
     ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(true);
     ui->actionSpaceBubble->setChecked(false);
     ui->actionTowerDefense->setChecked(false);
+
+    ui->tableWidget->setRowCount(0);
+
     fetch();
 }
 
 void HighScore::on_actionSpaceBubble_triggered()
 {
     // Request HTTP Parameters
-    parameters = QByteArray("appl=spacebubble");
+    applValue = QByteArray("spacebubble");
+    applAction= QByteArray("");
+    applId = QByteArray("");
 
     ui->actionPong2->setCheckable(false);
     ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(false);
     ui->actionSpaceBubble->setChecked(true);
     ui->actionTowerDefense->setChecked(false);
+
+    ui->tableWidget->setRowCount(0);
+
     fetch();
 }
 
 void HighScore::on_actionTowerDefense_triggered()
 {
     // Request HTTP Parameters
-    parameters = QByteArray("appl=towerdefense");
+    applValue = QByteArray("towerdefense");
+    applAction= QByteArray("");
+    applId = QByteArray("");
 
     ui->actionPong2->setCheckable(false);
     ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(false);
     ui->actionSpaceBubble->setChecked(false);
     ui->actionTowerDefense->setChecked(true);
+
+    ui->tableWidget->setRowCount(0);
+
     fetch();
 }
 
@@ -380,8 +376,8 @@ void HighScore::on_actionSettings_triggered()
 {
     // Set settings window position related to Main window.
     QPoint position = QPoint(pos());
-    position.setX(position.x()+100);
-    position.setY(position.y()+20);
+    position.setX(position.x()+120);
+    position.setY(position.y()+70);
     settings.move(position);
 
     // Make settings window visible
@@ -395,7 +391,16 @@ void HighScore::on_pushButton_pressed()
 {
     for ( int i = 0; i < ui->tableWidget->rowCount(); i++ ) {
       if( ui->tableWidget->item(i,0)->checkState() == Qt::Checked ) {
-          qDebug() << ui->tableWidget->item( i, 1 )->text();
+
+          QString id = ui->tableWidget->item( i, 1 )->text();
+
+          applAction = QByteArray("remove");
+          QByteArray tmp(id.toAscii());
+          applId = tmp;
+
+          qDebug() << "Remove " << id << "  [" << applId << "]";
+
+          fetch();
       }
     }
 }

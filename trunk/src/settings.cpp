@@ -72,7 +72,7 @@ void Settings::readSettings()
     // Fetch configuration
     QSettings settings("PlaatSoft", "PlaatScore");
 
-    ui->webServiceUrlEdit->setText(settings.value("webServiceUrl","").toString());
+    ui->webServiceUrlEdit->setText(settings.value("webServiceUrl","http://www.plaatsoft.nl/service/score.php").toString());
     ui->webServiceKeyEdit->setText(settings.value("webServiceKey","").toString());
 
     ui->LoginNameEdit->setText(settings.value("loginName","").toString());
@@ -119,3 +119,7 @@ void Settings::on_enabledCheckBox_clicked()
 {
     updateScreen();
 }
+
+// ********************************************
+// The end
+// ********************************************

@@ -1,6 +1,3 @@
-#ifndef HIGHSCORE_H
-#define HIGHSCORE_H
-
 /**
  *  @file
  *  @brief The file contain the highscore window
@@ -21,6 +18,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
+
+#ifndef HIGHSCORE_H
+#define HIGHSCORE_H
 
 #include <time.h>
 #include <QtGui>
@@ -61,7 +61,9 @@ protected:
 private:
     Ui::HighScore *ui;
     QNetworkAccessManager *manager;
-    QByteArray parameters;
+    QByteArray applValue;
+    QByteArray applAction;
+    QByteArray applId;
     Settings settings;
 
     void parseXML(QString response);
@@ -72,3 +74,40 @@ private:
 };
 
 #endif // HIGHSCORE_H
+
+/**
+ * @mainpage PlaatScore Documentation
+ * @image html PlaatScore.png
+ * Welcome to the PlaatScore documentation.
+ *
+ * @section Introduction
+ * PlaatStats is Windows HighScore tool
+ *
+ * @section Links
+ * Website: http://www.plaatsoft.nl\n
+ * Code: http://code.google.com/p/plaatscore\n
+ *
+ * @section Credits
+ * Documentation: wplaat\n
+ *
+ * @section WishList
+ *  - Sorting is not working correct on Date and number field
+ *
+ * @section ReleaseNotes
+ *  <b>26-03-2010 Version 0.2</b>
+ *  - Added settings page.
+ *  - Added Http Proxy support.
+ *  - Added remove entry functionality.
+ *  - Cleanup code.
+ *  - Build with QtCreator v1.3.1
+ *
+ *  <b>24-03-2010 Version 0.1</b>
+ *  - Start building.
+ *  - Created GUI.
+ *  - Added basic menu.
+ *  - Added basic about box.
+ *  - Load / Save window position on start / exit.
+ *  - Added application icon.
+ *  - Build with QtCreator v1.3.1
+ */
+

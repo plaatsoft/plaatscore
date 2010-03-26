@@ -1,6 +1,6 @@
 /**
  *  @file
- *  @brief The file contain the Main methode
+ *  @brief The file contain the main
  *  @author wplaat
  *
  *  Copyright (C) 2008-2010 PlaatSoft
@@ -20,8 +20,12 @@
  */
 
 #include <QtGui/QApplication>
+
 #include "highscore.h"
 
+/**
+ * Main
+ */
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -29,3 +33,7 @@ int main(int argc, char *argv[])
     w.show();
     return a.exec();
 }
+
+// ********************************************
+// The end
+// ********************************************
