@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'highscore.ui'
 **
-** Created: Fri 26. Mar 06:33:21 2010
+** Created: Fri 26. Mar 19:39:47 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -49,7 +49,7 @@ public:
     {
         if (HighScore->objectName().isEmpty())
             HighScore->setObjectName(QString::fromUtf8("HighScore"));
-        HighScore->resize(579, 230);
+        HighScore->resize(614, 390);
         actionExit = new QAction(HighScore);
         actionExit->setObjectName(QString::fromUtf8("actionExit"));
         actionPong2 = new QAction(HighScore);
@@ -75,17 +75,17 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(10, 180, 131, 23));
+        pushButton->setGeometry(QRect(7, 339, 131, 23));
         frame = new QFrame(centralWidget);
         frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setGeometry(QRect(10, 10, 561, 161));
+        frame->setGeometry(QRect(10, 10, 595, 321));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Sunken);
         frame->setLineWidth(2);
         frame->setMidLineWidth(2);
         tableWidget = new QTableWidget(frame);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        tableWidget->setGeometry(QRect(3, 3, 555, 155));
+        tableWidget->setGeometry(QRect(3, 3, 589, 316));
         tableWidget->setMinimumSize(QSize(351, 0));
         tableWidget->setFrameShape(QFrame::NoFrame);
         tableWidget->setSortingEnabled(true);
@@ -94,7 +94,7 @@ public:
         HighScore->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(HighScore);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 579, 20));
+        menuBar->setGeometry(QRect(0, 0, 614, 20));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuActions = new QMenu(menuBar);
