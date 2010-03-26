@@ -61,7 +61,7 @@ protected:
 private:
     Ui::HighScore *ui;
     QNetworkAccessManager *manager;
-    QString address;
+    QByteArray parameters;
     Settings settings;
 
     void parseXML(QString response);

@@ -53,6 +53,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="maxLength">
+     <number>200</number>
+    </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
@@ -75,6 +78,9 @@
       <width>138</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="maxLength">
+     <number>20</number>
     </property>
    </widget>
   </widget>
@@ -177,6 +183,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="maxLength">
+     <number>20</number>
+    </property>
    </widget>
    <widget class="QLineEdit" name="passwordEdit">
     <property name="geometry">
@@ -186,6 +195,12 @@
       <width>168</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="maxLength">
+     <number>20</number>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::PasswordEchoOnEdit</enum>
     </property>
    </widget>
    <widget class="QLineEdit" name="proxyAddressEdit">
@@ -197,6 +212,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="maxLength">
+     <number>50</number>
+    </property>
    </widget>
    <widget class="QLineEdit" name="proxyPortEdit">
     <property name="geometry">
@@ -206,6 +224,9 @@
       <width>160</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="maxLength">
+     <number>5</number>
     </property>
    </widget>
    <widget class="QCheckBox" name="enabledCheckBox">

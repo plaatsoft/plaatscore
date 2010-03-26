@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'settings.ui'
 **
-** Created: Thu 25. Mar 23:02:45 2010
+** Created: Fri 26. Mar 06:40:33 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -60,12 +60,14 @@ public:
         webServiceUrlEdit = new QLineEdit(groupBox);
         webServiceUrlEdit->setObjectName(QString::fromUtf8("webServiceUrlEdit"));
         webServiceUrlEdit->setGeometry(QRect(10, 33, 351, 20));
+        webServiceUrlEdit->setMaxLength(200);
         label_2 = new QLabel(groupBox);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(12, 57, 148, 16));
         webServiceKeyEdit = new QLineEdit(groupBox);
         webServiceKeyEdit->setObjectName(QString::fromUtf8("webServiceKeyEdit"));
         webServiceKeyEdit->setGeometry(QRect(11, 73, 138, 20));
+        webServiceKeyEdit->setMaxLength(20);
         cancelButton = new QPushButton(Settings);
         cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
         cancelButton->setGeometry(QRect(224, 230, 75, 23));
@@ -90,15 +92,20 @@ public:
         LoginNameEdit = new QLineEdit(groupBox_2);
         LoginNameEdit->setObjectName(QString::fromUtf8("LoginNameEdit"));
         LoginNameEdit->setGeometry(QRect(12, 34, 169, 20));
+        LoginNameEdit->setMaxLength(20);
         passwordEdit = new QLineEdit(groupBox_2);
         passwordEdit->setObjectName(QString::fromUtf8("passwordEdit"));
         passwordEdit->setGeometry(QRect(12, 72, 168, 20));
+        passwordEdit->setMaxLength(20);
+        passwordEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
         proxyAddressEdit = new QLineEdit(groupBox_2);
         proxyAddressEdit->setObjectName(QString::fromUtf8("proxyAddressEdit"));
         proxyAddressEdit->setGeometry(QRect(199, 35, 158, 20));
+        proxyAddressEdit->setMaxLength(50);
         proxyPortEdit = new QLineEdit(groupBox_2);
         proxyPortEdit->setObjectName(QString::fromUtf8("proxyPortEdit"));
         proxyPortEdit->setGeometry(QRect(199, 73, 160, 20));
+        proxyPortEdit->setMaxLength(5);
         enabledCheckBox = new QCheckBox(groupBox_2);
         enabledCheckBox->setObjectName(QString::fromUtf8("enabledCheckBox"));
         enabledCheckBox->setGeometry(QRect(115, 13, 70, 17));
@@ -120,7 +127,7 @@ public:
         Settings->setWindowTitle(QApplication::translate("Settings", "Form", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("Settings", "General", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("Settings", "Web Service Url", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("Settings", "Web Services key (Optional)", 0, QApplication::UnicodeUTF8));
+        label_2->setText(QApplication::translate("Settings", "Web Service key", 0, QApplication::UnicodeUTF8));
         cancelButton->setText(QApplication::translate("Settings", "Cancel", 0, QApplication::UnicodeUTF8));
         OkButton->setText(QApplication::translate("Settings", "Ok", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("Settings", "HTTP Proxy settings", 0, QApplication::UnicodeUTF8));
