@@ -6,76 +6,65 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>614</width>
-    <height>390</height>
+    <width>355</width>
+    <height>242</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>HighScore</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>7</x>
-      <y>339</y>
-      <width>131</width>
-      <height>23</height>
+      <x>0</x>
+      <y>0</y>
+      <width>351</width>
+      <height>218</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Remove</string>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>1</horstretch>
+      <verstretch>1</verstretch>
+     </sizepolicy>
     </property>
-   </widget>
-   <widget class="QFrame" name="frame">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>595</width>
-      <height>321</height>
-     </rect>
+    <property name="minimumSize">
+     <size>
+      <width>351</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="sizeIncrement">
+     <size>
+      <width>1</width>
+      <height>1</height>
+     </size>
+    </property>
+    <property name="baseSize">
+     <size>
+      <width>300</width>
+      <height>300</height>
+     </size>
     </property>
     <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
+     <enum>QFrame::NoFrame</enum>
     </property>
-    <property name="frameShadow">
-     <enum>QFrame::Sunken</enum>
+    <property name="sortingEnabled">
+     <bool>false</bool>
     </property>
-    <property name="lineWidth">
-     <number>2</number>
+    <property name="rowCount">
+     <number>0</number>
     </property>
-    <property name="midLineWidth">
-     <number>2</number>
+    <property name="columnCount">
+     <number>0</number>
     </property>
-    <widget class="QTableWidget" name="tableWidget">
-     <property name="geometry">
-      <rect>
-       <x>3</x>
-       <y>3</y>
-       <width>589</width>
-       <height>316</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>351</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <property name="sortingEnabled">
-      <bool>true</bool>
-     </property>
-     <property name="rowCount">
-      <number>0</number>
-     </property>
-     <property name="columnCount">
-      <number>0</number>
-     </property>
-    </widget>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>100</number>
+    </attribute>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>100</number>
+    </attribute>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -83,7 +72,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>614</width>
+     <width>355</width>
      <height>20</height>
     </rect>
    </property>
@@ -174,7 +163,6 @@
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
   <tabstop>tableWidget</tabstop>
-  <tabstop>pushButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

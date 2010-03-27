@@ -44,7 +44,7 @@ public:
 
 private slots:
     void on_actionSettings_triggered();
-    void on_pushButton_pressed();
+    void remove();
     void on_actionAbout_triggered();
     void on_actionTowerDefense_triggered();
     void on_actionSpaceBubble_triggered();
@@ -65,12 +65,15 @@ private:
     QByteArray applAction;
     QByteArray applId;
     Settings settings;
+    QAction *removeAct;
 
     void parseXML(QString response);
     void closeEvent(QCloseEvent *event);
     void readSettings();
     void writeSettings();
     const char * getDate(time_t date);
+    void resizeEvent(QResizeEvent *event );
+    void contextMenuEvent(QContextMenuEvent *event);
 };
 
 #endif // HIGHSCORE_H
@@ -84,24 +87,32 @@ private:
  * PlaatStats is Windows HighScore tool
  *
  * @section Links
- * Website: http://www.plaatsoft.nl\n
- * Code: http://code.google.com/p/plaatscore\n
+ * Website: http://www.plaatsoft.nl
+ * Code: http://code.google.com/p/plaatscore
  *
  * @section Credits
- * Documentation: wplaat\n
+ * Documentation: wplaat
  *
  * @section WishList
- *  - Sorting is not working correct on Date and number field
+ *  - Table column sorting.
+ *  - Encrypt proxy password and webservice key.
  *
  * @section ReleaseNotes
- *  <b>26-03-2010 Version 0.2</b>
+ *  <b>27-03-2010 Version 0.30</b>
+ *  - Added support for dynamic xml data.
+ *  - Make table resizable.
+ *  - Added popup menu.
+ *  - Disable column sorting (Did not work good).
+ *  - Build with QtCreator v1.3.1
+ *
+ *  <b>25-03-2010 Version 0.20</b>
  *  - Added settings page.
  *  - Added Http Proxy support.
  *  - Added remove entry functionality.
  *  - Cleanup code.
  *  - Build with QtCreator v1.3.1
  *
- *  <b>24-03-2010 Version 0.1</b>
+ *  <b>24-03-2010 Version 0.10</b>
  *  - Start building.
  *  - Created GUI.
  *  - Added basic menu.
