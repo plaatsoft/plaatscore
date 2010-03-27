@@ -33,19 +33,19 @@
 <a name="l00028"></a>00028 <span class="preprocessor">#include &lt;QtNetwork&gt;</span>
 <a name="l00029"></a>00029 
 <a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="settings_8h.html" title="The file contain the settings window.">settings.h</a>&quot;</span>
-<a name="l00031"></a>00031 
-<a name="l00032"></a><a class="code" href="namespace_ui.html">00032</a> <span class="keyword">namespace </span>Ui {
-<a name="l00033"></a>00033     <span class="keyword">class </span><a class="code" href="class_ui_1_1_high_score.html">HighScore</a>;
-<a name="l00034"></a>00034 }
-<a name="l00035"></a>00035 
-<a name="l00036"></a><a class="code" href="class_high_score.html">00036</a> <span class="keyword">class </span><a class="code" href="class_high_score.html">HighScore</a> : <span class="keyword">public</span> QMainWindow {
-<a name="l00037"></a>00037     Q_OBJECT
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039 <span class="keyword">public</span>:
-<a name="l00040"></a>00040     <a class="code" href="class_high_score.html#ad6f9cf6d10160a8729b9bb731110bc5f">HighScore</a>(QWidget *parent = 0);
-<a name="l00041"></a>00041     <a class="code" href="class_high_score.html#a4a831c1baf5a723b2418f11dd2209c19">~HighScore</a>();
-<a name="l00042"></a>00042     <span class="keywordtype">void</span> <a class="code" href="class_high_score.html#a5e34f05ba4e25535569a97ffc06698f1">updateEditorGeometry</a>(QWidget *editor,
-<a name="l00043"></a>00043          <span class="keyword">const</span> QStyleOptionViewItem &amp;option, <span class="keyword">const</span> QModelIndex &amp;) <span class="keyword">const</span>;
+<a name="l00031"></a>00031 <span class="preprocessor">#include &quot;<a class="code" href="about_8h.html" title="The file contain the about window.">about.h</a>&quot;</span>
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033 <span class="keyword">namespace </span>Ui {
+<a name="l00034"></a>00034     <span class="keyword">class </span><a class="code" href="class_high_score.html">HighScore</a>;
+<a name="l00035"></a>00035 }
+<a name="l00036"></a>00036 
+<a name="l00037"></a><a class="code" href="class_high_score.html">00037</a> <span class="keyword">class </span><a class="code" href="class_high_score.html">HighScore</a> : <span class="keyword">public</span> QMainWindow {
+<a name="l00038"></a>00038     Q_OBJECT
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040 <span class="keyword">public</span>:
+<a name="l00041"></a>00041     <a class="code" href="class_high_score.html#ad6f9cf6d10160a8729b9bb731110bc5f">HighScore</a>(QWidget *parent = 0);
+<a name="l00042"></a>00042     <a class="code" href="class_high_score.html#a4a831c1baf5a723b2418f11dd2209c19">~HighScore</a>();
+<a name="l00043"></a>00043     <span class="keywordtype">void</span> <a class="code" href="class_high_score.html#a5e34f05ba4e25535569a97ffc06698f1">updateEditorGeometry</a>(QWidget *editor, <span class="keyword">const</span> QStyleOptionViewItem &amp;option, <span class="keyword">const</span> QModelIndex &amp;) <span class="keyword">const</span>;
 <a name="l00044"></a>00044 
 <a name="l00045"></a>00045 <span class="keyword">private</span> slots:
 <a name="l00046"></a>00046     <span class="keywordtype">void</span> on_actionSettings_triggered();
@@ -70,19 +70,20 @@
 <a name="l00065"></a>00065     QByteArray applAction;
 <a name="l00066"></a>00066     QByteArray applId;
 <a name="l00067"></a>00067     <a class="code" href="class_settings.html">Settings</a> settings;
-<a name="l00068"></a>00068     QAction *removeAct;
-<a name="l00069"></a>00069 
-<a name="l00070"></a>00070     <span class="keywordtype">void</span> parseXML(QString response);
-<a name="l00071"></a>00071     <span class="keywordtype">void</span> closeEvent(QCloseEvent *event);
-<a name="l00072"></a>00072     <span class="keywordtype">void</span> readSettings();
-<a name="l00073"></a>00073     <span class="keywordtype">void</span> writeSettings();
-<a name="l00074"></a>00074     <span class="keyword">const</span> <span class="keywordtype">char</span> * getDate(time_t date);
-<a name="l00075"></a>00075     <span class="keywordtype">void</span> resizeEvent(QResizeEvent *event );
-<a name="l00076"></a>00076     <span class="keywordtype">void</span> contextMenuEvent(QContextMenuEvent *event);
-<a name="l00077"></a>00077 };
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079 <span class="preprocessor">#endif // HIGHSCORE_H</span>
-<a name="l00080"></a>00080 <span class="preprocessor"></span>
+<a name="l00068"></a>00068     <a class="code" href="class_about.html">About</a> about;
+<a name="l00069"></a>00069     QAction *removeAct;
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071     <span class="keywordtype">void</span> parseXML(QString response);
+<a name="l00072"></a>00072     <span class="keywordtype">void</span> closeEvent(QCloseEvent *event);
+<a name="l00073"></a>00073     <span class="keywordtype">void</span> readSettings();
+<a name="l00074"></a>00074     <span class="keywordtype">void</span> writeSettings();
+<a name="l00075"></a>00075     <span class="keyword">const</span> <span class="keywordtype">char</span> * getDate(time_t date);
+<a name="l00076"></a>00076     <span class="keywordtype">void</span> resizeEvent(QResizeEvent *event );
+<a name="l00077"></a>00077     <span class="keywordtype">void</span> contextMenuEvent(QContextMenuEvent *event);
+<a name="l00078"></a>00078 };
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080 <span class="preprocessor">#endif // HIGHSCORE_H</span>
+<a name="l00081"></a>00081 <span class="preprocessor"></span>
 </pre></div></div>
 <hr size="1"/><address style="text-align: right;"><small>Generated by&nbsp;
 <a href="http://www.doxygen.org/index.html">

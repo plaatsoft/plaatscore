@@ -27,6 +27,7 @@
 
 #include "highscore.h"
 #include "settings.h"
+#include "about.h"
 #include "ui_highscore.h"
 
 /**
@@ -411,16 +412,14 @@ void HighScore::on_actionTowerDefense_triggered()
  */
 void HighScore::on_actionAbout_triggered()
 {
-    QMessageBox::about(this, tr("About"),
-       tr("<b>PlaatSoft HighScore</b><br>"
-          "Version 0.40 (Build 28-03-2010)<br>"
-          "<br>"
-          "Created by <i>wplaat</i><br>"
-          "<br>"
-          "This tool collects the PlaatSoft game highscore from<br>"
-          "internet and let the user modified the data<br><br>"
-          "All copyrights reserved (c) "
-          "<a href='http://www.plaatsoft.nl'>PlaatSoft</a> 2008-2010"));
+    // Set settings window position related to Main window.
+    QPoint position = QPoint(pos());
+    position.setX(position.x()+120);
+    position.setY(position.y()+70);
+    about.move(position);
+
+    // Make about window visible
+    about.show();
 }
 
 /**
