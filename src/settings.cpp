@@ -43,6 +43,8 @@ Settings::Settings(QWidget *parent): QWidget(parent), ui(new Ui::Settings)
     updateScreen();
 
     setWindowTitle("Settings");
+
+
 }
 
 /**
@@ -158,6 +160,19 @@ void Settings::updateScreen()
         ui->proxyPortEdit->setEnabled(false);
     }
 }
+
+void Settings::paintEvent()
+    {
+        QPainter paint;
+        paint.begin( this );                    // start painting widget
+        paint.setPen( Qt::blue );               // set blue pen
+        paint.drawText( rect(),                 // draw a text, centered
+                                    //   in the widget
+                        "The Text" );
+        paint.end();                            // painting done
+
+        qDebug() << "paintEvent ";
+    }
 
 // ************************************
 // Button & Menu events

@@ -28,6 +28,7 @@
 #include <QtNetwork>
 
 #include "settings.h"
+#include "about.h"
 
 namespace Ui {
     class HighScore;
@@ -39,8 +40,7 @@ class HighScore : public QMainWindow {
 public:
     HighScore(QWidget *parent = 0);
     ~HighScore();
-    void updateEditorGeometry(QWidget *editor,
-         const QStyleOptionViewItem &option, const QModelIndex &) const;
+    void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &) const;
 
 private slots:
     void on_actionSettings_triggered();
@@ -65,6 +65,7 @@ private:
     QByteArray applAction;
     QByteArray applId;
     Settings settings;
+    About about;
     QAction *removeAct;
 
     void parseXML(QString response);
@@ -99,6 +100,7 @@ private:
  * @section ReleaseNotes
  *  <b>28-03-2010 Version 0.40 (Next development release)</b>
  *  - Encrypt / Decrypt entered password in Registry.
+ *  - Added improve about window.
  *
  *  <b>27-03-2010 Version 0.30</b>
  *  - Added support for dynamic xml data.

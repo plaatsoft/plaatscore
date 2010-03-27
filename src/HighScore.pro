@@ -8,9 +8,13 @@ TARGET = HighScore
 TEMPLATE = app
 SOURCES += main.cpp \
     highscore.cpp \
-    settings.cpp
+    settings.cpp \
+    about.cpp
 HEADERS += highscore.h \
-    settings.h
+    settings.h \
+    about.h
 FORMS += highscore.ui \
-    settings.ui
+    settings.ui \
+    about.ui
 RC_FILE = HighScore.rc
+RESOURCES += resource.qrc

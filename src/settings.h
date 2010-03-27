@@ -45,6 +45,7 @@ private:
     void readSettings();
     void writeSettings();
     void updateScreen();
+    void paintEvent();
 
 private slots:
     void on_enabledCheckBox_clicked();

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'settings.ui'
 **
-** Created: Sat 27. Mar 14:42:01 2010
+** Created: Sat 27. Mar 23:05:26 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -49,7 +49,7 @@ public:
     {
         if (Settings->objectName().isEmpty())
             Settings->setObjectName(QString::fromUtf8("Settings"));
-        Settings->resize(391, 261);
+        Settings->resize(391, 262);
         Settings->setMaximumSize(QSize(391, 16777215));
         groupBox = new QGroupBox(Settings);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
