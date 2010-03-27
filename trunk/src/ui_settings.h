@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'settings.ui'
 **
-** Created: Sat 27. Mar 11:35:08 2010
+** Created: Sat 27. Mar 14:42:01 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -68,7 +68,7 @@ public:
         webServiceKeyEdit->setObjectName(QString::fromUtf8("webServiceKeyEdit"));
         webServiceKeyEdit->setGeometry(QRect(11, 73, 138, 20));
         webServiceKeyEdit->setMaxLength(20);
-        webServiceKeyEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
+        webServiceKeyEdit->setEchoMode(QLineEdit::Password);
         cancelButton = new QPushButton(Settings);
         cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
         cancelButton->setGeometry(QRect(224, 230, 75, 23));
@@ -98,7 +98,7 @@ public:
         passwordEdit->setObjectName(QString::fromUtf8("passwordEdit"));
         passwordEdit->setGeometry(QRect(12, 72, 168, 20));
         passwordEdit->setMaxLength(20);
-        passwordEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
+        passwordEdit->setEchoMode(QLineEdit::Password);
         proxyAddressEdit = new QLineEdit(groupBox_2);
         proxyAddressEdit->setObjectName(QString::fromUtf8("proxyAddressEdit"));
         proxyAddressEdit->setGeometry(QRect(199, 35, 158, 20));
