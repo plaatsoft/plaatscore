@@ -29,6 +29,9 @@
 #include "settings.h"
 #include "ui_highscore.h"
 
+/**
+ * Constructor
+ */
 HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScore)
 {
     ui->setupUi(this);
@@ -42,7 +45,7 @@ HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScor
                 this,
                 SLOT(replyFinished(QNetworkReply*)) );
 
-    setWindowTitle("PlaatSoft HighScore v0.3");
+    setWindowTitle("PlaatSoft HighScore v0.30");
 
     // Set fix windows form size.
     //setMinimumSize(614,390);
@@ -52,17 +55,26 @@ HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScor
     connect(removeAct, SIGNAL(triggered()), this, SLOT(remove()));
 }
 
+/**
+ * ???
+ */
 void HighScore::updateEditorGeometry(QWidget *editor,
      const QStyleOptionViewItem &option, const QModelIndex &/* index */) const
  {
      ui->tableWidget->setGeometry(option.rect);
  }
 
+/**
+ * Destructor
+ */
 HighScore::~HighScore()
 {
     delete ui;
 }
 
+/**
+ * Change language event
+ */
 void HighScore::changeEvent(QEvent *e)
 {
     QMainWindow::changeEvent(e);
@@ -75,6 +87,9 @@ void HighScore::changeEvent(QEvent *e)
     }
 }
 
+/**
+ * Close event
+ */
 void HighScore::closeEvent(QCloseEvent *event)
 {
    // Store current window position
@@ -85,6 +100,9 @@ void HighScore::closeEvent(QCloseEvent *event)
 // Support methods
 // ********************************************
 
+/**
+ * Parse XML data and fill Qt table
+ */
 void HighScore::parseXML(QString response)
 {
    QString columnId[20];
@@ -152,6 +170,9 @@ void HighScore::parseXML(QString response)
    ui->tableWidget->resizeColumnsToContents();
 }
 
+/**
+ * Create http request
+ */
 void HighScore::fetch()
 {
     QSettings settings("PlaatSoft", "PlaatScore");
@@ -184,6 +205,9 @@ void HighScore::fetch()
     manager->get(request);
 }
 
+/**
+ * Process incoming http response
+ */
 void HighScore::replyFinished(QNetworkReply *reply)
 {
     QString sA = QString::number( reply->bytesAvailable());
@@ -200,9 +224,13 @@ void HighScore::replyFinished(QNetworkReply *reply)
 
     qDebug() << result;
 
+    // Parse XML date
     parseXML(result);
 }
 
+/**
+ * Read setting form registry
+ */
 void HighScore::readSettings()
 {
     // Fetch previous window position
@@ -213,6 +241,9 @@ void HighScore::readSettings()
     move(pos);
 }
 
+/**
+ * Write settings to registry
+ */
 void HighScore::writeSettings()
 {
     // Store current window position
@@ -221,6 +252,9 @@ void HighScore::writeSettings()
     settings.setValue("size", size());
 }
 
+/**
+ * Convert date to String
+ */
 const char * HighScore::getDate(time_t date)
 {
   struct tm *now = NULL;
@@ -248,6 +282,9 @@ void HighScore::resizeEvent(QResizeEvent *event )
     ui->tableWidget->resize(width,height-20);
 }
 
+/**
+ * Create popup menu
+ */
 void HighScore::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu menu(this);
@@ -259,11 +296,17 @@ void HighScore::contextMenuEvent(QContextMenuEvent *event)
 // User actions.
 // ********************************************
 
+/**
+ * Exit menu event
+ */
 void HighScore::on_actionExit_triggered()
 {
    exit(0);
 }
 
+/**
+ * Pong2 menu event
+ */
 void HighScore::on_actionPong2_triggered()
 {
     // Request HTTP Parameters
@@ -282,6 +325,9 @@ void HighScore::on_actionPong2_triggered()
     fetch();
 }
 
+/**
+ * bibleQuiz menu event
+ */
 void HighScore::on_actionBibleQuiz_triggered()
 {
     // Request HTTP Parameters
@@ -300,6 +346,9 @@ void HighScore::on_actionBibleQuiz_triggered()
     fetch();
 }
 
+/**
+ * RedSquare menu event
+ */
 void HighScore::on_actionRedSquare_triggered()
 {
     // Request HTTP Parameters
@@ -318,6 +367,9 @@ void HighScore::on_actionRedSquare_triggered()
     fetch();
 }
 
+/**
+ * Space Bubble menu event
+ */
 void HighScore::on_actionSpaceBubble_triggered()
 {
     // Request HTTP Parameters
@@ -336,6 +388,9 @@ void HighScore::on_actionSpaceBubble_triggered()
     fetch();
 }
 
+/**
+ * TowerDefense menu event
+ */
 void HighScore::on_actionTowerDefense_triggered()
 {
     // Request HTTP Parameters
@@ -354,11 +409,14 @@ void HighScore::on_actionTowerDefense_triggered()
     fetch();
 }
 
+/**
+ * About menu event
+ */
 void HighScore::on_actionAbout_triggered()
 {
     QMessageBox::about(this, tr("About"),
        tr("<b>PlaatSoft HighScore</b><br>"
-          "Version 0.3 (Build 27-03-2010)<br>"
+          "Version 0.30 (Build 27-03-2010)<br>"
           "<br>"
           "Created by <i>wplaat</i><br>"
           "<br>"

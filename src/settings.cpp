@@ -24,6 +24,9 @@
 #include "settings.h"
 #include "ui_settings.h"
 
+/**
+ * Constructor
+ */
 Settings::Settings(QWidget *parent): QWidget(parent), ui(new Ui::Settings)
 {
     ui->setupUi(this);
@@ -38,11 +41,17 @@ Settings::Settings(QWidget *parent): QWidget(parent), ui(new Ui::Settings)
     setWindowTitle("Settings");
 }
 
+/**
+ * Destructor
+ */
 Settings::~Settings()
 {
     delete ui;
 }
 
+/**
+ * Change language event
+ */
 void Settings::changeEvent(QEvent *e)
 {
     QWidget::changeEvent(e);
@@ -55,18 +64,27 @@ void Settings::changeEvent(QEvent *e)
     }
 }
 
+/**
+ * Process cancel button event
+ */
 void Settings::on_cancelButton_pressed()
 {
     readSettings();
     close();
 }
 
+/**
+ * Process ok button event
+ */
 void Settings::on_OkButton_pressed()
 {
     writeSettings();
     close();
 }
 
+/**
+ * Read settings from Registry
+ */
 void Settings::readSettings()
 {
     // Fetch configuration
@@ -82,6 +100,9 @@ void Settings::readSettings()
     ui->enabledCheckBox->setChecked(settings.value("proxyEnabled",false).toBool());
 }
 
+/**
+ * Save settings to Registry
+ */
 void Settings::writeSettings()
 {
     // Store configuration
@@ -97,6 +118,9 @@ void Settings::writeSettings()
     settings.setValue("proxyEnabled", ui->enabledCheckBox->isChecked());
 }
 
+/**
+ * Update screen components
+ */
 void Settings::updateScreen()
 {
     if (ui->enabledCheckBox->isChecked())
@@ -115,6 +139,9 @@ void Settings::updateScreen()
     }
 }
 
+/**
+ * Process enabled proxy checkbox event
+ */
 void Settings::on_enabledCheckBox_clicked()
 {
     updateScreen();
