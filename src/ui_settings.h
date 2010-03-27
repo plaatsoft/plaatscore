@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'settings.ui'
 **
-** Created: Fri 26. Mar 19:39:47 2010
+** Created: Sat 27. Mar 11:35:08 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -68,6 +68,7 @@ public:
         webServiceKeyEdit->setObjectName(QString::fromUtf8("webServiceKeyEdit"));
         webServiceKeyEdit->setGeometry(QRect(11, 73, 138, 20));
         webServiceKeyEdit->setMaxLength(20);
+        webServiceKeyEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
         cancelButton = new QPushButton(Settings);
         cancelButton->setObjectName(QString::fromUtf8("cancelButton"));
         cancelButton->setGeometry(QRect(224, 230, 75, 23));

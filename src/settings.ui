@@ -82,6 +82,9 @@
     <property name="maxLength">
      <number>20</number>
     </property>
+    <property name="echoMode">
+     <enum>QLineEdit::PasswordEchoOnEdit</enum>
+    </property>
    </widget>
   </widget>
   <widget class="QPushButton" name="cancelButton">

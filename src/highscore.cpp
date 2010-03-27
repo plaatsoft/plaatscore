@@ -42,11 +42,14 @@ HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScor
                 this,
                 SLOT(replyFinished(QNetworkReply*)) );
 
-    setWindowTitle("PlaatSoft HighScore v0.2");
+    setWindowTitle("PlaatSoft HighScore v0.3");
 
     // Set fix windows form size.
-    setMinimumSize(614,390);
-    setMaximumSize(614,390);
+    //setMinimumSize(614,390);
+    //setMaximumSize(614,390);
+
+    removeAct = new QAction(tr("Remove"), this);
+    connect(removeAct, SIGNAL(triggered()), this, SLOT(remove()));
 }
 
 void HighScore::updateEditorGeometry(QWidget *editor,
@@ -84,94 +87,69 @@ void HighScore::closeEvent(QCloseEvent *event)
 
 void HighScore::parseXML(QString response)
 {
-   QString id;
-   QString name;
-   QString level;
-   QString score;
-   QString dt;
-   QString location;
-   QTableWidgetItem *column;
+   QString columnId[20];
+   QString columnLabel[20];
+   QString data[20][100];
    QTableWidgetItem *item;
 
    QXmlStreamReader reader(response);
 
-   ui->tableWidget->setColumnCount(7);
-   ui->tableWidget->setRowCount(response.count("/>"));
-
-   ui->tableWidget->setColumnWidth(0,25);
-   column = new QTableWidgetItem("");
-   ui->tableWidget->setHorizontalHeaderItem(0, column);
-
-   ui->tableWidget->setColumnWidth(1,60);
-   column = new QTableWidgetItem("Id");
-   ui->tableWidget->setHorizontalHeaderItem(1, column);
-
-   ui->tableWidget->setColumnWidth(2,60);
-   column = new QTableWidgetItem("Name");
-   ui->tableWidget->setHorizontalHeaderItem(2, column);
-
-   ui->tableWidget->setColumnWidth(3,40);
-   column = new QTableWidgetItem("Level");
-   ui->tableWidget->setHorizontalHeaderItem(3, column);
-
-   ui->tableWidget->setColumnWidth(4,50);
-   column = new QTableWidgetItem("Score");
-   ui->tableWidget->setHorizontalHeaderItem(4, column);
-
-   ui->tableWidget->setColumnWidth(5,120);
-   column = new QTableWidgetItem("Timestamp");
-   ui->tableWidget->setHorizontalHeaderItem(5, column);
-
-   ui->tableWidget->setColumnWidth(6,150);
-   column = new QTableWidgetItem("Location");
-   ui->tableWidget->setHorizontalHeaderItem(6, column);
-
-   int i=0;
+   // Parse XML data
+   int columnCount=0;
+   int rowCount=0;
    while (!reader.atEnd()) {
       reader.readNext();
       if (reader.isStartElement()) {
-          if(reader.name() == "item") {
-            bool ok;
-
-            id = reader.attributes().value("id").toString();
-            name = reader.attributes().value("name").toString();
-            level = reader.attributes().value("level").toString();
-            score = reader.attributes().value("score").toString();
-            dt = reader.attributes().value("dt").toString();
-            location = reader.attributes().value("location").toString();
-
-            QTableWidgetItem* chkBoxItem = new QTableWidgetItem();
-            chkBoxItem->setCheckState(Qt::Unchecked);
-            ui->tableWidget->setItem(i, 0, chkBoxItem);
-
-            item = new QTableWidgetItem(id);
-            ui->tableWidget->setItem(i, 1, item);
-
-            item = new QTableWidgetItem(name);
-            ui->tableWidget->setItem(i, 2, item);
-
-            item = new QTableWidgetItem(level);
-            ui->tableWidget->setItem(i, 3, item);
-
-            item = new QTableWidgetItem(score);
-            ui->tableWidget->setItem(i, 4, item);
-
-            int value = dt.toInt(&ok, 10);
-            item = new QTableWidgetItem(getDate(value));
-            ui->tableWidget->setItem(i, 5, item);
-
-            item = new QTableWidgetItem(location);
-            ui->tableWidget->setItem(i, 6, item);
-
-            i++;
+          if(reader.name() == "header") {
+              columnId[columnCount] = reader.attributes().value("id").toString();
+              columnLabel[columnCount] = reader.attributes().value("label").toString();
+              columnCount++;
           }
+          if(reader.name() == "item") {
+            for (int y=0; y<columnCount; y++)
+            {
+                data[y][rowCount]=reader.attributes().value(columnId[y]).toString();
+            }
+            rowCount++;
+         }
       }
    }
 
    if (reader.hasError()) {
       qDebug() << "The XML file isn't well-formed: "
           << reader.errorString() << endl << endl << endl;
+      return;
    }
+
+   // Set table dimensions
+   ui->tableWidget->setColumnCount(columnCount+1);
+   ui->tableWidget->setRowCount(rowCount);
+
+   // Build Header
+   ui->tableWidget->setColumnWidth(0,25);
+   item = new QTableWidgetItem("");
+   ui->tableWidget->setHorizontalHeaderItem(0, item);
+
+   for (int x=0; x<columnCount; x++)
+   {
+       item = new QTableWidgetItem(columnLabel[x]);
+       ui->tableWidget->setHorizontalHeaderItem(x+1, item);
+   }
+
+   // Build Data
+   for (int y=0; y<rowCount; y++)
+   {
+      item = new QTableWidgetItem();
+      item->setCheckState(Qt::Unchecked);
+      ui->tableWidget->setItem(y, 0, item);
+
+      for (int x=0; x<columnCount; x++)
+      {
+         item = new QTableWidgetItem(data[x][y]);
+         ui->tableWidget->setItem(y, x+1, item);
+      }
+   }
+   ui->tableWidget->resizeColumnsToContents();
 }
 
 void HighScore::fetch()
@@ -230,6 +208,8 @@ void HighScore::readSettings()
     // Fetch previous window position
     QSettings settings("PlaatSoft", "PlaatScore");
     QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
+    QSize size = settings.value("size", QSize(640, 480)).toSize();
+    resize(size);
     move(pos);
 }
 
@@ -238,6 +218,7 @@ void HighScore::writeSettings()
     // Store current window position
     QSettings settings("PlaatSoft", "PlaatScore");
     settings.setValue("pos", pos());
+    settings.setValue("size", size());
 }
 
 const char * HighScore::getDate(time_t date)
@@ -254,6 +235,24 @@ const char * HighScore::getDate(time_t date)
         now->tm_hour,now->tm_min,now->tm_sec);
 
   return buf;
+}
+
+/**
+ * Resize table if windows is resized
+ */
+void HighScore::resizeEvent(QResizeEvent *event )
+{
+    int height = event->size().height();
+    int width = event->size().width();
+
+    ui->tableWidget->resize(width,height-20);
+}
+
+void HighScore::contextMenuEvent(QContextMenuEvent *event)
+{
+    QMenu menu(this);
+    menu.addAction(removeAct);
+    menu.exec(event->globalPos());
 }
 
 // ********************************************
@@ -359,7 +358,7 @@ void HighScore::on_actionAbout_triggered()
 {
     QMessageBox::about(this, tr("About"),
        tr("<b>PlaatSoft HighScore</b><br>"
-          "Version 0.2 (Build 25-03-2010)<br>"
+          "Version 0.3 (Build 27-03-2010)<br>"
           "<br>"
           "Created by <i>wplaat</i><br>"
           "<br>"
@@ -387,7 +386,7 @@ void HighScore::on_actionSettings_triggered()
 /**
  * Process remove button action
  */
-void HighScore::on_pushButton_pressed()
+void HighScore::remove()
 {
     for ( int i = 0; i < ui->tableWidget->rowCount(); i++ ) {
       if( ui->tableWidget->item(i,0)->checkState() == Qt::Checked ) {

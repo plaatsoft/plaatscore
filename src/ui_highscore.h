@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'highscore.ui'
 **
-** Created: Fri 26. Mar 19:39:47 2010
+** Created: Sat 27. Mar 13:26:52 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -14,12 +14,10 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
-#include <QtGui/QFrame>
 #include <QtGui/QHeaderView>
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
-#include <QtGui/QPushButton>
 #include <QtGui/QTableWidget>
 #include <QtGui/QWidget>
 
@@ -37,8 +35,6 @@ public:
     QAction *actionAbout;
     QAction *actionSettings;
     QWidget *centralWidget;
-    QPushButton *pushButton;
-    QFrame *frame;
     QTableWidget *tableWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -49,7 +45,7 @@ public:
     {
         if (HighScore->objectName().isEmpty())
             HighScore->setObjectName(QString::fromUtf8("HighScore"));
-        HighScore->resize(614, 390);
+        HighScore->resize(355, 242);
         actionExit = new QAction(HighScore);
         actionExit->setObjectName(QString::fromUtf8("actionExit"));
         actionPong2 = new QAction(HighScore);
@@ -73,28 +69,26 @@ public:
         actionSettings->setObjectName(QString::fromUtf8("actionSettings"));
         centralWidget = new QWidget(HighScore);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(7, 339, 131, 23));
-        frame = new QFrame(centralWidget);
-        frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setGeometry(QRect(10, 10, 595, 321));
-        frame->setFrameShape(QFrame::StyledPanel);
-        frame->setFrameShadow(QFrame::Sunken);
-        frame->setLineWidth(2);
-        frame->setMidLineWidth(2);
-        tableWidget = new QTableWidget(frame);
+        tableWidget = new QTableWidget(centralWidget);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        tableWidget->setGeometry(QRect(3, 3, 589, 316));
+        tableWidget->setGeometry(QRect(0, 0, 351, 218));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(1);
+        sizePolicy.setVerticalStretch(1);
+        sizePolicy.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
+        tableWidget->setSizePolicy(sizePolicy);
         tableWidget->setMinimumSize(QSize(351, 0));
+        tableWidget->setSizeIncrement(QSize(1, 1));
+        tableWidget->setBaseSize(QSize(300, 300));
         tableWidget->setFrameShape(QFrame::NoFrame);
-        tableWidget->setSortingEnabled(true);
+        tableWidget->setSortingEnabled(false);
         tableWidget->setRowCount(0);
         tableWidget->setColumnCount(0);
+        tableWidget->horizontalHeader()->setDefaultSectionSize(100);
         HighScore->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(HighScore);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 614, 20));
+        menuBar->setGeometry(QRect(0, 0, 355, 20));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuActions = new QMenu(menuBar);
@@ -102,7 +96,6 @@ public:
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
         HighScore->setMenuBar(menuBar);
-        QWidget::setTabOrder(tableWidget, pushButton);
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuActions->menuAction());
@@ -133,7 +126,6 @@ public:
         actionTowerDefense->setText(QApplication::translate("HighScore", "TowerDefense", 0, QApplication::UnicodeUTF8));
         actionAbout->setText(QApplication::translate("HighScore", "About", 0, QApplication::UnicodeUTF8));
         actionSettings->setText(QApplication::translate("HighScore", "Settings", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("HighScore", "Remove", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("HighScore", "File", 0, QApplication::UnicodeUTF8));
         menuActions->setTitle(QApplication::translate("HighScore", "Actions", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("HighScore", "Help", 0, QApplication::UnicodeUTF8));
