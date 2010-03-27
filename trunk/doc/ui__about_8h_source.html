@@ -13,14 +13,14 @@
     <ul>
       <li><a href="index.html"><span>Main&nbsp;Page</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li><a href="annotated.html"><span>Data&nbsp;Structures</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
   <div class="tabs">
     <ul>
       <li><a href="files.html"><span>File&nbsp;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
+      <li><a href="globals.html"><span>File&nbsp;Members</span></a></li>
     </ul>
   </div>
 <h1>src/ui_about.h</h1><a href="ui__about_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/********************************************************************************</span>
@@ -50,34 +50,34 @@
 <a name="l00025"></a><a class="code" href="class_ui___about.html">00025</a> <span class="keyword">class </span><a class="code" href="class_ui___about.html">Ui_About</a>
 <a name="l00026"></a>00026 {
 <a name="l00027"></a>00027 <span class="keyword">public</span>:
-<a name="l00028"></a><a class="code" href="class_ui___about.html#a262c48e5ed6d65d02603c59fa560b6ed">00028</a>     QGraphicsView *<a class="code" href="class_ui___about.html#a262c48e5ed6d65d02603c59fa560b6ed">graphicsView</a>;
-<a name="l00029"></a><a class="code" href="class_ui___about.html#a9a4cf5cefb632d53e271d1c3cd9d9834">00029</a>     QLabel *<a class="code" href="class_ui___about.html#a9a4cf5cefb632d53e271d1c3cd9d9834">label_2</a>;
-<a name="l00030"></a><a class="code" href="class_ui___about.html#a054b267d044aac51b5097138bcc78e17">00030</a>     QPushButton *<a class="code" href="class_ui___about.html#a054b267d044aac51b5097138bcc78e17">pushButton</a>;
+<a name="l00028"></a><a class="code" href="class_ui___about.html#a2caf45bc1828ded45d0a129fa7f42f8d">00028</a>     QGraphicsView *<a class="code" href="class_ui___about.html#a2caf45bc1828ded45d0a129fa7f42f8d">graphicsView</a>;
+<a name="l00029"></a><a class="code" href="class_ui___about.html#a090e136bc2cb57d24b6a81caba8b516b">00029</a>     QLabel *<a class="code" href="class_ui___about.html#a090e136bc2cb57d24b6a81caba8b516b">label_2</a>;
+<a name="l00030"></a><a class="code" href="class_ui___about.html#a45766d8b424bd13387232b7b0d43c3f8">00030</a>     QPushButton *<a class="code" href="class_ui___about.html#a45766d8b424bd13387232b7b0d43c3f8">pushButton</a>;
 <a name="l00031"></a>00031 
-<a name="l00032"></a><a class="code" href="class_ui___about.html#abcdae891a72a5c8df89f451db3ba29ba">00032</a>     <span class="keywordtype">void</span> <a class="code" href="class_ui___about.html#abcdae891a72a5c8df89f451db3ba29ba">setupUi</a>(QWidget *<a class="code" href="class_about.html">About</a>)
+<a name="l00032"></a><a class="code" href="class_ui___about.html#a4bfef17d0e351b36b671e56023fa844e">00032</a>     <span class="keywordtype">void</span> <a class="code" href="class_ui___about.html#a4bfef17d0e351b36b671e56023fa844e">setupUi</a>(QWidget *<a class="code" href="class_about.html">About</a>)
 <a name="l00033"></a>00033     {
 <a name="l00034"></a>00034         <span class="keywordflow">if</span> (About-&gt;objectName().isEmpty())
 <a name="l00035"></a>00035             About-&gt;setObjectName(QString::fromUtf8(<span class="stringliteral">&quot;About&quot;</span>));
 <a name="l00036"></a>00036         About-&gt;resize(538, 220);
-<a name="l00037"></a>00037         <a class="code" href="class_ui___about.html#a262c48e5ed6d65d02603c59fa560b6ed">graphicsView</a> = <span class="keyword">new</span> QGraphicsView(About);
-<a name="l00038"></a>00038         <a class="code" href="class_ui___about.html#a262c48e5ed6d65d02603c59fa560b6ed">graphicsView</a>-&gt;setObjectName(QString::fromUtf8(<span class="stringliteral">&quot;graphicsView&quot;</span>));
-<a name="l00039"></a>00039         <a class="code" href="class_ui___about.html#a262c48e5ed6d65d02603c59fa560b6ed">graphicsView</a>-&gt;setGeometry(QRect(10, 10, 251, 201));
-<a name="l00040"></a>00040         <a class="code" href="class_ui___about.html#a9a4cf5cefb632d53e271d1c3cd9d9834">label_2</a> = <span class="keyword">new</span> QLabel(About);
-<a name="l00041"></a>00041         <a class="code" href="class_ui___about.html#a9a4cf5cefb632d53e271d1c3cd9d9834">label_2</a>-&gt;setObjectName(QString::fromUtf8(<span class="stringliteral">&quot;label_2&quot;</span>));
-<a name="l00042"></a>00042         <a class="code" href="class_ui___about.html#a9a4cf5cefb632d53e271d1c3cd9d9834">label_2</a>-&gt;setGeometry(QRect(280, 20, 251, 131));
-<a name="l00043"></a>00043         <a class="code" href="class_ui___about.html#a054b267d044aac51b5097138bcc78e17">pushButton</a> = <span class="keyword">new</span> QPushButton(About);
-<a name="l00044"></a>00044         <a class="code" href="class_ui___about.html#a054b267d044aac51b5097138bcc78e17">pushButton</a>-&gt;setObjectName(QString::fromUtf8(<span class="stringliteral">&quot;pushButton&quot;</span>));
-<a name="l00045"></a>00045         <a class="code" href="class_ui___about.html#a054b267d044aac51b5097138bcc78e17">pushButton</a>-&gt;setGeometry(QRect(370, 180, 75, 23));
+<a name="l00037"></a>00037         <a class="code" href="class_ui___about.html#a2caf45bc1828ded45d0a129fa7f42f8d">graphicsView</a> = <span class="keyword">new</span> QGraphicsView(About);
+<a name="l00038"></a>00038         <a class="code" href="class_ui___about.html#a2caf45bc1828ded45d0a129fa7f42f8d">graphicsView</a>-&gt;setObjectName(QString::fromUtf8(<span class="stringliteral">&quot;graphicsView&quot;</span>));
+<a name="l00039"></a>00039         <a class="code" href="class_ui___about.html#a2caf45bc1828ded45d0a129fa7f42f8d">graphicsView</a>-&gt;setGeometry(QRect(10, 10, 251, 201));
+<a name="l00040"></a>00040         <a class="code" href="class_ui___about.html#a090e136bc2cb57d24b6a81caba8b516b">label_2</a> = <span class="keyword">new</span> QLabel(About);
+<a name="l00041"></a>00041         <a class="code" href="class_ui___about.html#a090e136bc2cb57d24b6a81caba8b516b">label_2</a>-&gt;setObjectName(QString::fromUtf8(<span class="stringliteral">&quot;label_2&quot;</span>));
+<a name="l00042"></a>00042         <a class="code" href="class_ui___about.html#a090e136bc2cb57d24b6a81caba8b516b">label_2</a>-&gt;setGeometry(QRect(280, 20, 251, 131));
+<a name="l00043"></a>00043         <a class="code" href="class_ui___about.html#a45766d8b424bd13387232b7b0d43c3f8">pushButton</a> = <span class="keyword">new</span> QPushButton(About);
+<a name="l00044"></a>00044         <a class="code" href="class_ui___about.html#a45766d8b424bd13387232b7b0d43c3f8">pushButton</a>-&gt;setObjectName(QString::fromUtf8(<span class="stringliteral">&quot;pushButton&quot;</span>));
+<a name="l00045"></a>00045         <a class="code" href="class_ui___about.html#a45766d8b424bd13387232b7b0d43c3f8">pushButton</a>-&gt;setGeometry(QRect(370, 180, 75, 23));
 <a name="l00046"></a>00046 
-<a name="l00047"></a>00047         <a class="code" href="class_ui___about.html#ac8d4e5fb2a7ab84df5cc10b2b32d02df">retranslateUi</a>(About);
+<a name="l00047"></a>00047         <a class="code" href="class_ui___about.html#a174e5717d08b4c90edb43361521e9cee">retranslateUi</a>(About);
 <a name="l00048"></a>00048 
 <a name="l00049"></a>00049         QMetaObject::connectSlotsByName(About);
 <a name="l00050"></a>00050     } <span class="comment">// setupUi</span>
 <a name="l00051"></a>00051 
-<a name="l00052"></a><a class="code" href="class_ui___about.html#ac8d4e5fb2a7ab84df5cc10b2b32d02df">00052</a>     <span class="keywordtype">void</span> <a class="code" href="class_ui___about.html#ac8d4e5fb2a7ab84df5cc10b2b32d02df">retranslateUi</a>(QWidget *<a class="code" href="class_about.html">About</a>)
+<a name="l00052"></a><a class="code" href="class_ui___about.html#a174e5717d08b4c90edb43361521e9cee">00052</a>     <span class="keywordtype">void</span> <a class="code" href="class_ui___about.html#a174e5717d08b4c90edb43361521e9cee">retranslateUi</a>(QWidget *<a class="code" href="class_about.html">About</a>)
 <a name="l00053"></a>00053     {
 <a name="l00054"></a>00054         About-&gt;setWindowTitle(QApplication::translate(<span class="stringliteral">&quot;About&quot;</span>, <span class="stringliteral">&quot;Form&quot;</span>, 0, QApplication::UnicodeUTF8));
-<a name="l00055"></a>00055         <a class="code" href="class_ui___about.html#a9a4cf5cefb632d53e271d1c3cd9d9834">label_2</a>-&gt;setText(QApplication::translate(<span class="stringliteral">&quot;About&quot;</span>, <span class="stringliteral">&quot;&lt;!DOCTYPE HTML PUBLIC \&quot;-//W3C//DTD HTML 4.0//EN\&quot; \&quot;http://www.w3.org/TR/REC-html40/strict.dtd\&quot;&gt;\n&quot;</span>
+<a name="l00055"></a>00055         <a class="code" href="class_ui___about.html#a090e136bc2cb57d24b6a81caba8b516b">label_2</a>-&gt;setText(QApplication::translate(<span class="stringliteral">&quot;About&quot;</span>, <span class="stringliteral">&quot;&lt;!DOCTYPE HTML PUBLIC \&quot;-//W3C//DTD HTML 4.0//EN\&quot; \&quot;http://www.w3.org/TR/REC-html40/strict.dtd\&quot;&gt;\n&quot;</span>
 <a name="l00056"></a>00056 <span class="stringliteral">&quot;&lt;html&gt;&lt;head&gt;&lt;meta name=\&quot;qrichtext\&quot; content=\&quot;1\&quot; /&gt;&lt;style type=\&quot;text/css\&quot;&gt;\n&quot;</span>
 <a name="l00057"></a>00057 <span class="stringliteral">&quot;p, li { white-space: pre-wrap; }\n&quot;</span>
 <a name="l00058"></a>00058 <span class="stringliteral">&quot;&lt;/style&gt;&lt;/head&gt;&lt;body style=\&quot; font-family:&#39;MS Shell Dlg 2&#39;; font-size:8.25pt; font-weight:400; font-style:normal;\&quot;&gt;\n&quot;</span>
@@ -92,7 +92,7 @@
 <a name="l00067"></a>00067 <span class="stringliteral">&quot;&lt;p style=\&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;\&quot;&gt;&lt;/p&gt;\n&quot;</span>
 <a name="l00068"></a>00068 <span class="stringliteral">&quot;&lt;p style=\&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-inde&quot;</span>
 <a name="l00069"></a>00069                         <span class="stringliteral">&quot;nt:0; text-indent:0px;\&quot;&gt;&lt;span style=\&quot; font-size:8pt;\&quot;&gt;All copyrights reserved (c) &lt;/span&gt;&lt;a href=\&quot;http://www.plaatsoft.nl\&quot;&gt;&lt;span style=\&quot; font-size:8pt; text-decoration: underline; color:#0000ff;\&quot;&gt;PlaatSoft &lt;/span&gt;&lt;/a&gt;&lt;span style=\&quot; font-size:8pt;\&quot;&gt;2008-2010&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>, 0, QApplication::UnicodeUTF8));
-<a name="l00070"></a>00070         <a class="code" href="class_ui___about.html#a054b267d044aac51b5097138bcc78e17">pushButton</a>-&gt;setText(QApplication::translate(<span class="stringliteral">&quot;About&quot;</span>, <span class="stringliteral">&quot;Ok&quot;</span>, 0, QApplication::UnicodeUTF8));
+<a name="l00070"></a>00070         <a class="code" href="class_ui___about.html#a45766d8b424bd13387232b7b0d43c3f8">pushButton</a>-&gt;setText(QApplication::translate(<span class="stringliteral">&quot;About&quot;</span>, <span class="stringliteral">&quot;Ok&quot;</span>, 0, QApplication::UnicodeUTF8));
 <a name="l00071"></a>00071     } <span class="comment">// retranslateUi</span>
 <a name="l00072"></a>00072 
 <a name="l00073"></a>00073 };
