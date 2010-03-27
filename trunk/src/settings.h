@@ -34,6 +34,9 @@ public:
     Settings(QWidget *parent = 0);
     ~Settings();
 
+    QString encrypt(QString in);
+    QString decrypt(QString in);
+
 protected:
     void changeEvent(QEvent *e);
 

@@ -95,9 +95,11 @@ private:
  *
  * @section WishList
  *  - Table column sorting.
- *  - Encrypt proxy password and webservice key.
  *
  * @section ReleaseNotes
+ *  <b>28-03-2010 Version 0.40 (Next development release)</b>
+ *  - Encrypt / Decrypt entered password in Registry.
+ *
  *  <b>27-03-2010 Version 0.30</b>
  *  - Added support for dynamic xml data.
  *  - Make table resizable.
