@@ -24,6 +24,10 @@
 #include "settings.h"
 #include "ui_settings.h"
 
+// ************************************
+// Constructor & Destructor
+// ************************************
+
 /**
  * Constructor
  */
@@ -49,6 +53,41 @@ Settings::~Settings()
     delete ui;
 }
 
+// ************************************
+// Logic
+// ************************************
+
+/**
+ * Encrypt QString (Very easy but unsave approach)
+ */
+QString Settings::encrypt(QString in) {
+  QChar* data = in.data();
+  int i=0;
+  while (!data[i].isNull()) {
+     char tmp =data[i].toAscii();
+     tmp+=(i+1);
+     data[i]=tmp;
+     ++data;
+  }
+  return in;
+}
+
+/**
+ * Decrypt QString (Very easy but unsave approach)
+ */
+QString Settings::decrypt(QString in) {
+  QChar* data = in.data();
+  int i=0;
+  while (!data[i].isNull()) {
+     char tmp =data[i].toAscii();
+     tmp-=(i+1);
+     data[i]=tmp;
+     ++data;
+  }
+  return in;
+}
+
+
 /**
  * Change language event
  */
@@ -65,24 +104,6 @@ void Settings::changeEvent(QEvent *e)
 }
 
 /**
- * Process cancel button event
- */
-void Settings::on_cancelButton_pressed()
-{
-    readSettings();
-    close();
-}
-
-/**
- * Process ok button event
- */
-void Settings::on_OkButton_pressed()
-{
-    writeSettings();
-    close();
-}
-
-/**
  * Read settings from Registry
  */
 void Settings::readSettings()
@@ -91,10 +112,10 @@ void Settings::readSettings()
     QSettings settings("PlaatSoft", "PlaatScore");
 
     ui->webServiceUrlEdit->setText(settings.value("webServiceUrl","http://www.plaatsoft.nl/service/score.php").toString());
-    ui->webServiceKeyEdit->setText(settings.value("webServiceKey","").toString());
+    ui->webServiceKeyEdit->setText(decrypt(settings.value("webServiceKey","").toString()));
 
     ui->LoginNameEdit->setText(settings.value("loginName","").toString());
-    ui->passwordEdit->setText( settings.value("password","").toString());
+    ui->passwordEdit->setText( decrypt(settings.value("password","").toString()));
     ui->proxyAddressEdit->setText( settings.value("proxyAddress","").toString());
     ui->proxyPortEdit->setText( settings.value("proxyPort","").toString());
     ui->enabledCheckBox->setChecked(settings.value("proxyEnabled",false).toBool());
@@ -109,10 +130,9 @@ void Settings::writeSettings()
     QSettings settings("PlaatSoft", "PlaatScore");
 
     settings.setValue("webServiceUrl", ui->webServiceUrlEdit->text());
-    settings.setValue("webServiceKey", ui->webServiceKeyEdit->text());
-
+    settings.setValue("webServiceKey", encrypt(ui->webServiceKeyEdit->text()));
     settings.setValue("loginName", ui->LoginNameEdit->text());
-    settings.setValue("password", ui->passwordEdit->text());
+    settings.setValue("password", encrypt(ui->passwordEdit->text()));
     settings.setValue("proxyAddress", ui->proxyAddressEdit->text());
     settings.setValue("proxyPort", ui->proxyPortEdit->text());
     settings.setValue("proxyEnabled", ui->enabledCheckBox->isChecked());
@@ -137,6 +157,28 @@ void Settings::updateScreen()
         ui->proxyAddressEdit->setEnabled(false);
         ui->proxyPortEdit->setEnabled(false);
     }
+}
+
+// ************************************
+// Button & Menu events
+// ************************************
+
+/**
+ * Process cancel button event
+ */
+void Settings::on_cancelButton_pressed()
+{
+    readSettings();
+    close();
+}
+
+/**
+ * Process ok button event
+ */
+void Settings::on_OkButton_pressed()
+{
+    writeSettings();
+    close();
 }
 
 /**

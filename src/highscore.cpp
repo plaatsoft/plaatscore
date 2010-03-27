@@ -45,11 +45,7 @@ HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScor
                 this,
                 SLOT(replyFinished(QNetworkReply*)) );
 
-    setWindowTitle("PlaatSoft HighScore v0.30");
-
-    // Set fix windows form size.
-    //setMinimumSize(614,390);
-    //setMaximumSize(614,390);
+    setWindowTitle("PlaatSoft HighScore v0.40");
 
     removeAct = new QAction(tr("Remove"), this);
     connect(removeAct, SIGNAL(triggered()), this, SLOT(remove()));
@@ -175,19 +171,19 @@ void HighScore::parseXML(QString response)
  */
 void HighScore::fetch()
 {
-    QSettings settings("PlaatSoft", "PlaatScore");
+    QSettings qSettings("PlaatSoft", "PlaatScore");
 
     // Proxy support
-    bool enabled = settings.value("proxyEnabled",false).toBool();
+    bool enabled = qSettings.value("proxyEnabled",false).toBool();
     QNetworkProxy proxy;
     if (enabled)
     {
         qDebug() << "Proxy enabled";
         bool ok;
-        proxy.setUser(settings.value("loginName","").toString());
-        proxy.setPassword(settings.value("password","").toString());
-        proxy.setPort(settings.value("proxyPort","").toString().toInt(&ok, 10));
-        proxy.setHostName(settings.value("proxyAddress","").toString());
+        proxy.setUser(qSettings.value("loginName","").toString());
+        proxy.setPassword(settings.decrypt(qSettings.value("password","").toString()));
+        proxy.setPort(qSettings.value("proxyPort","").toString().toInt(&ok, 10));
+        proxy.setHostName(qSettings.value("proxyAddress","").toString());
         proxy.setType(QNetworkProxy::HttpProxy);
     } else {
         proxy.setType(QNetworkProxy::NoProxy);
@@ -195,8 +191,9 @@ void HighScore::fetch()
     manager->setProxy(proxy);
 
     QNetworkRequest request;
-    request.setUrl(QUrl(settings.value("webServiceUrl","").toString()));
-    request.setRawHeader("KEY", settings.value("webServiceKey","").toByteArray());
+    request.setUrl(QUrl(qSettings.value("webServiceUrl","").toString()));
+    QString key = settings.decrypt(qSettings.value("webServiceKey","").toString());
+    request.setRawHeader("KEY", key.toAscii());
     request.setRawHeader("APPL", applValue);
     request.setRawHeader("ACTION", applAction);
     request.setRawHeader("ID", applId);
@@ -416,7 +413,7 @@ void HighScore::on_actionAbout_triggered()
 {
     QMessageBox::about(this, tr("About"),
        tr("<b>PlaatSoft HighScore</b><br>"
-          "Version 0.30 (Build 27-03-2010)<br>"
+          "Version 0.40 (Build 28-03-2010)<br>"
           "<br>"
           "Created by <i>wplaat</i><br>"
           "<br>"
