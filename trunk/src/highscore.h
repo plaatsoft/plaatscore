@@ -30,6 +30,14 @@
 #include "settings.h"
 #include "about.h"
 
+#define VERSION  "0.40"
+enum
+{
+    STATE_IDLE=0,
+    STATE_VERSION_CHECK=1,
+    STATE_REQUEST_DATA=2
+};
+
 namespace Ui {
     class HighScore;
 }
@@ -43,6 +51,7 @@ public:
     void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &) const;
 
 private slots:
+    void on_actionCheck_for_updates_triggered();
     void on_actionSettings_triggered();
     void remove();
     void on_actionAbout_triggered();
@@ -52,7 +61,8 @@ private slots:
     void on_actionBibleQuiz_triggered();
     void on_actionPong2_triggered();
     void on_actionExit_triggered();
-    void fetch();
+    void fetchData();
+    void fetchVersion();
     void replyFinished(QNetworkReply*);
 
 protected:
@@ -67,14 +77,17 @@ private:
     Settings settings;
     About about;
     QAction *removeAct;
+    int stateMachine;
 
     void parseXML(QString response);
+    void parseVersion(QString response);
     void closeEvent(QCloseEvent *event);
     void readSettings();
     void writeSettings();
     const char * getDate(time_t date);
     void resizeEvent(QResizeEvent *event );
     void contextMenuEvent(QContextMenuEvent *event);
+    void disableMenu(bool disable);
 };
 
 #endif // HIGHSCORE_H
@@ -99,20 +112,25 @@ private:
  *
  * @section ReleaseNotes
  *  <b>28-03-2010 Version 0.40 (Next development release)</b>
- *  - Encrypt / Decrypt entered password in Registry.
+ *  - Encrypt / Decrypt entered passwords in windows registry.
  *  - Added improve about window.
+ *  - Improve screen layout.
+ *  - Add new version detection.
+ *  - Disable menu buttons when http request is executed.
+ *  - Build with QtCreator v1.3.1
  *
  *  <b>27-03-2010 Version 0.30</b>
  *  - Added support for dynamic xml data.
  *  - Make table resizable.
  *  - Added popup menu.
  *  - Disable column sorting (Did not work good).
+ *  - Improve screen layout.
  *  - Build with QtCreator v1.3.1
  *
  *  <b>25-03-2010 Version 0.20</b>
+ *  - First release for the windows (Qt) scene.
  *  - Added settings page.
  *  - Added Http Proxy support.
- *  - Added remove entry functionality.
  *  - Cleanup code.
  *  - Build with QtCreator v1.3.1
  *

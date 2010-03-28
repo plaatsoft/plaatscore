@@ -35,55 +35,68 @@
 <a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="settings_8h.html" title="The file contain the settings window.">settings.h</a>&quot;</span>
 <a name="l00031"></a>00031 <span class="preprocessor">#include &quot;<a class="code" href="about_8h.html" title="The file contain the about window.">about.h</a>&quot;</span>
 <a name="l00032"></a>00032 
-<a name="l00033"></a>00033 <span class="keyword">namespace </span>Ui {
-<a name="l00034"></a>00034     <span class="keyword">class </span><a class="code" href="class_high_score.html">HighScore</a>;
-<a name="l00035"></a>00035 }
-<a name="l00036"></a>00036 
-<a name="l00037"></a><a class="code" href="class_high_score.html">00037</a> <span class="keyword">class </span><a class="code" href="class_high_score.html">HighScore</a> : <span class="keyword">public</span> QMainWindow {
-<a name="l00038"></a>00038     Q_OBJECT
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040 <span class="keyword">public</span>:
-<a name="l00041"></a>00041     <a class="code" href="class_high_score.html#a52de60c642fea2e40e7df4231bcd9936">HighScore</a>(QWidget *parent = 0);
-<a name="l00042"></a>00042     <a class="code" href="class_high_score.html#a979a1776ad5fc85a1b92215861e4db65">~HighScore</a>();
-<a name="l00043"></a>00043     <span class="keywordtype">void</span> <a class="code" href="class_high_score.html#acfba6ab23a4bce6c37fefc6da1975ceb">updateEditorGeometry</a>(QWidget *editor, <span class="keyword">const</span> QStyleOptionViewItem &amp;option, <span class="keyword">const</span> QModelIndex &amp;) <span class="keyword">const</span>;
+<a name="l00033"></a><a class="code" href="highscore_8h.html#a1c6d5de492ac61ad29aec7aa9a436bbf">00033</a> <span class="preprocessor">#define VERSION  &quot;0.40&quot;</span>
+<a name="l00034"></a>00034 <span class="preprocessor"></span><span class="keyword">enum</span>
+<a name="l00035"></a>00035 {
+<a name="l00036"></a><a class="code" href="highscore_8h.html#a06fc87d81c62e9abb8790b6e5713c55baaade5e53e88cf231292cd1142cce2afe">00036</a>     <a class="code" href="highscore_8h.html#a06fc87d81c62e9abb8790b6e5713c55baaade5e53e88cf231292cd1142cce2afe">STATE_IDLE</a>=0,
+<a name="l00037"></a><a class="code" href="highscore_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba0871af6dcdf8b2f0433b952b4153b4a9">00037</a>     <a class="code" href="highscore_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba0871af6dcdf8b2f0433b952b4153b4a9">STATE_VERSION_CHECK</a>=1,
+<a name="l00038"></a><a class="code" href="highscore_8h.html#a06fc87d81c62e9abb8790b6e5713c55baee09438b87b06aa9333f04fcf6fce077">00038</a>     <a class="code" href="highscore_8h.html#a06fc87d81c62e9abb8790b6e5713c55baee09438b87b06aa9333f04fcf6fce077">STATE_REQUEST_DATA</a>=2
+<a name="l00039"></a>00039 };
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041 <span class="keyword">namespace </span>Ui {
+<a name="l00042"></a>00042     <span class="keyword">class </span><a class="code" href="class_high_score.html">HighScore</a>;
+<a name="l00043"></a>00043 }
 <a name="l00044"></a>00044 
-<a name="l00045"></a>00045 <span class="keyword">private</span> slots:
-<a name="l00046"></a>00046     <span class="keywordtype">void</span> on_actionSettings_triggered();
-<a name="l00047"></a>00047     <span class="keywordtype">void</span> <span class="keyword">remove</span>();
-<a name="l00048"></a>00048     <span class="keywordtype">void</span> on_actionAbout_triggered();
-<a name="l00049"></a>00049     <span class="keywordtype">void</span> on_actionTowerDefense_triggered();
-<a name="l00050"></a>00050     <span class="keywordtype">void</span> on_actionSpaceBubble_triggered();
-<a name="l00051"></a>00051     <span class="keywordtype">void</span> on_actionRedSquare_triggered();
-<a name="l00052"></a>00052     <span class="keywordtype">void</span> on_actionBibleQuiz_triggered();
-<a name="l00053"></a>00053     <span class="keywordtype">void</span> on_actionPong2_triggered();
-<a name="l00054"></a>00054     <span class="keywordtype">void</span> on_actionExit_triggered();
-<a name="l00055"></a>00055     <span class="keywordtype">void</span> fetch();
-<a name="l00056"></a>00056     <span class="keywordtype">void</span> replyFinished(QNetworkReply*);
-<a name="l00057"></a>00057 
-<a name="l00058"></a>00058 <span class="keyword">protected</span>:
-<a name="l00059"></a>00059     <span class="keywordtype">void</span> <a class="code" href="class_high_score.html#ae4a7dc7c69e34704e2afe9d94f8d427b">changeEvent</a>(QEvent *e);
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061 <span class="keyword">private</span>:
-<a name="l00062"></a>00062     <a class="code" href="class_ui_1_1_high_score.html">Ui::HighScore</a> *ui;
-<a name="l00063"></a>00063     QNetworkAccessManager *manager;
-<a name="l00064"></a>00064     QByteArray applValue;
-<a name="l00065"></a>00065     QByteArray applAction;
-<a name="l00066"></a>00066     QByteArray applId;
-<a name="l00067"></a>00067     <a class="code" href="class_settings.html">Settings</a> settings;
-<a name="l00068"></a>00068     <a class="code" href="class_about.html">About</a> about;
-<a name="l00069"></a>00069     QAction *removeAct;
+<a name="l00045"></a><a class="code" href="class_high_score.html">00045</a> <span class="keyword">class </span><a class="code" href="class_high_score.html">HighScore</a> : <span class="keyword">public</span> QMainWindow {
+<a name="l00046"></a>00046     Q_OBJECT
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048 <span class="keyword">public</span>:
+<a name="l00049"></a>00049     <a class="code" href="class_high_score.html#a52de60c642fea2e40e7df4231bcd9936">HighScore</a>(QWidget *parent = 0);
+<a name="l00050"></a>00050     <a class="code" href="class_high_score.html#a979a1776ad5fc85a1b92215861e4db65">~HighScore</a>();
+<a name="l00051"></a>00051     <span class="keywordtype">void</span> <a class="code" href="class_high_score.html#acfba6ab23a4bce6c37fefc6da1975ceb">updateEditorGeometry</a>(QWidget *editor, <span class="keyword">const</span> QStyleOptionViewItem &amp;option, <span class="keyword">const</span> QModelIndex &amp;) <span class="keyword">const</span>;
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053 <span class="keyword">private</span> slots:
+<a name="l00054"></a>00054     <span class="keywordtype">void</span> on_actionCheck_for_updates_triggered();
+<a name="l00055"></a>00055     <span class="keywordtype">void</span> on_actionSettings_triggered();
+<a name="l00056"></a>00056     <span class="keywordtype">void</span> <span class="keyword">remove</span>();
+<a name="l00057"></a>00057     <span class="keywordtype">void</span> on_actionAbout_triggered();
+<a name="l00058"></a>00058     <span class="keywordtype">void</span> on_actionTowerDefense_triggered();
+<a name="l00059"></a>00059     <span class="keywordtype">void</span> on_actionSpaceBubble_triggered();
+<a name="l00060"></a>00060     <span class="keywordtype">void</span> on_actionRedSquare_triggered();
+<a name="l00061"></a>00061     <span class="keywordtype">void</span> on_actionBibleQuiz_triggered();
+<a name="l00062"></a>00062     <span class="keywordtype">void</span> on_actionPong2_triggered();
+<a name="l00063"></a>00063     <span class="keywordtype">void</span> on_actionExit_triggered();
+<a name="l00064"></a>00064     <span class="keywordtype">void</span> fetchData();
+<a name="l00065"></a>00065     <span class="keywordtype">void</span> fetchVersion();
+<a name="l00066"></a>00066     <span class="keywordtype">void</span> replyFinished(QNetworkReply*);
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068 <span class="keyword">protected</span>:
+<a name="l00069"></a>00069     <span class="keywordtype">void</span> <a class="code" href="class_high_score.html#ae4a7dc7c69e34704e2afe9d94f8d427b">changeEvent</a>(QEvent *e);
 <a name="l00070"></a>00070 
-<a name="l00071"></a>00071     <span class="keywordtype">void</span> parseXML(QString response);
-<a name="l00072"></a>00072     <span class="keywordtype">void</span> closeEvent(QCloseEvent *event);
-<a name="l00073"></a>00073     <span class="keywordtype">void</span> readSettings();
-<a name="l00074"></a>00074     <span class="keywordtype">void</span> writeSettings();
-<a name="l00075"></a>00075     <span class="keyword">const</span> <span class="keywordtype">char</span> * getDate(time_t date);
-<a name="l00076"></a>00076     <span class="keywordtype">void</span> resizeEvent(QResizeEvent *event );
-<a name="l00077"></a>00077     <span class="keywordtype">void</span> contextMenuEvent(QContextMenuEvent *event);
-<a name="l00078"></a>00078 };
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080 <span class="preprocessor">#endif // HIGHSCORE_H</span>
-<a name="l00081"></a>00081 <span class="preprocessor"></span>
+<a name="l00071"></a>00071 <span class="keyword">private</span>:
+<a name="l00072"></a>00072     <a class="code" href="class_ui_1_1_high_score.html">Ui::HighScore</a> *ui;
+<a name="l00073"></a>00073     QNetworkAccessManager *manager;
+<a name="l00074"></a>00074     QByteArray applValue;
+<a name="l00075"></a>00075     QByteArray applAction;
+<a name="l00076"></a>00076     QByteArray applId;
+<a name="l00077"></a>00077     <a class="code" href="class_settings.html">Settings</a> settings;
+<a name="l00078"></a>00078     <a class="code" href="class_about.html">About</a> about;
+<a name="l00079"></a>00079     QAction *removeAct;
+<a name="l00080"></a>00080     <span class="keywordtype">int</span> stateMachine;
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082     <span class="keywordtype">void</span> parseXML(QString response);
+<a name="l00083"></a>00083     <span class="keywordtype">void</span> parseVersion(QString response);
+<a name="l00084"></a>00084     <span class="keywordtype">void</span> closeEvent(QCloseEvent *event);
+<a name="l00085"></a>00085     <span class="keywordtype">void</span> readSettings();
+<a name="l00086"></a>00086     <span class="keywordtype">void</span> writeSettings();
+<a name="l00087"></a>00087     <span class="keyword">const</span> <span class="keywordtype">char</span> * getDate(time_t date);
+<a name="l00088"></a>00088     <span class="keywordtype">void</span> resizeEvent(QResizeEvent *event );
+<a name="l00089"></a>00089     <span class="keywordtype">void</span> contextMenuEvent(QContextMenuEvent *event);
+<a name="l00090"></a>00090     <span class="keywordtype">void</span> disableMenu(<span class="keywordtype">bool</span> disable);
+<a name="l00091"></a>00091 };
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093 <span class="preprocessor">#endif // HIGHSCORE_H</span>
+<a name="l00094"></a>00094 <span class="preprocessor"></span>
 </pre></div></div>
 <hr size="1"/><address style="text-align: right;"><small>Generated by&nbsp;
 <a href="http://www.doxygen.org/index.html">

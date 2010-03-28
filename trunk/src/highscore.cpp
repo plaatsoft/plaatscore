@@ -46,10 +46,20 @@ HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScor
                 this,
                 SLOT(replyFinished(QNetworkReply*)) );
 
-    setWindowTitle("PlaatSoft HighScore v0.40");
+    setWindowTitle(tr("PlaatSoft HighScore " VERSION));
 
     removeAct = new QAction(tr("Remove"), this);
     connect(removeAct, SIGNAL(triggered()), this, SLOT(remove()));
+
+    fetchVersion();
+}
+
+/**
+ * Destructor
+ */
+HighScore::~HighScore()
+{
+   delete ui;
 }
 
 /**
@@ -61,13 +71,6 @@ void HighScore::updateEditorGeometry(QWidget *editor,
      ui->tableWidget->setGeometry(option.rect);
  }
 
-/**
- * Destructor
- */
-HighScore::~HighScore()
-{
-    delete ui;
-}
 
 /**
  * Change language event
@@ -102,6 +105,15 @@ void HighScore::closeEvent(QCloseEvent *event)
  */
 void HighScore::parseXML(QString response)
 {
+   // Filter out illigal characters.
+   response=response.replace("&","");
+   response=response.replace(";","");
+
+   // Filter start lines without xml data
+   response=response.remove(0, response.indexOf("<highscore>"));
+
+   qDebug() << response;
+
    QString columnId[20];
    QString columnLabel[20];
    QString data[20][100];
@@ -168,10 +180,34 @@ void HighScore::parseXML(QString response)
 }
 
 /**
- * Create http request
+ * Parse data for version information
  */
-void HighScore::fetch()
+void HighScore::parseVersion(QString response)
 {
+   qDebug() << response;
+
+   QString text;
+   int pos = response.indexOf("Version ");
+   QString version = response.mid(pos+8,4).simplified();
+   if ((version.size()>0) && (version.compare(VERSION)!=0))
+   {
+       text="New version ";
+       text+=version;
+       text+=" of PlaatScore is available!<br>";
+       text+="Check out http://www.plaatsoft.nl for more information";
+
+       QMessageBox::information(this, tr("Software update"),text);
+   }
+}
+
+/**
+ * Create http request for xml data.
+ */
+void HighScore::fetchData()
+{
+    // Disable all menu items
+    disableMenu(true);
+
     QSettings qSettings("PlaatSoft", "PlaatScore");
 
     // Proxy support
@@ -201,6 +237,41 @@ void HighScore::fetch()
     request.setHeader(QNetworkRequest::ContentTypeHeader, "text/xml");
 
     manager->get(request);
+    stateMachine=STATE_REQUEST_DATA;
+}
+
+/**
+ * Create http request for version data.
+ */
+void HighScore::fetchVersion()
+{
+    // Disable all menu items
+    disableMenu(true);
+
+    QSettings qSettings("PlaatSoft", "PlaatScore");
+
+    // Proxy support
+    bool enabled = qSettings.value("proxyEnabled",false).toBool();
+    QNetworkProxy proxy;
+    if (enabled)
+    {
+        qDebug() << "Proxy enabled";
+        bool ok;
+        proxy.setUser(qSettings.value("loginName","").toString());
+        proxy.setPassword(settings.decrypt(qSettings.value("password","").toString()));
+        proxy.setPort(qSettings.value("proxyPort","").toString().toInt(&ok, 10));
+        proxy.setHostName(qSettings.value("proxyAddress","").toString());
+        proxy.setType(QNetworkProxy::HttpProxy);
+    } else {
+        proxy.setType(QNetworkProxy::NoProxy);
+    }
+    manager->setProxy(proxy);
+
+    QNetworkRequest request;
+    request.setUrl(QUrl("http://www.plaatsoft.nl/service/plaatscore.html"));
+
+    manager->get(request);
+    stateMachine=STATE_VERSION_CHECK;
 }
 
 /**
@@ -208,22 +279,31 @@ void HighScore::fetch()
  */
 void HighScore::replyFinished(QNetworkReply *reply)
 {
-    QString sA = QString::number( reply->bytesAvailable());
+    QString bytesCount = QString::number( reply->bytesAvailable());
     QString result = reply->readAll();
-    QString item;
 
-    qDebug() << sA << "Bytes received ";
+    qDebug() << bytesCount << "Bytes received ";
 
-    // Filter out illigal characters.
-    result=result.replace("&","");
-    result=result.replace(";","");
-    int pos = result.indexOf("<highscore>");
-    result=result.remove(0, pos);
+    switch (stateMachine)
+    {
+        case STATE_REQUEST_DATA:
+        {
+            // Parse XML date
+            parseXML(result);
+            stateMachine=STATE_IDLE;
+        }
+        break;
 
-    qDebug() << result;
+        case STATE_VERSION_CHECK:
+        {
+            parseVersion(result);
+            stateMachine=STATE_IDLE;
+        }
+        break;
+    }
 
-    // Parse XML date
-    parseXML(result);
+    // Enable all menu items
+    disableMenu(false);
 }
 
 /**
@@ -290,6 +370,20 @@ void HighScore::contextMenuEvent(QContextMenuEvent *event)
     menu.exec(event->globalPos());
 }
 
+
+/**
+ * Disable / enable all fetch menu items
+ */
+void HighScore::disableMenu(bool disable)
+{
+  ui->actionPong2->setDisabled(disable);
+  ui->actionBibleQuiz->setDisabled(disable);
+  ui->actionRedSquare->setDisabled(disable);
+  ui->actionSpaceBubble->setDisabled(disable);
+  ui->actionTowerDefense->setDisabled(disable);
+  ui->actionCheck_for_updates->setDisabled(disable);
+}
+
 // ********************************************
 // User actions.
 // ********************************************
@@ -320,7 +414,7 @@ void HighScore::on_actionPong2_triggered()
 
     ui->tableWidget->setRowCount(0);
 
-    fetch();
+    fetchData();
 }
 
 /**
@@ -341,7 +435,7 @@ void HighScore::on_actionBibleQuiz_triggered()
 
     ui->tableWidget->setRowCount(0);
 
-    fetch();
+    fetchData();
 }
 
 /**
@@ -362,7 +456,7 @@ void HighScore::on_actionRedSquare_triggered()
 
     ui->tableWidget->setRowCount(0);
 
-    fetch();
+    fetchData();
 }
 
 /**
@@ -383,7 +477,7 @@ void HighScore::on_actionSpaceBubble_triggered()
 
     ui->tableWidget->setRowCount(0);
 
-    fetch();
+    fetchData();
 }
 
 /**
@@ -404,7 +498,7 @@ void HighScore::on_actionTowerDefense_triggered()
 
     ui->tableWidget->setRowCount(0);
 
-    fetch();
+    fetchData();
 }
 
 /**
@@ -453,14 +547,23 @@ void HighScore::remove()
 
           qDebug() << "Remove " << id << "  [" << applId << "]";
 
-          fetch();
+          fetchData();
       }
     }
 }
 
+void HighScore::on_actionCheck_for_updates_triggered()
+{
+   stateMachine=STATE_VERSION_CHECK;
+   fetchVersion();
+}
+
+
 // ********************************************
 // The end
 // ********************************************
+
+
 
 
 
