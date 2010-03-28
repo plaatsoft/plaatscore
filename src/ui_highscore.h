@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'highscore.ui'
 **
-** Created: Sat 27. Mar 13:26:52 2010
+** Created: Sun 28. Mar 22:05:57 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -34,6 +34,7 @@ public:
     QAction *actionTowerDefense;
     QAction *actionAbout;
     QAction *actionSettings;
+    QAction *actionCheck_for_updates;
     QWidget *centralWidget;
     QTableWidget *tableWidget;
     QMenuBar *menuBar;
@@ -67,6 +68,8 @@ public:
         actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
         actionSettings = new QAction(HighScore);
         actionSettings->setObjectName(QString::fromUtf8("actionSettings"));
+        actionCheck_for_updates = new QAction(HighScore);
+        actionCheck_for_updates->setObjectName(QString::fromUtf8("actionCheck_for_updates"));
         centralWidget = new QWidget(HighScore);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         tableWidget = new QTableWidget(centralWidget);
@@ -109,6 +112,8 @@ public:
         menuActions->addSeparator();
         menuActions->addAction(actionSettings);
         menuHelp->addAction(actionAbout);
+        menuHelp->addSeparator();
+        menuHelp->addAction(actionCheck_for_updates);
 
         retranslateUi(HighScore);
 
@@ -126,6 +131,7 @@ public:
         actionTowerDefense->setText(QApplication::translate("HighScore", "TowerDefense", 0, QApplication::UnicodeUTF8));
         actionAbout->setText(QApplication::translate("HighScore", "About", 0, QApplication::UnicodeUTF8));
         actionSettings->setText(QApplication::translate("HighScore", "Settings", 0, QApplication::UnicodeUTF8));
+        actionCheck_for_updates->setText(QApplication::translate("HighScore", "Check for updates...", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("HighScore", "File", 0, QApplication::UnicodeUTF8));
         menuActions->setTitle(QApplication::translate("HighScore", "Actions", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("HighScore", "Help", 0, QApplication::UnicodeUTF8));

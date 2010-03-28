@@ -99,6 +99,8 @@
      <string>Help</string>
     </property>
     <addaction name="actionAbout"/>
+    <addaction name="separator"/>
+    <addaction name="actionCheck_for_updates"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuActions"/>
@@ -157,6 +159,11 @@
   <action name="actionSettings">
    <property name="text">
     <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionCheck_for_updates">
+   <property name="text">
+    <string>Check for updates...</string>
    </property>
   </action>
  </widget>
