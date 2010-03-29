@@ -43,8 +43,6 @@ Settings::Settings(QWidget *parent): QWidget(parent), ui(new Ui::Settings)
     updateScreen();
 
     setWindowTitle("Settings");
-
-
 }
 
 /**

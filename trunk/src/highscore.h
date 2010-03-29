@@ -31,6 +31,7 @@
 #include "about.h"
 
 #define VERSION  "0.40"
+
 enum
 {
     STATE_IDLE=0,
