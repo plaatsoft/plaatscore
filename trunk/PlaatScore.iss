@@ -23,7 +23,6 @@ Source: "src\release\QtCore4.dll"; DestDir: "{app}"
 Source: "src\release\QtGui4.dll"; DestDir: "{app}"
 Source: "src\release\QtNetwork4.dll"; DestDir: "{app}"
 Source: "src\release\QtXml4.dll"; DestDir: "{app}"
-Source: "src\release\qjpeg4.dll"; DestDir: "{app}"
 Source: "src\release\license.txt"; DestDir: "{app}"; Flags: isreadme
 
 [Icons]
