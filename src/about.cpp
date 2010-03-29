@@ -33,7 +33,7 @@ About::About(QWidget *parent) : QWidget(parent), ui(new Ui::About)
     ui->setupUi(this);
 
     scene = new QGraphicsScene();
-    scene->addPixmap(QPixmap(":/images/plaatsoft.jpg"));
+    scene->addPixmap(QPixmap(":/images/plaatsoft.png"));
     ui->graphicsView->setScene(scene);
     ui->graphicsView->show();
 
