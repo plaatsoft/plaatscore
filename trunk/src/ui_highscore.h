@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'highscore.ui'
 **
-** Created: Sun 28. Mar 22:05:57 2010
+** Created: Mon 29. Mar 16:37:44 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -46,7 +46,7 @@ public:
     {
         if (HighScore->objectName().isEmpty())
             HighScore->setObjectName(QString::fromUtf8("HighScore"));
-        HighScore->resize(355, 242);
+        HighScore->resize(355, 197);
         actionExit = new QAction(HighScore);
         actionExit->setObjectName(QString::fromUtf8("actionExit"));
         actionPong2 = new QAction(HighScore);
@@ -74,7 +74,7 @@ public:
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         tableWidget = new QTableWidget(centralWidget);
         tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        tableWidget->setGeometry(QRect(0, 0, 351, 218));
+        tableWidget->setGeometry(QRect(0, 0, 351, 173));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(1);
         sizePolicy.setVerticalStretch(1);

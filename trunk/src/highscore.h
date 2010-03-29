@@ -30,7 +30,7 @@
 #include "settings.h"
 #include "about.h"
 
-#define VERSION  "0.40"
+#define VERSION  "0.50"
 
 enum
 {
@@ -80,7 +80,7 @@ private:
     QAction *removeAct;
     int stateMachine;
 
-    void parseXML(QString response);
+    void parseData(QString response);
     void parseVersion(QString response);
     void closeEvent(QCloseEvent *event);
     void readSettings();
@@ -112,7 +112,10 @@ private:
  *  - Table column sorting.
  *
  * @section ReleaseNotes
- *  <b>28-03-2010 Version 0.40 (Next development release)</b>
+ *  <b>29-03-2010 Version 0.50 (Next release)</b>
+ *  - Show popup window when internet connect fails.
+ *
+ *  <b>28-03-2010 Version 0.40</b>
  *  - Encrypt / Decrypt entered passwords in windows registry.
  *  - Added improve about window.
  *  - Improve screen layout.

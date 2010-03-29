@@ -50,8 +50,6 @@ HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScor
 
     removeAct = new QAction(tr("Remove"), this);
     connect(removeAct, SIGNAL(triggered()), this, SLOT(remove()));
-
-    fetchVersion();
 }
 
 /**
@@ -103,7 +101,7 @@ void HighScore::closeEvent(QCloseEvent *event)
 /**
  * Parse XML data and fill Qt table
  */
-void HighScore::parseXML(QString response)
+void HighScore::parseData(QString response)
 {
    // Filter out illigal characters.
    response=response.replace("&","");
@@ -143,8 +141,9 @@ void HighScore::parseXML(QString response)
    }
 
    if (reader.hasError()) {
-      qDebug() << "The XML file isn't well-formed: "
-          << reader.errorString() << endl << endl << endl;
+      QString text = "The XML data isn't well-formed:\n";
+      text += reader.errorString();
+      QMessageBox::warning(this, tr("Warning"), text);
       return;
    }
 
@@ -188,16 +187,21 @@ void HighScore::parseVersion(QString response)
 
    QString text;
    int pos = response.indexOf("Version ");
-   QString version = response.mid(pos+8,4).simplified();
-   if ((version.size()>0) && (version.compare(VERSION)!=0))
-   {
-       text="New version ";
-       text+=version;
-       text+=" of PlaatScore is available!<br>";
-       text+="Check out http://www.plaatsoft.nl for more information";
-
-       QMessageBox::information(this, tr("Software update"),text);
-   }
+   if (pos>0) {
+        QString version = response.mid(pos+8,4).simplified();
+        if ((version.size()>0) && (version.compare(VERSION)!=0)) {
+            text="New version ";
+            text+=version;
+            text+=" of PlaatScore is available!<br>";
+            text+="Check out http://www.plaatsoft.nl for more information";
+        } else  {
+            text = "No update available!";
+        }
+        QMessageBox::information(this, tr("Software update"),text);
+    } else {
+        text = "Update check failed!";
+        QMessageBox::warning(this, tr("Warning"),text);
+    }
 }
 
 /**
@@ -289,7 +293,7 @@ void HighScore::replyFinished(QNetworkReply *reply)
         case STATE_REQUEST_DATA:
         {
             // Parse XML date
-            parseXML(result);
+            parseData(result);
             stateMachine=STATE_IDLE;
         }
         break;

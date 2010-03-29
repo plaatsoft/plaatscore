@@ -7,7 +7,7 @@
 
 [Setup]
 AppName=PlaatScore
-AppVerName=PlaatSoft HighScore v0.40
+AppVerName=PlaatSoft HighScore v0.50
 DefaultDirName={pf}\PlaatScore
 DefaultGroupName=PlaatSoft
 UninstallDisplayIcon={app}\HighScore.exe
@@ -23,6 +23,7 @@ Source: "src\release\QtCore4.dll"; DestDir: "{app}"
 Source: "src\release\QtGui4.dll"; DestDir: "{app}"
 Source: "src\release\QtNetwork4.dll"; DestDir: "{app}"
 Source: "src\release\QtXml4.dll"; DestDir: "{app}"
+Source: "src\release\qjpeg4.dll"; DestDir: "{app}"
 Source: "src\release\license.txt"; DestDir: "{app}"; Flags: isreadme
 
 [Icons]
