@@ -98,9 +98,13 @@
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionAbout"/>
+    <addaction name="actionRelease_Notes"/>
+    <addaction name="actionDonate"/>
+    <addaction name="actionCredits"/>
     <addaction name="separator"/>
     <addaction name="actionCheck_for_updates"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuActions"/>
@@ -164,6 +168,21 @@
   <action name="actionCheck_for_updates">
    <property name="text">
     <string>Check for updates...</string>
+   </property>
+  </action>
+  <action name="actionRelease_Notes">
+   <property name="text">
+    <string>Release Notes</string>
+   </property>
+  </action>
+  <action name="actionDonate">
+   <property name="text">
+    <string>Donate</string>
+   </property>
+  </action>
+  <action name="actionCredits">
+   <property name="text">
+    <string>Credits</string>
    </property>
   </action>
  </widget>

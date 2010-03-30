@@ -9,12 +9,21 @@ TEMPLATE = app
 SOURCES += main.cpp \
     highscore.cpp \
     settings.cpp \
-    about.cpp
+    about.cpp \
+    releasenotes.cpp \
+    donate.cpp \
+    credits.cpp
 HEADERS += highscore.h \
     settings.h \
-    about.h
+    about.h \
+    releasenotes.h \
+    donate.h \
+    credits.h
 FORMS += highscore.ui \
     settings.ui \
-    about.ui
+    about.ui \
+    releasenotes.ui \
+    donate.ui \
+    credits.ui
 RC_FILE = HighScore.rc
 RESOURCES += resource.qrc

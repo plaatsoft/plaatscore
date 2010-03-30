@@ -26,9 +26,11 @@
 #include <QtNetwork>
 
 #include "highscore.h"
-#include "settings.h"
-#include "about.h"
 #include "ui_highscore.h"
+
+// ********************************************
+// Constructor & Destructor
+// ********************************************
 
 /**
  * Constructor
@@ -60,15 +62,9 @@ HighScore::~HighScore()
    delete ui;
 }
 
-/**
- * ???
- */
-void HighScore::updateEditorGeometry(QWidget *editor,
-     const QStyleOptionViewItem &option, const QModelIndex &/* index */) const
- {
-     ui->tableWidget->setGeometry(option.rect);
- }
-
+// ********************************************
+// Support methods
+// ********************************************
 
 /**
  * Change language event
@@ -94,9 +90,32 @@ void HighScore::closeEvent(QCloseEvent *event)
    writeSettings();
 }
 
-// ********************************************
-// Support methods
-// ********************************************
+
+/**
+ * Close event
+ */
+void HighScore::setProxy()
+{
+    QSettings qSettings("PlaatSoft", "PlaatScore");
+
+    // Proxy support
+    bool enabled = qSettings.value("proxyEnabled",false).toBool();
+    QNetworkProxy proxy;
+    if (enabled)
+    {
+        qDebug() << "Proxy enabled";
+        bool ok;
+        proxy.setUser(qSettings.value("loginName","").toString());
+        proxy.setPassword(settings.decrypt(qSettings.value("password","").toString()));
+        proxy.setPort(qSettings.value("proxyPort","").toString().toInt(&ok, 10));
+        proxy.setHostName(qSettings.value("proxyAddress","").toString());
+        proxy.setType(QNetworkProxy::HttpProxy);
+    } else {
+        proxy.setType(QNetworkProxy::NoProxy);
+    }
+    manager->setProxy(proxy);
+}
+
 
 /**
  * Parse XML data and fill Qt table
@@ -205,6 +224,17 @@ void HighScore::parseVersion(QString response)
 }
 
 /**
+ * Parse data for version information
+ */
+void HighScore::parseReleaseNotes(QString response)
+{
+   qDebug() << response;
+
+   // Store release notes
+   releaseNotes.setText(response);
+}
+
+/**
  * Create http request for xml data.
  */
 void HighScore::fetchData()
@@ -212,24 +242,9 @@ void HighScore::fetchData()
     // Disable all menu items
     disableMenu(true);
 
-    QSettings qSettings("PlaatSoft", "PlaatScore");
+    setProxy();
 
-    // Proxy support
-    bool enabled = qSettings.value("proxyEnabled",false).toBool();
-    QNetworkProxy proxy;
-    if (enabled)
-    {
-        qDebug() << "Proxy enabled";
-        bool ok;
-        proxy.setUser(qSettings.value("loginName","").toString());
-        proxy.setPassword(settings.decrypt(qSettings.value("password","").toString()));
-        proxy.setPort(qSettings.value("proxyPort","").toString().toInt(&ok, 10));
-        proxy.setHostName(qSettings.value("proxyAddress","").toString());
-        proxy.setType(QNetworkProxy::HttpProxy);
-    } else {
-        proxy.setType(QNetworkProxy::NoProxy);
-    }
-    manager->setProxy(proxy);
+    QSettings qSettings("PlaatSoft", "PlaatScore");
 
     QNetworkRequest request;
     request.setUrl(QUrl(qSettings.value("webServiceUrl","").toString()));
@@ -252,30 +267,30 @@ void HighScore::fetchVersion()
     // Disable all menu items
     disableMenu(true);
 
-    QSettings qSettings("PlaatSoft", "PlaatScore");
-
-    // Proxy support
-    bool enabled = qSettings.value("proxyEnabled",false).toBool();
-    QNetworkProxy proxy;
-    if (enabled)
-    {
-        qDebug() << "Proxy enabled";
-        bool ok;
-        proxy.setUser(qSettings.value("loginName","").toString());
-        proxy.setPassword(settings.decrypt(qSettings.value("password","").toString()));
-        proxy.setPort(qSettings.value("proxyPort","").toString().toInt(&ok, 10));
-        proxy.setHostName(qSettings.value("proxyAddress","").toString());
-        proxy.setType(QNetworkProxy::HttpProxy);
-    } else {
-        proxy.setType(QNetworkProxy::NoProxy);
-    }
-    manager->setProxy(proxy);
+    setProxy();
 
     QNetworkRequest request;
     request.setUrl(QUrl("http://www.plaatsoft.nl/service/plaatscore.html"));
 
     manager->get(request);
     stateMachine=STATE_VERSION_CHECK;
+}
+
+/**
+ * Create http request for release notes data.
+ */
+void HighScore::fetchReleaseNotes()
+{
+    // Disable all menu items
+    disableMenu(true);
+
+    setProxy();
+
+    QNetworkRequest request;
+    request.setUrl(QUrl("http://www.plaatsoft.nl/service/plaatscore.html"));
+
+    manager->get(request);
+    stateMachine=STATE_RELEASE_NOTES;
 }
 
 /**
@@ -292,7 +307,6 @@ void HighScore::replyFinished(QNetworkReply *reply)
     {
         case STATE_REQUEST_DATA:
         {
-            // Parse XML date
             parseData(result);
             stateMachine=STATE_IDLE;
         }
@@ -301,6 +315,13 @@ void HighScore::replyFinished(QNetworkReply *reply)
         case STATE_VERSION_CHECK:
         {
             parseVersion(result);
+            stateMachine=STATE_IDLE;
+        }
+        break;
+
+        case STATE_RELEASE_NOTES:
+        {
+            parseReleaseNotes(result);
             stateMachine=STATE_IDLE;
         }
         break;
@@ -562,6 +583,44 @@ void HighScore::on_actionCheck_for_updates_triggered()
    fetchVersion();
 }
 
+void HighScore::on_actionRelease_Notes_triggered()
+{
+    fetchReleaseNotes();
+
+    // Set settings window position related to Main window.
+    QPoint position = QPoint(pos());
+    position.setX(position.x()+80);
+    position.setY(position.y()+70);
+    releaseNotes.move(position);
+
+    // Make ReleaseNotes window visible
+    releaseNotes.show();
+}
+
+void HighScore::on_actionDonate_triggered()
+{
+    // Set settings window position related to Main window.
+    QPoint position = QPoint(pos());
+    position.setX(position.x()+120);
+    position.setY(position.y()+70);
+    donate.move(position);
+
+    // Make settings window visible
+    donate.show();
+}
+
+void HighScore::on_actionCredits_triggered()
+{
+    // Set settings window position related to Main window.
+    QPoint position = QPoint(pos());
+    position.setX(position.x()+120);
+    position.setY(position.y()+70);
+    credits.move(position);
+
+    // Make settings window visible
+    credits.show();
+
+}
 
 // ********************************************
 // The end

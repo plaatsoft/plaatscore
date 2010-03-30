@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'highscore.ui'
 **
-** Created: Mon 29. Mar 16:37:44 2010
+** Created: Tue 30. Mar 16:21:14 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -35,6 +35,9 @@ public:
     QAction *actionAbout;
     QAction *actionSettings;
     QAction *actionCheck_for_updates;
+    QAction *actionRelease_Notes;
+    QAction *actionDonate;
+    QAction *actionCredits;
     QWidget *centralWidget;
     QTableWidget *tableWidget;
     QMenuBar *menuBar;
@@ -70,6 +73,12 @@ public:
         actionSettings->setObjectName(QString::fromUtf8("actionSettings"));
         actionCheck_for_updates = new QAction(HighScore);
         actionCheck_for_updates->setObjectName(QString::fromUtf8("actionCheck_for_updates"));
+        actionRelease_Notes = new QAction(HighScore);
+        actionRelease_Notes->setObjectName(QString::fromUtf8("actionRelease_Notes"));
+        actionDonate = new QAction(HighScore);
+        actionDonate->setObjectName(QString::fromUtf8("actionDonate"));
+        actionCredits = new QAction(HighScore);
+        actionCredits->setObjectName(QString::fromUtf8("actionCredits"));
         centralWidget = new QWidget(HighScore);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         tableWidget = new QTableWidget(centralWidget);
@@ -111,9 +120,13 @@ public:
         menuActions->addAction(actionTowerDefense);
         menuActions->addSeparator();
         menuActions->addAction(actionSettings);
-        menuHelp->addAction(actionAbout);
+        menuHelp->addAction(actionRelease_Notes);
+        menuHelp->addAction(actionDonate);
+        menuHelp->addAction(actionCredits);
         menuHelp->addSeparator();
         menuHelp->addAction(actionCheck_for_updates);
+        menuHelp->addSeparator();
+        menuHelp->addAction(actionAbout);
 
         retranslateUi(HighScore);
 
@@ -132,6 +145,9 @@ public:
         actionAbout->setText(QApplication::translate("HighScore", "About", 0, QApplication::UnicodeUTF8));
         actionSettings->setText(QApplication::translate("HighScore", "Settings", 0, QApplication::UnicodeUTF8));
         actionCheck_for_updates->setText(QApplication::translate("HighScore", "Check for updates...", 0, QApplication::UnicodeUTF8));
+        actionRelease_Notes->setText(QApplication::translate("HighScore", "Release Notes", 0, QApplication::UnicodeUTF8));
+        actionDonate->setText(QApplication::translate("HighScore", "Donate", 0, QApplication::UnicodeUTF8));
+        actionCredits->setText(QApplication::translate("HighScore", "Credits", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("HighScore", "File", 0, QApplication::UnicodeUTF8));
         menuActions->setTitle(QApplication::translate("HighScore", "Actions", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("HighScore", "Help", 0, QApplication::UnicodeUTF8));

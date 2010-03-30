@@ -29,6 +29,9 @@
 
 #include "settings.h"
 #include "about.h"
+#include "releasenotes.h"
+#include "donate.h"
+#include "credits.h"
 
 #define VERSION  "0.50"
 
@@ -36,7 +39,8 @@ enum
 {
     STATE_IDLE=0,
     STATE_VERSION_CHECK=1,
-    STATE_REQUEST_DATA=2
+    STATE_REQUEST_DATA=2,
+    STATE_RELEASE_NOTES=3
 };
 
 namespace Ui {
@@ -52,6 +56,10 @@ public:
     void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &) const;
 
 private slots:
+    // User action methods
+    void on_actionCredits_triggered();
+    void on_actionDonate_triggered();
+    void on_actionRelease_Notes_triggered();
     void on_actionCheck_for_updates_triggered();
     void on_actionSettings_triggered();
     void remove();
@@ -62,8 +70,11 @@ private slots:
     void on_actionBibleQuiz_triggered();
     void on_actionPong2_triggered();
     void on_actionExit_triggered();
+
+    // HTTP related methods
     void fetchData();
     void fetchVersion();
+    void fetchReleaseNotes();
     void replyFinished(QNetworkReply*);
 
 protected:
@@ -75,17 +86,28 @@ private:
     QByteArray applValue;
     QByteArray applAction;
     QByteArray applId;
-    Settings settings;
-    About about;
     QAction *removeAct;
     int stateMachine;
 
+    // Other child windows
+    Settings settings;
+    About about;
+    ReleaseNotes releaseNotes;
+    Donate donate;
+    Credits credits;
+
+    // Http relate methods
     void parseData(QString response);
     void parseVersion(QString response);
-    void closeEvent(QCloseEvent *event);
+    void parseReleaseNotes(QString response);
+    void setProxy();
+
+    // Settings methods
     void readSettings();
     void writeSettings();
     const char * getDate(time_t date);
+
+    void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent *event );
     void contextMenuEvent(QContextMenuEvent *event);
     void disableMenu(bool disable);
@@ -112,8 +134,12 @@ private:
  *  - Table column sorting.
  *
  * @section ReleaseNotes
- *  <b>29-03-2010 Version 0.50 (Next release)</b>
+ *  <b>30-03-2010 Version 0.50 (Next release)</b>
  *  - Show popup window when internet connect fails.
+ *  - Added release notes window.
+ *  - Added donate window.
+ *  - Added credits window.
+ *  - Build with QtCreator v1.3.1
  *
  *  <b>28-03-2010 Version 0.40</b>
  *  - Encrypt / Decrypt entered passwords in windows registry.
@@ -147,4 +173,3 @@ private:
  *  - Added application icon.
  *  - Build with QtCreator v1.3.1
  */
-
