@@ -38,8 +38,8 @@ About::About(QWidget *parent) : QWidget(parent), ui(new Ui::About)
     ui->graphicsView->show();
 
     // Set fix windows form size.
-    setMinimumSize(540,220);
-    setMaximumSize(540,220);
+    setMinimumSize(525,220);
+    setMaximumSize(525,220);
 
     setWindowTitle("About");
 }
