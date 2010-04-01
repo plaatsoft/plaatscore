@@ -12,18 +12,21 @@ SOURCES += main.cpp \
     about.cpp \
     releasenotes.cpp \
     donate.cpp \
-    credits.cpp
+    credits.cpp \
+    add.cpp
 HEADERS += highscore.h \
     settings.h \
     about.h \
     releasenotes.h \
     donate.h \
-    credits.h
+    credits.h \
+    add.h
 FORMS += highscore.ui \
     settings.ui \
     about.ui \
     releasenotes.ui \
     donate.ui \
-    credits.ui
+    credits.ui \
+    add.ui
 RC_FILE = HighScore.rc
 RESOURCES += resource.qrc

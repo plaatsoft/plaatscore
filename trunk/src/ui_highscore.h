@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'highscore.ui'
 **
-** Created: Tue 30. Mar 16:21:14 2010
+** Created: Thu 1. Apr 16:19:24 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -38,11 +38,13 @@ public:
     QAction *actionRelease_Notes;
     QAction *actionDonate;
     QAction *actionCredits;
+    QAction *actionNew_Entry;
     QWidget *centralWidget;
     QTableWidget *tableWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuActions;
+    QMenu *menuFetch_Data;
     QMenu *menuHelp;
 
     void setupUi(QMainWindow *HighScore)
@@ -55,9 +57,11 @@ public:
         actionPong2 = new QAction(HighScore);
         actionPong2->setObjectName(QString::fromUtf8("actionPong2"));
         actionPong2->setCheckable(true);
+        actionPong2->setEnabled(false);
         actionBibleQuiz = new QAction(HighScore);
         actionBibleQuiz->setObjectName(QString::fromUtf8("actionBibleQuiz"));
         actionBibleQuiz->setCheckable(true);
+        actionBibleQuiz->setEnabled(false);
         actionRedSquare = new QAction(HighScore);
         actionRedSquare->setObjectName(QString::fromUtf8("actionRedSquare"));
         actionRedSquare->setCheckable(true);
@@ -79,6 +83,8 @@ public:
         actionDonate->setObjectName(QString::fromUtf8("actionDonate"));
         actionCredits = new QAction(HighScore);
         actionCredits->setObjectName(QString::fromUtf8("actionCredits"));
+        actionNew_Entry = new QAction(HighScore);
+        actionNew_Entry->setObjectName(QString::fromUtf8("actionNew_Entry"));
         centralWidget = new QWidget(HighScore);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         tableWidget = new QTableWidget(centralWidget);
@@ -105,6 +111,8 @@ public:
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuActions = new QMenu(menuBar);
         menuActions->setObjectName(QString::fromUtf8("menuActions"));
+        menuFetch_Data = new QMenu(menuActions);
+        menuFetch_Data->setObjectName(QString::fromUtf8("menuFetch_Data"));
         menuHelp = new QMenu(menuBar);
         menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
         HighScore->setMenuBar(menuBar);
@@ -113,13 +121,16 @@ public:
         menuBar->addAction(menuActions->menuAction());
         menuBar->addAction(menuHelp->menuAction());
         menuFile->addAction(actionExit);
-        menuActions->addAction(actionPong2);
-        menuActions->addAction(actionBibleQuiz);
-        menuActions->addAction(actionRedSquare);
-        menuActions->addAction(actionSpaceBubble);
-        menuActions->addAction(actionTowerDefense);
+        menuActions->addAction(menuFetch_Data->menuAction());
+        menuActions->addAction(actionNew_Entry);
         menuActions->addSeparator();
         menuActions->addAction(actionSettings);
+        menuActions->addSeparator();
+        menuFetch_Data->addAction(actionPong2);
+        menuFetch_Data->addAction(actionBibleQuiz);
+        menuFetch_Data->addAction(actionRedSquare);
+        menuFetch_Data->addAction(actionSpaceBubble);
+        menuFetch_Data->addAction(actionTowerDefense);
         menuHelp->addAction(actionRelease_Notes);
         menuHelp->addAction(actionDonate);
         menuHelp->addAction(actionCredits);
@@ -148,8 +159,10 @@ public:
         actionRelease_Notes->setText(QApplication::translate("HighScore", "Release Notes", 0, QApplication::UnicodeUTF8));
         actionDonate->setText(QApplication::translate("HighScore", "Donate", 0, QApplication::UnicodeUTF8));
         actionCredits->setText(QApplication::translate("HighScore", "Credits", 0, QApplication::UnicodeUTF8));
+        actionNew_Entry->setText(QApplication::translate("HighScore", "New Entry", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("HighScore", "File", 0, QApplication::UnicodeUTF8));
         menuActions->setTitle(QApplication::translate("HighScore", "Actions", 0, QApplication::UnicodeUTF8));
+        menuFetch_Data->setTitle(QApplication::translate("HighScore", "Fetch Entries", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("HighScore", "Help", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

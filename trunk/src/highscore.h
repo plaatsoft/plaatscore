@@ -32,8 +32,9 @@
 #include "releasenotes.h"
 #include "donate.h"
 #include "credits.h"
+#include "add.h"
 
-#define VERSION  "0.50"
+#define VERSION  "0.60"
 
 enum
 {
@@ -57,6 +58,7 @@ public:
 
 private slots:
     // User action methods
+    void on_actionNew_Entry_triggered();
     void on_actionCredits_triggered();
     void on_actionDonate_triggered();
     void on_actionRelease_Notes_triggered();
@@ -95,6 +97,7 @@ private:
     ReleaseNotes releaseNotes;
     Donate donate;
     Credits credits;
+    Add add;
 
     // Http relate methods
     void parseData(QString response);
@@ -134,7 +137,10 @@ private:
  *  - Table column sorting.
  *
  * @section ReleaseNotes
- *  <b>30-03-2010 Version 0.50 (Next release)</b>
+ *  <b>01-04-2010 Version 0.60 (Next release)</b>
+ *  - Added new entry add window.
+ *
+ *  <b>30-03-2010 Version 0.50</b>
  *  - Show popup window when internet connect fails.
  *  - Added release notes window.
  *  - Added donate window.

@@ -86,13 +86,21 @@
     <property name="title">
      <string>Actions</string>
     </property>
-    <addaction name="actionPong2"/>
-    <addaction name="actionBibleQuiz"/>
-    <addaction name="actionRedSquare"/>
-    <addaction name="actionSpaceBubble"/>
-    <addaction name="actionTowerDefense"/>
+    <widget class="QMenu" name="menuFetch_Data">
+     <property name="title">
+      <string>Fetch Entries</string>
+     </property>
+     <addaction name="actionPong2"/>
+     <addaction name="actionBibleQuiz"/>
+     <addaction name="actionRedSquare"/>
+     <addaction name="actionSpaceBubble"/>
+     <addaction name="actionTowerDefense"/>
+    </widget>
+    <addaction name="menuFetch_Data"/>
+    <addaction name="actionNew_Entry"/>
     <addaction name="separator"/>
     <addaction name="actionSettings"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -119,6 +127,9 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Pong2</string>
    </property>
@@ -126,6 +137,9 @@
   <action name="actionBibleQuiz">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>BibleQuiz</string>
@@ -183,6 +197,11 @@
   <action name="actionCredits">
    <property name="text">
     <string>Credits</string>
+   </property>
+  </action>
+  <action name="actionNew_Entry">
+   <property name="text">
+    <string>New Entry</string>
    </property>
   </action>
  </widget>

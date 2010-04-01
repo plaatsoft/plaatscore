@@ -395,14 +395,13 @@ void HighScore::contextMenuEvent(QContextMenuEvent *event)
     menu.exec(event->globalPos());
 }
 
-
 /**
  * Disable / enable all fetch menu items
  */
 void HighScore::disableMenu(bool disable)
 {
-  ui->actionPong2->setDisabled(disable);
-  ui->actionBibleQuiz->setDisabled(disable);
+  //ui->actionPong2->setDisabled(disable);
+  //ui->actionBibleQuiz->setDisabled(disable);
   ui->actionRedSquare->setDisabled(disable);
   ui->actionSpaceBubble->setDisabled(disable);
   ui->actionTowerDefense->setDisabled(disable);
@@ -431,8 +430,8 @@ void HighScore::on_actionPong2_triggered()
     applAction= QByteArray("");
     applId = QByteArray("");
 
-    ui->actionPong2->setCheckable(true);
-    ui->actionBibleQuiz->setChecked(false);
+    //ui->actionPong2->setCheckable(true);
+    //ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(false);
     ui->actionSpaceBubble->setChecked(false);
     ui->actionTowerDefense->setChecked(false);
@@ -452,8 +451,8 @@ void HighScore::on_actionBibleQuiz_triggered()
     applAction= QByteArray("");
     applId = QByteArray("");
 
-    ui->actionPong2->setCheckable(false);
-    ui->actionBibleQuiz->setChecked(true);
+    //ui->actionPong2->setCheckable(false);
+    //ui->actionBibleQuiz->setChecked(true);
     ui->actionRedSquare->setChecked(false);
     ui->actionSpaceBubble->setChecked(false);
     ui->actionTowerDefense->setChecked(false);
@@ -473,8 +472,8 @@ void HighScore::on_actionRedSquare_triggered()
     applAction= QByteArray("");
     applId = QByteArray("");
 
-    ui->actionPong2->setCheckable(false);
-    ui->actionBibleQuiz->setChecked(false);
+    //ui->actionPong2->setCheckable(false);
+    //ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(true);
     ui->actionSpaceBubble->setChecked(false);
     ui->actionTowerDefense->setChecked(false);
@@ -494,8 +493,8 @@ void HighScore::on_actionSpaceBubble_triggered()
     applAction= QByteArray("");
     applId = QByteArray("");
 
-    ui->actionPong2->setCheckable(false);
-    ui->actionBibleQuiz->setChecked(false);
+    //ui->actionPong2->setCheckable(false);
+    //ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(false);
     ui->actionSpaceBubble->setChecked(true);
     ui->actionTowerDefense->setChecked(false);
@@ -515,8 +514,8 @@ void HighScore::on_actionTowerDefense_triggered()
     applAction= QByteArray("");
     applId = QByteArray("");
 
-    ui->actionPong2->setCheckable(false);
-    ui->actionBibleQuiz->setChecked(false);
+    //ui->actionPong2->setCheckable(false);
+    //ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(false);
     ui->actionSpaceBubble->setChecked(false);
     ui->actionTowerDefense->setChecked(true);
@@ -587,7 +586,7 @@ void HighScore::on_actionRelease_Notes_triggered()
 {
     fetchReleaseNotes();
 
-    // Set settings window position related to Main window.
+    // Set window position related to Main window.
     QPoint position = QPoint(pos());
     position.setX(position.x()+80);
     position.setY(position.y()+70);
@@ -599,7 +598,7 @@ void HighScore::on_actionRelease_Notes_triggered()
 
 void HighScore::on_actionDonate_triggered()
 {
-    // Set settings window position related to Main window.
+    // Set window position related to Main window.
     QPoint position = QPoint(pos());
     position.setX(position.x()+120);
     position.setY(position.y()+70);
@@ -611,7 +610,7 @@ void HighScore::on_actionDonate_triggered()
 
 void HighScore::on_actionCredits_triggered()
 {
-    // Set settings window position related to Main window.
+    // Set window position related to Main window.
     QPoint position = QPoint(pos());
     position.setX(position.x()+120);
     position.setY(position.y()+70);
@@ -622,9 +621,23 @@ void HighScore::on_actionCredits_triggered()
 
 }
 
+void HighScore::on_actionNew_Entry_triggered()
+{
+    // Set window position related to Main window.
+    QPoint position = QPoint(pos());
+    position.setX(position.x()+120);
+    position.setY(position.y()+70);
+    add.move(position);
+
+    // Make settings window visible
+    add.show();
+}
+
 // ********************************************
 // The end
 // ********************************************
+
+
 
 
 
