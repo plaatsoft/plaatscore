@@ -152,7 +152,6 @@
     <value type="QString">USERPROFILE=C:\Documents and Settings\WPLAAT</value>
     <value type="QString">VSEDEFLOGDIR=C:\Documents and Settings\All Users\Application Data\McAfee\DesktopProtection</value>
     <value type="QString">WINDIR=C:\WINDOWS</value>
-    <value type="QString">__COMPAT_LAYER=EnableNXShowUI </value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList">
     <value type="QString">C:/Sources/Prive/Windows/PlaatScore/src/HighScore.pro</value>
@@ -218,7 +217,6 @@
     <value type="QString">USERPROFILE=C:\Documents and Settings\WPLAAT</value>
     <value type="QString">VSEDEFLOGDIR=C:\Documents and Settings\All Users\Application Data\McAfee\DesktopProtection</value>
     <value type="QString">WINDIR=C:\WINDOWS</value>
-    <value type="QString">__COMPAT_LAYER=EnableNXShowUI </value>
    </valuelist>
    <value key="abstractProcess.IgnoreReturnValue" type="bool">false</value>
    <valuelist key="abstractProcess.arguments" type="QVariantList">
