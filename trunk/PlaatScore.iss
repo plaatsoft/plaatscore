@@ -7,7 +7,7 @@
 
 [Setup]
 AppName=PlaatScore
-AppVerName=PlaatSoft HighScore v0.50
+AppVerName=PlaatSoft HighScore v0.60
 DefaultDirName={pf}\PlaatScore
 DefaultGroupName=PlaatSoft
 UninstallDisplayIcon={app}\HighScore.exe
