@@ -65,6 +65,7 @@ private slots:
     void on_actionCheck_for_updates_triggered();
     void on_actionSettings_triggered();
     void remove();
+    void copy();
     void on_actionAbout_triggered();
     void on_actionTowerDefense_triggered();
     void on_actionSpaceBubble_triggered();
@@ -89,7 +90,10 @@ private:
     QByteArray applAction;
     QByteArray applId;
     QAction *removeAct;
+    QAction *copyAct;
+
     int stateMachine;
+    QString data[20][100];
 
     // Other child windows
     Settings settings;

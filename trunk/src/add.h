@@ -22,7 +22,7 @@
 #ifndef ADD_H
 #define ADD_H
 
-#include <QWidget>
+#include <QtGui>
 
 namespace Ui {
     class Add;
@@ -33,6 +33,15 @@ class Add : public QWidget {
 public:
     Add(QWidget *parent = 0);
     ~Add();
+
+    void setApplication(QString application);
+    void setName(QString name);
+    void setLevel(int level);
+    void setScore(int score);
+    void setDate(QDateTime date);
+    void setVersion(QString version);
+    void setMap(int map);
+    void setAddress(QString address);
 
 protected:
     void changeEvent(QEvent *e);

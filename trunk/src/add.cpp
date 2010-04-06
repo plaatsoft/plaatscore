@@ -31,8 +31,8 @@ Add::Add(QWidget *parent) : QWidget(parent), ui(new Ui::Add)
     ui->setupUi(this);
 
     // Set fix windows form size.
-    setMinimumSize(229,189);
-    setMaximumSize(229,189);
+    setMinimumSize(229,230);
+    setMaximumSize(229,230);
 
     setWindowTitle("Add Entry");
 }
@@ -66,6 +66,50 @@ void Add::on_cancelPushButton_clicked()
 void Add::on_okPushButton_clicked()
 {
     close();
+}
+
+// *******************************
+// Getter and Setters
+// *******************************
+
+void Add::setApplication(QString application)
+{
+    ui->applicationComboBox->setEditText(application);
+}
+
+void Add::setName(QString name)
+{
+    ui->nameEdit->setText(name);
+}
+
+void Add::setLevel(int level)
+{
+    ui->levelSpinBox->setValue(level);
+}
+
+void Add::setScore(int score)
+{
+    ui->scoreSpinBox->setValue(score);
+}
+
+void Add::setDate(QDateTime date)
+{
+    ui->dateTimeEdit->setDateTime(date);
+}
+
+void Add::setVersion(QString version)
+{
+    ui->versionEdit->setText(version);
+}
+
+void Add::setMap(int map)
+{
+    ui->mapSpinBox->setValue(map);
+}
+
+void Add::setAddress(QString address)
+{
+    ui->addressEdit->setText(address);
 }
 
 // *******************************
