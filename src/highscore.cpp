@@ -50,6 +50,8 @@ HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScor
 
     setWindowTitle(tr("PlaatSoft HighScore " VERSION));
 
+    copyAct = new QAction(tr("Copy"), this);
+    connect(copyAct, SIGNAL(triggered()), this, SLOT(copy()));
     removeAct = new QAction(tr("Remove"), this);
     connect(removeAct, SIGNAL(triggered()), this, SLOT(remove()));
 }
@@ -133,8 +135,8 @@ void HighScore::parseData(QString response)
 
    QString columnId[20];
    QString columnLabel[20];
-   QString data[20][100];
    QTableWidgetItem *item;
+   int columnTimestamp=0;
 
    QXmlStreamReader reader(response);
 
@@ -147,6 +149,9 @@ void HighScore::parseData(QString response)
           if(reader.name() == "header") {
               columnId[columnCount] = reader.attributes().value("id").toString();
               columnLabel[columnCount] = reader.attributes().value("label").toString();
+              if (columnLabel[columnCount].compare("Timestamp")==0) {
+                  columnTimestamp=columnCount;
+              }
               columnCount++;
           }
           if(reader.name() == "item") {
@@ -190,7 +195,14 @@ void HighScore::parseData(QString response)
 
       for (int x=0; x<columnCount; x++)
       {
-         item = new QTableWidgetItem(data[x][y]);
+         if (columnTimestamp==x) {
+            bool ok;
+            QString tmp=data[x][y];
+            time_t date = tmp.toInt(&ok, 10);
+            item = new QTableWidgetItem(getDate(date));
+         } else {
+            item = new QTableWidgetItem(data[x][y]);
+         }
          ui->tableWidget->setItem(y, x+1, item);
       }
    }
@@ -253,6 +265,7 @@ void HighScore::fetchData()
     request.setRawHeader("APPL", applValue);
     request.setRawHeader("ACTION", applAction);
     request.setRawHeader("ID", applId);
+    request.setRawHeader("MODE", "1");
     request.setHeader(QNetworkRequest::ContentTypeHeader, "text/xml");
 
     manager->get(request);
@@ -391,6 +404,7 @@ void HighScore::resizeEvent(QResizeEvent *event )
 void HighScore::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu menu(this);
+    menu.addAction(copyAct);
     menu.addAction(removeAct);
     menu.exec(event->globalPos());
 }
@@ -572,6 +586,51 @@ void HighScore::remove()
           qDebug() << "Remove " << id << "  [" << applId << "]";
 
           fetchData();
+      }
+    }
+}
+
+/**
+ * Process remove button action
+ */
+void HighScore::copy()
+{
+    for ( int i = 0; i < ui->tableWidget->rowCount(); i++ ) {
+      if( ui->tableWidget->item(i,0)->checkState() == Qt::Checked ) {
+
+          bool ok;
+
+          QString name = ui->tableWidget->item( i, 2 )->text();
+          int level = ui->tableWidget->item( i, 3 )->text().toInt(&ok, 10);
+          int score = ui->tableWidget->item( i, 4 )->text().toInt(&ok, 10);
+
+          QDateTime dt = QDateTime::currentDateTime();
+          dt.setTime_t(data[4][i].toInt(&ok, 10));
+
+          QString version = ui->tableWidget->item( i, 7 )->text();
+          int  map = ui->tableWidget->item( i, 8 )->text().toInt(&ok, 10);
+          QString address = ui->tableWidget->item( i, 9 )->text();
+
+          applAction = QByteArray("add");
+          //applId = new QByteArray(id.toAscii());
+
+          // Set window position related to Main window.
+          QPoint position = QPoint(pos());
+          position.setX(position.x()+120);
+          position.setY(position.y()+70);
+          add.move(position);
+
+          //add.setApplication(applValue.QString);
+          add.setName(name);
+          add.setLevel(level);
+          add.setScore(score);
+          add.setDate(dt);
+          add.setVersion(version);
+          add.setMap(map);
+          add.setAddress(address);
+
+          // Make settings add window visible
+          add.show();
       }
     }
 }

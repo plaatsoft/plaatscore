@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'add.ui'
 **
-** Created: Thu 1. Apr 16:32:38 2010
+** Created: Tue 6. Apr 21:29:37 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -15,6 +15,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QComboBox>
+#include <QtGui/QDateTimeEdit>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
@@ -27,7 +28,7 @@ QT_BEGIN_NAMESPACE
 class Ui_Add
 {
 public:
-    QLineEdit *ipEdit;
+    QLineEdit *addressEdit;
     QLabel *label_2;
     QLabel *label_4;
     QLabel *label_6;
@@ -41,16 +42,20 @@ public:
     QLineEdit *nameEdit;
     QComboBox *applicationComboBox;
     QLabel *label_3;
+    QLabel *label_7;
+    QLineEdit *versionEdit;
+    QLabel *label_8;
+    QDateTimeEdit *dateTimeEdit;
 
     void setupUi(QWidget *Add)
     {
         if (Add->objectName().isEmpty())
             Add->setObjectName(QString::fromUtf8("Add"));
-        Add->resize(229, 189);
-        ipEdit = new QLineEdit(Add);
-        ipEdit->setObjectName(QString::fromUtf8("ipEdit"));
-        ipEdit->setGeometry(QRect(16, 124, 121, 20));
-        ipEdit->setMaxLength(15);
+        Add->resize(229, 230);
+        addressEdit = new QLineEdit(Add);
+        addressEdit->setObjectName(QString::fromUtf8("addressEdit"));
+        addressEdit->setGeometry(QRect(15, 120, 128, 20));
+        addressEdit->setMaxLength(15);
         label_2 = new QLabel(Add);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(17, 58, 46, 13));
@@ -63,12 +68,13 @@ public:
         scoreSpinBox = new QSpinBox(Add);
         scoreSpinBox->setObjectName(QString::fromUtf8("scoreSpinBox"));
         scoreSpinBox->setGeometry(QRect(154, 25, 63, 22));
+        scoreSpinBox->setMaximum(100000000);
         cancelPushButton = new QPushButton(Add);
         cancelPushButton->setObjectName(QString::fromUtf8("cancelPushButton"));
-        cancelPushButton->setGeometry(QRect(28, 155, 75, 23));
+        cancelPushButton->setGeometry(QRect(27, 199, 75, 23));
         okPushButton = new QPushButton(Add);
         okPushButton->setObjectName(QString::fromUtf8("okPushButton"));
-        okPushButton->setGeometry(QRect(128, 155, 75, 23));
+        okPushButton->setGeometry(QRect(120, 199, 76, 23));
         label = new QLabel(Add);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(16, 8, 56, 16));
@@ -83,14 +89,27 @@ public:
         label_5->setGeometry(QRect(156, 59, 46, 13));
         nameEdit = new QLineEdit(Add);
         nameEdit->setObjectName(QString::fromUtf8("nameEdit"));
-        nameEdit->setGeometry(QRect(16, 75, 119, 20));
+        nameEdit->setGeometry(QRect(16, 75, 127, 20));
         nameEdit->setMaxLength(6);
         applicationComboBox = new QComboBox(Add);
         applicationComboBox->setObjectName(QString::fromUtf8("applicationComboBox"));
-        applicationComboBox->setGeometry(QRect(16, 25, 118, 22));
+        applicationComboBox->setGeometry(QRect(16, 25, 126, 22));
         label_3 = new QLabel(Add);
         label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(16, 108, 64, 16));
+        label_3->setGeometry(QRect(17, 104, 64, 16));
+        label_7 = new QLabel(Add);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+        label_7->setGeometry(QRect(153, 150, 64, 16));
+        versionEdit = new QLineEdit(Add);
+        versionEdit->setObjectName(QString::fromUtf8("versionEdit"));
+        versionEdit->setGeometry(QRect(155, 166, 59, 20));
+        versionEdit->setMaxLength(4);
+        label_8 = new QLabel(Add);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setGeometry(QRect(17, 148, 64, 16));
+        dateTimeEdit = new QDateTimeEdit(Add);
+        dateTimeEdit->setObjectName(QString::fromUtf8("dateTimeEdit"));
+        dateTimeEdit->setGeometry(QRect(15, 165, 128, 22));
 
         retranslateUi(Add);
 
@@ -109,14 +128,14 @@ public:
         label_5->setText(QApplication::translate("Add", "Level", 0, QApplication::UnicodeUTF8));
         applicationComboBox->clear();
         applicationComboBox->insertItems(0, QStringList()
-         << QString()
-         << QApplication::translate("Add", "Pong2", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("Add", "BibleQuiz", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("Add", "SpaceBubble", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("Add", "RedSquare", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("Add", "SpaceBubble", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("Add", "TowerDefense", 0, QApplication::UnicodeUTF8)
         );
-        label_3->setText(QApplication::translate("Add", "Ip Address", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("Add", "Address", 0, QApplication::UnicodeUTF8));
+        label_7->setText(QApplication::translate("Add", "Version", 0, QApplication::UnicodeUTF8));
+        label_8->setText(QApplication::translate("Add", "Date", 0, QApplication::UnicodeUTF8));
+        dateTimeEdit->setDisplayFormat(QApplication::translate("Add", "dd-MM-yyyy HH:mm:ss", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

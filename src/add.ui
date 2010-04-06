@@ -7,18 +7,18 @@
     <x>0</x>
     <y>0</y>
     <width>229</width>
-    <height>189</height>
+    <height>230</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLineEdit" name="ipEdit">
+  <widget class="QLineEdit" name="addressEdit">
    <property name="geometry">
     <rect>
-     <x>16</x>
-     <y>124</y>
-     <width>121</width>
+     <x>15</x>
+     <y>120</y>
+     <width>128</width>
      <height>20</height>
     </rect>
    </property>
@@ -74,12 +74,15 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="maximum">
+    <number>100000000</number>
+   </property>
   </widget>
   <widget class="QPushButton" name="cancelPushButton">
    <property name="geometry">
     <rect>
-     <x>28</x>
-     <y>155</y>
+     <x>27</x>
+     <y>199</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -91,9 +94,9 @@
   <widget class="QPushButton" name="okPushButton">
    <property name="geometry">
     <rect>
-     <x>128</x>
-     <y>155</y>
-     <width>75</width>
+     <x>120</x>
+     <y>199</y>
+     <width>76</width>
      <height>23</height>
     </rect>
    </property>
@@ -152,7 +155,7 @@
     <rect>
      <x>16</x>
      <y>75</y>
-     <width>119</width>
+     <width>127</width>
      <height>20</height>
     </rect>
    </property>
@@ -165,33 +168,18 @@
     <rect>
      <x>16</x>
      <y>25</y>
-     <width>118</width>
+     <width>126</width>
      <height>22</height>
     </rect>
    </property>
    <item>
     <property name="text">
-     <string/>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Pong2</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>BibleQuiz</string>
+     <string>RedSquare</string>
     </property>
    </item>
    <item>
     <property name="text">
      <string>SpaceBubble</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>RedSquare</string>
     </property>
    </item>
    <item>
@@ -203,14 +191,66 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>16</x>
-     <y>108</y>
+     <x>17</x>
+     <y>104</y>
      <width>64</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>Ip Address</string>
+    <string>Address</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>153</x>
+     <y>150</y>
+     <width>64</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Version</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="versionEdit">
+   <property name="geometry">
+    <rect>
+     <x>155</x>
+     <y>166</y>
+     <width>59</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="maxLength">
+    <number>4</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>17</x>
+     <y>148</y>
+     <width>64</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Date</string>
+   </property>
+  </widget>
+  <widget class="QDateTimeEdit" name="dateTimeEdit">
+   <property name="geometry">
+    <rect>
+     <x>15</x>
+     <y>165</y>
+     <width>128</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="displayFormat">
+    <string>dd-MM-yyyy HH:mm:ss</string>
    </property>
   </widget>
  </widget>

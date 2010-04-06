@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'highscore.ui'
 **
-** Created: Thu 1. Apr 16:19:24 2010
+** Created: Tue 6. Apr 20:47:05 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -99,6 +99,7 @@ public:
         tableWidget->setSizeIncrement(QSize(1, 1));
         tableWidget->setBaseSize(QSize(300, 300));
         tableWidget->setFrameShape(QFrame::NoFrame);
+        tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tableWidget->setSortingEnabled(false);
         tableWidget->setRowCount(0);
         tableWidget->setColumnCount(0);
