@@ -72,9 +72,13 @@ void Add::on_okPushButton_clicked()
 // Getter and Setters
 // *******************************
 
-void Add::setApplication(QString application)
+void Add::setApplication(QByteArray application)
 {
-    ui->applicationComboBox->setEditText(application);
+    if (application.contains("redsquare"))
+    {
+        ui->applicationComboBox->setCurrentIndex(0);
+    }
+
 }
 
 void Add::setName(QString name)
@@ -92,9 +96,12 @@ void Add::setScore(int score)
     ui->scoreSpinBox->setValue(score);
 }
 
-void Add::setDate(QDateTime date)
+void Add::setDate(time_t date)
 {
-    ui->dateTimeEdit->setDateTime(date);
+    QDateTime dt = QDateTime::currentDateTime();
+    dt.setTime_t(date.toInt(&ok, 10));
+
+    ui->dateTimeEdit->setDateTime(dt);
 }
 
 void Add::setVersion(QString version)
@@ -110,6 +117,58 @@ void Add::setMap(int map)
 void Add::setAddress(QString address)
 {
     ui->addressEdit->setText(address);
+}
+
+QString Add::getApplication(void)
+{
+    switch (ui->applicationComboBox->currentIndex())
+    {
+        case 1: return "redsquare";
+                break;
+
+        case 2: return "spacebubble";
+                break;
+
+        case 3: return "towerdefense";
+                break;
+
+        default: return "";
+    }
+}
+
+QString Add::getName()
+{
+    return ui->nameEdit->text();
+}
+
+int Add::getLevel()
+{
+    return ui->levelSpinBox->value();
+}
+
+int Add::getScore()
+{
+    return ui->scoreSpinBox->value();
+}
+
+time_t Add::getDate()
+{
+    return ui->dateTimeEdit->dateTime().toTime_t();
+}
+
+QString Add::getVersion()
+{
+    return ui->versionEdit->text();
+}
+
+int Add::getMap()
+{
+    return ui->mapSpinBox->value();
+}
+
+QString Add::getAddress()
+{
+    return ui->addressEdit->text();
 }
 
 // *******************************

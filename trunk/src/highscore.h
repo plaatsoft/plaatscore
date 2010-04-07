@@ -34,7 +34,7 @@
 #include "credits.h"
 #include "add.h"
 
-#define VERSION  "0.60"
+#define VERSION  "0.70"
 
 enum
 {
@@ -70,8 +70,6 @@ private slots:
     void on_actionTowerDefense_triggered();
     void on_actionSpaceBubble_triggered();
     void on_actionRedSquare_triggered();
-    void on_actionBibleQuiz_triggered();
-    void on_actionPong2_triggered();
     void on_actionExit_triggered();
 
     // HTTP related methods
@@ -141,8 +139,10 @@ private:
  *  - Table column sorting.
  *
  * @section ReleaseNotes
- *  <b>01-04-2010 Version 0.60 (Next release)</b>
+ *  <b>07-04-2010 Version 0.60 (Next release)</b>
  *  - Added new entry add window.
+ *  - Added copy row data to new entry window.
+ *  - Disable inline table editing.
  *
  *  <b>30-03-2010 Version 0.50</b>
  *  - Show popup window when internet connect fails.

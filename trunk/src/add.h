@@ -34,14 +34,23 @@ public:
     Add(QWidget *parent = 0);
     ~Add();
 
-    void setApplication(QString application);
+    void setApplication(QByteArray application);
     void setName(QString name);
     void setLevel(int level);
     void setScore(int score);
-    void setDate(QDateTime date);
+    void setDate(time_t date);
     void setVersion(QString version);
     void setMap(int map);
     void setAddress(QString address);
+
+    QByteArray getApplication();
+    QString getName();
+    int getLevel();
+    int getScore();
+    time_t getDate();
+    QString getVersion();
+    int getMap();
+    QString getAddress();
 
 protected:
     void changeEvent(QEvent *e);
