@@ -435,48 +435,6 @@ void HighScore::on_actionExit_triggered()
 }
 
 /**
- * Pong2 menu event
- */
-void HighScore::on_actionPong2_triggered()
-{
-    // Request HTTP Parameters
-    applValue = QByteArray("pong2");
-    applAction= QByteArray("");
-    applId = QByteArray("");
-
-    //ui->actionPong2->setCheckable(true);
-    //ui->actionBibleQuiz->setChecked(false);
-    ui->actionRedSquare->setChecked(false);
-    ui->actionSpaceBubble->setChecked(false);
-    ui->actionTowerDefense->setChecked(false);
-
-    ui->tableWidget->setRowCount(0);
-
-    fetchData();
-}
-
-/**
- * bibleQuiz menu event
- */
-void HighScore::on_actionBibleQuiz_triggered()
-{
-    // Request HTTP Parameters
-    applValue = QByteArray("biblequiz");
-    applAction= QByteArray("");
-    applId = QByteArray("");
-
-    //ui->actionPong2->setCheckable(false);
-    //ui->actionBibleQuiz->setChecked(true);
-    ui->actionRedSquare->setChecked(false);
-    ui->actionSpaceBubble->setChecked(false);
-    ui->actionTowerDefense->setChecked(false);
-
-    ui->tableWidget->setRowCount(0);
-
-    fetchData();
-}
-
-/**
  * RedSquare menu event
  */
 void HighScore::on_actionRedSquare_triggered()
@@ -486,8 +444,6 @@ void HighScore::on_actionRedSquare_triggered()
     applAction= QByteArray("");
     applId = QByteArray("");
 
-    //ui->actionPong2->setCheckable(false);
-    //ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(true);
     ui->actionSpaceBubble->setChecked(false);
     ui->actionTowerDefense->setChecked(false);
@@ -507,8 +463,6 @@ void HighScore::on_actionSpaceBubble_triggered()
     applAction= QByteArray("");
     applId = QByteArray("");
 
-    //ui->actionPong2->setCheckable(false);
-    //ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(false);
     ui->actionSpaceBubble->setChecked(true);
     ui->actionTowerDefense->setChecked(false);
@@ -528,8 +482,6 @@ void HighScore::on_actionTowerDefense_triggered()
     applAction= QByteArray("");
     applId = QByteArray("");
 
-    //ui->actionPong2->setCheckable(false);
-    //ui->actionBibleQuiz->setChecked(false);
     ui->actionRedSquare->setChecked(false);
     ui->actionSpaceBubble->setChecked(false);
     ui->actionTowerDefense->setChecked(true);
@@ -575,18 +527,19 @@ void HighScore::on_actionSettings_triggered()
 void HighScore::remove()
 {
     for ( int i = 0; i < ui->tableWidget->rowCount(); i++ ) {
-      if( ui->tableWidget->item(i,0)->checkState() == Qt::Checked ) {
+       if( ui->tableWidget->item(i,0)->checkState() == Qt::Checked ) {
 
           QString id = ui->tableWidget->item( i, 1 )->text();
 
           applAction = QByteArray("remove");
+          
           QByteArray tmp(id.toAscii());
           applId = tmp;
 
           qDebug() << "Remove " << id << "  [" << applId << "]";
 
           fetchData();
-      }
+       }
     }
 }
 
@@ -600,17 +553,17 @@ void HighScore::copy()
 
           bool ok;
 
-          QString name = ui->tableWidget->item( i, 2 )->text();
-          int level = ui->tableWidget->item( i, 3 )->text().toInt(&ok, 10);
-          int score = ui->tableWidget->item( i, 4 )->text().toInt(&ok, 10);
+          // Fill add window with select row data.
+          add.setApplication(applValue);
+          add.setName(ui->tableWidget->item( i, 2 )->text());
+          add.setLevel(ui->tableWidget->item( i, 3 )->text().toInt(&ok, 10));
+          add.setScore(ui->tableWidget->item( i, 4 )->text().toInt(&ok, 10));
+          add.setDate(data[4][i].toInt(&ok, 10));
+          add.setVersion(ui->tableWidget->item( i, 7 )->text());
+          add.setMap(ui->tableWidget->item( i, 8 )->text().toInt(&ok, 10));
+          add.setAddress(ui->tableWidget->item( i, 9 )->text());
 
-          QDateTime dt = QDateTime::currentDateTime();
-          dt.setTime_t(data[4][i].toInt(&ok, 10));
-
-          QString version = ui->tableWidget->item( i, 7 )->text();
-          int  map = ui->tableWidget->item( i, 8 )->text().toInt(&ok, 10);
-          QString address = ui->tableWidget->item( i, 9 )->text();
-
+          // Define webservice action
           applAction = QByteArray("add");
           //applId = new QByteArray(id.toAscii());
 
@@ -619,15 +572,6 @@ void HighScore::copy()
           position.setX(position.x()+120);
           position.setY(position.y()+70);
           add.move(position);
-
-          //add.setApplication(applValue.QString);
-          add.setName(name);
-          add.setLevel(level);
-          add.setScore(score);
-          add.setDate(dt);
-          add.setVersion(version);
-          add.setMap(map);
-          add.setAddress(address);
 
           // Make settings add window visible
           add.show();
