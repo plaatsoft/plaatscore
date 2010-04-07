@@ -93,30 +93,7 @@ void HighScore::closeEvent(QCloseEvent *event)
 }
 
 
-/**
- * Close event
- */
-void HighScore::setProxy()
-{
-    QSettings qSettings("PlaatSoft", "PlaatScore");
 
-    // Proxy support
-    bool enabled = qSettings.value("proxyEnabled",false).toBool();
-    QNetworkProxy proxy;
-    if (enabled)
-    {
-        qDebug() << "Proxy enabled";
-        bool ok;
-        proxy.setUser(qSettings.value("loginName","").toString());
-        proxy.setPassword(settings.decrypt(qSettings.value("password","").toString()));
-        proxy.setPort(qSettings.value("proxyPort","").toString().toInt(&ok, 10));
-        proxy.setHostName(qSettings.value("proxyAddress","").toString());
-        proxy.setType(QNetworkProxy::HttpProxy);
-    } else {
-        proxy.setType(QNetworkProxy::NoProxy);
-    }
-    manager->setProxy(proxy);
-}
 
 
 /**
@@ -246,6 +223,28 @@ void HighScore::parseReleaseNotes(QString response)
    releaseNotes.setText(response);
 }
 
+void HighScore::setProxy()
+{
+    QSettings qSettings("PlaatSoft", "PlaatScore");
+
+    // Proxy support
+    bool enabled = qSettings.value("proxyEnabled",false).toBool();
+    QNetworkProxy proxy;
+    if (enabled)
+    {
+        qDebug() << "Proxy enabled";
+        bool ok;
+        proxy.setUser(qSettings.value("loginName","").toString());
+        proxy.setPassword(settings.decrypt(qSettings.value("password","").toString()));
+        proxy.setPort(qSettings.value("proxyPort","").toString().toInt(&ok, 10));
+        proxy.setHostName(qSettings.value("proxyAddress","").toString());
+        proxy.setType(QNetworkProxy::HttpProxy);
+    } else {
+        proxy.setType(QNetworkProxy::NoProxy);
+    }
+    manager->setProxy(proxy);
+}
+
 /**
  * Create http request for xml data.
  */
@@ -266,6 +265,45 @@ void HighScore::fetchData()
     request.setRawHeader("ACTION", applAction);
     request.setRawHeader("ID", applId);
     request.setRawHeader("MODE", "1");
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "text/xml");
+
+    manager->get(request);
+    stateMachine=STATE_REQUEST_DATA;
+}
+
+/**
+ * Create http request for xml data.
+ */
+void HighScore::fetchAdd()
+{
+    QString tmp;
+
+    // Disable all menu items
+    disableMenu(true);
+
+    setProxy();
+
+    QSettings qSettings("PlaatSoft", "PlaatScore");
+
+    QNetworkRequest request;
+    request.setUrl(QUrl(qSettings.value("webServiceUrl","").toString()));
+    tmp = settings.decrypt(qSettings.value("webServiceKey","").toString());
+    request.setRawHeader("KEY", tmp.toAscii());
+    request.setRawHeader("ACTION", "add");
+
+    request.setRawHeader("APPL", add.getApplication().toAscii());
+    request.setRawHeader("NAME", add.getName().toAscii());
+    tmp = QString::number(add.getLevel());
+    request.setRawHeader("LEVEL", tmp.toAscii());
+    tmp = QString::number(add.getScore());
+    request.setRawHeader("SCORE", tmp.toAscii());
+    tmp = QString::number(add.getDate());
+    request.setRawHeader("DATE", tmp.toAscii());
+    request.setRawHeader("VERSION", add.getVersion().toAscii());
+    tmp = QString::number(add.getMap());
+    request.setRawHeader("MAP", tmp.toAscii());
+    request.setRawHeader("ADDRESS", add.getAddress().toAscii());
+
     request.setHeader(QNetworkRequest::ContentTypeHeader, "text/xml");
 
     manager->get(request);
@@ -414,8 +452,6 @@ void HighScore::contextMenuEvent(QContextMenuEvent *event)
  */
 void HighScore::disableMenu(bool disable)
 {
-  //ui->actionPong2->setDisabled(disable);
-  //ui->actionBibleQuiz->setDisabled(disable);
   ui->actionRedSquare->setDisabled(disable);
   ui->actionSpaceBubble->setDisabled(disable);
   ui->actionTowerDefense->setDisabled(disable);
@@ -575,7 +611,7 @@ void HighScore::copy()
 
           // Make settings add window visible
           add.show();
-      }
+       }
     }
 }
 
@@ -621,7 +657,6 @@ void HighScore::on_actionCredits_triggered()
 
     // Make settings window visible
     credits.show();
-
 }
 
 void HighScore::on_actionNew_Entry_triggered()

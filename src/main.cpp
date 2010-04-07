@@ -29,8 +29,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    HighScore w;
-    w.show();
+    HighScore highscore;
+    highscore.show();
     return a.exec();
 }
 

@@ -21,7 +21,9 @@
 
 #include "add.h"
 #include "ui_add.h"
+#include "highscore.h"
 
+extern
 // *******************************
 // Constructor & Destructor
 // *******************************
@@ -65,6 +67,7 @@ void Add::on_cancelPushButton_clicked()
 
 void Add::on_okPushButton_clicked()
 {
+    //HighScore::fetchAdd();
     close();
 }
 
@@ -96,11 +99,10 @@ void Add::setScore(int score)
     ui->scoreSpinBox->setValue(score);
 }
 
-void Add::setDate(time_t date)
+void Add::setDate(int date)
 {
     QDateTime dt = QDateTime::currentDateTime();
-    dt.setTime_t(date.toInt(&ok, 10));
-
+    dt.setTime_t(date);
     ui->dateTimeEdit->setDateTime(dt);
 }
 
@@ -151,7 +153,7 @@ int Add::getScore()
     return ui->scoreSpinBox->value();
 }
 
-time_t Add::getDate()
+int Add::getDate()
 {
     return ui->dateTimeEdit->dateTime().toTime_t();
 }
