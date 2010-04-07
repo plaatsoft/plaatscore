@@ -55,6 +55,7 @@ public:
     HighScore(QWidget *parent = 0);
     ~HighScore();
     void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &) const;
+    void fetchAdd();
 
 private slots:
     // User action methods

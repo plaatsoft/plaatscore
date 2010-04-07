@@ -38,16 +38,16 @@ public:
     void setName(QString name);
     void setLevel(int level);
     void setScore(int score);
-    void setDate(time_t date);
+    void setDate(int date);
     void setVersion(QString version);
     void setMap(int map);
     void setAddress(QString address);
 
-    QByteArray getApplication();
+    QString getApplication();
     QString getName();
     int getLevel();
     int getScore();
-    time_t getDate();
+    int getDate();
     QString getVersion();
     int getMap();
     QString getAddress();
