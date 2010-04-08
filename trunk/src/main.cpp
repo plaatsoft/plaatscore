@@ -23,15 +23,20 @@
 
 #include "highscore.h"
 
+HighScore *highscore;
+
 /**
  * Main
  */
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    HighScore highscore;
-    highscore.show();
-    return a.exec();
+    QApplication app(argc, argv);
+    app.setApplicationName("PlaatScore");
+    app.setOrganizationName("PlaatSoft");
+
+    highscore = new HighScore;
+    highscore->show();
+    return app.exec();
 }
 
 // ********************************************

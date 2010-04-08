@@ -23,7 +23,8 @@
 #include "ui_add.h"
 #include "highscore.h"
 
-extern
+extern HighScore *highscore;
+
 // *******************************
 // Constructor & Destructor
 // *******************************
@@ -31,6 +32,9 @@ extern
 Add::Add(QWidget *parent) : QWidget(parent), ui(new Ui::Add)
 {
     ui->setupUi(this);
+
+    // Store parent
+    parent1=parent;
 
     // Set fix windows form size.
     setMinimumSize(229,230);
@@ -67,7 +71,7 @@ void Add::on_cancelPushButton_clicked()
 
 void Add::on_okPushButton_clicked()
 {
-    //HighScore::fetchAdd();
+    highscore->fetchAdd();
     close();
 }
 
@@ -77,11 +81,13 @@ void Add::on_okPushButton_clicked()
 
 void Add::setApplication(QByteArray application)
 {
-    if (application.contains("redsquare"))
-    {
+    if (application.contains("redsquare")) {
         ui->applicationComboBox->setCurrentIndex(0);
+    } else if (application.contains("spacebubble")) {
+        ui->applicationComboBox->setCurrentIndex(1);
+    } else if (application.contains("towerdefense")) {
+        ui->applicationComboBox->setCurrentIndex(2);
     }
-
 }
 
 void Add::setName(QString name)

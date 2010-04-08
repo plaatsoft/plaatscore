@@ -140,10 +140,11 @@ private:
  *  - Table column sorting.
  *
  * @section ReleaseNotes
- *  <b>07-04-2010 Version 0.60 (Next release)</b>
- *  - Added new entry add window.
+ *  <b>08-04-2010 Version 0.60 (Next release)</b>
+ *  - Added new entry window.
  *  - Added copy row data to new entry window.
  *  - Disable inline table editing.
+ *  - Build with QtCreator v1.3.1
  *
  *  <b>30-03-2010 Version 0.50</b>
  *  - Show popup window when internet connect fails.

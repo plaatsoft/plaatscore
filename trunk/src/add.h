@@ -57,6 +57,7 @@ protected:
 
 private:
     Ui::Add *ui;
+    QWidget *parent1;
 
 private slots:
     void on_okPushButton_clicked();
