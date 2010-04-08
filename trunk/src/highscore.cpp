@@ -41,6 +41,8 @@ HighScore::HighScore(QWidget *parent) : QMainWindow(parent), ui(new Ui::HighScor
 
     readSettings();
 
+    applId=APPL_NONE;
+
     manager = new QNetworkAccessManager(this);
 
     connect( manager,
@@ -106,7 +108,7 @@ void HighScore::parseData(QString response)
    // Filter start lines without xml data
    response=response.remove(0, response.indexOf("<highscore>"));
 
-   qDebug() << response;
+   //qDebug() << response;
 
    QString columnId[20];
    QString columnLabel[20];
@@ -245,10 +247,27 @@ void HighScore::setProxy()
     manager->setProxy(proxy);
 }
 
+QString HighScore::convertApplication(int applId)
+{
+   switch (applId)
+   {
+      case 1: return "redsquare";
+              break;
+
+      case 2: return "spacebubble";
+              break;
+
+      case 3: return "towerdefense";
+              break;
+
+     default: return "";
+   }
+}
+
 /**
  * Create http request for xml data.
  */
-void HighScore::fetchData()
+void HighScore::fetchData(int applId)
 {
     qDebug() << "fetchData enter";
 
@@ -263,9 +282,37 @@ void HighScore::fetchData()
     request.setUrl(QUrl(qSettings.value("webServiceUrl","").toString()));
     QString key = settings.decrypt(qSettings.value("webServiceKey","").toString());
     request.setRawHeader("KEY", key.toAscii());
-    request.setRawHeader("APPL", applValue);
-    request.setRawHeader("ACTION", applAction);
-    request.setRawHeader("ID", applId);
+    request.setRawHeader("APPL", convertApplication(applId).toAscii());
+    request.setRawHeader("MODE", "1");
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "text/xml");
+
+    manager->get(request);
+    stateMachine=STATE_REQUEST_DATA;
+
+     qDebug() << "fetchData leave";
+}
+
+/**
+ * Create http request for xml data.
+ */
+void HighScore::fetchRemove(int applId, QString id)
+{
+    qDebug() << "fetchRemove enter";
+
+    // Disable all menu items
+    disableMenu(true);
+
+    setProxy();
+
+    QSettings qSettings("PlaatSoft", "PlaatScore");
+
+    QNetworkRequest request;
+    request.setUrl(QUrl(qSettings.value("webServiceUrl","").toString()));
+    QString key = settings.decrypt(qSettings.value("webServiceKey","").toString());
+    request.setRawHeader("KEY", key.toAscii());
+    request.setRawHeader("APPL", convertApplication(applId).toAscii());
+    request.setRawHeader("ACTION", "remove");
+    request.setRawHeader("ID", id.toAscii());
     request.setRawHeader("MODE", "1");
     request.setHeader(QNetworkRequest::ContentTypeHeader, "text/xml");
 
@@ -296,8 +343,10 @@ void HighScore::fetchAdd()
     tmp = settings.decrypt(qSettings.value("webServiceKey","").toString());
     request.setRawHeader("KEY", tmp.toAscii());
     request.setRawHeader("ACTION", "add");
+    request.setRawHeader("MODE", "1");
 
-    request.setRawHeader("APPL", add.getApplication().toAscii());
+    applId = add.getApplication();
+    request.setRawHeader("APPL", convertApplication(applId).toAscii());
     request.setRawHeader("NAME", add.getName().toAscii());
     tmp = QString::number(add.getLevel());
     request.setRawHeader("LEVEL", tmp.toAscii());
@@ -315,7 +364,7 @@ void HighScore::fetchAdd()
     manager->get(request);
     stateMachine=STATE_REQUEST_DATA;
 
-     qDebug() << "fetchAdd leave";
+    qDebug() << "fetchAdd leave";
 }
 
 /**
@@ -369,6 +418,8 @@ void HighScore::replyFinished(QNetworkReply *reply)
     QString result = reply->readAll();
 
     qDebug() << bytesCount << "Bytes received ";
+
+    qDebug() << result;
 
     switch (stateMachine)
     {
@@ -491,18 +542,14 @@ void HighScore::on_actionExit_triggered()
  */
 void HighScore::on_actionRedSquare_triggered()
 {
-    // Request HTTP Parameters
-    applValue = QByteArray("redsquare");
-    applAction= QByteArray("");
-    applId = QByteArray("");
-
     ui->actionRedSquare->setChecked(true);
     ui->actionSpaceBubble->setChecked(false);
     ui->actionTowerDefense->setChecked(false);
 
     ui->tableWidget->setRowCount(0);
 
-    fetchData();
+    applId=APPL_REDSQUARE;
+    fetchData(applId);
 }
 
 /**
@@ -510,18 +557,14 @@ void HighScore::on_actionRedSquare_triggered()
  */
 void HighScore::on_actionSpaceBubble_triggered()
 {
-    // Request HTTP Parameters
-    applValue = QByteArray("spacebubble");
-    applAction= QByteArray("");
-    applId = QByteArray("");
-
     ui->actionRedSquare->setChecked(false);
     ui->actionSpaceBubble->setChecked(true);
     ui->actionTowerDefense->setChecked(false);
 
     ui->tableWidget->setRowCount(0);
 
-    fetchData();
+    applId=APPL_SPACEBUBBLE;
+    fetchData(applId);
 }
 
 /**
@@ -529,18 +572,14 @@ void HighScore::on_actionSpaceBubble_triggered()
  */
 void HighScore::on_actionTowerDefense_triggered()
 {
-    // Request HTTP Parameters
-    applValue = QByteArray("towerdefense");
-    applAction= QByteArray("");
-    applId = QByteArray("");
-
     ui->actionRedSquare->setChecked(false);
     ui->actionSpaceBubble->setChecked(false);
     ui->actionTowerDefense->setChecked(true);
 
     ui->tableWidget->setRowCount(0);
 
-    fetchData();
+    applId=APPL_TOWERDEFENSE;
+    fetchData(applId);
 }
 
 /**
@@ -553,6 +592,9 @@ void HighScore::on_actionAbout_triggered()
     position.setX(position.x()+120);
     position.setY(position.y()+70);
     about.move(position);
+
+    // Disable main form
+    setDisabled(true);
 
     // Make about window visible
     about.show();
@@ -569,6 +611,9 @@ void HighScore::on_actionSettings_triggered()
     position.setY(position.y()+70);
     settings.move(position);
 
+    // Disable main form
+    setDisabled(true);
+
     // Make settings window visible
     settings.show();
 }
@@ -582,15 +627,9 @@ void HighScore::remove()
        if( ui->tableWidget->item(i,0)->checkState() == Qt::Checked ) {
 
           QString id = ui->tableWidget->item( i, 1 )->text();
+          qDebug() << "Remove " << id;
 
-          applAction = QByteArray("remove");
-          
-          QByteArray tmp(id.toAscii());
-          applId = tmp;
-
-          qDebug() << "Remove " << id << "  [" << applId << "]";
-
-          fetchData();
+          fetchRemove(applId, id.toAscii());
        }
     }
 }
@@ -606,7 +645,7 @@ void HighScore::copy()
           bool ok;
 
           // Fill add window with select row data.
-          add.setApplication(applValue);
+          add.setApplication(applId);
           add.setName(ui->tableWidget->item( i, 2 )->text());
           add.setLevel(ui->tableWidget->item( i, 3 )->text().toInt(&ok, 10));
           add.setScore(ui->tableWidget->item( i, 4 )->text().toInt(&ok, 10));
@@ -615,15 +654,14 @@ void HighScore::copy()
           add.setMap(ui->tableWidget->item( i, 8 )->text().toInt(&ok, 10));
           add.setAddress(ui->tableWidget->item( i, 9 )->text());
 
-          // Define webservice action
-          applAction = QByteArray("add");
-          //applId = new QByteArray(id.toAscii());
-
           // Set window position related to Main window.
           QPoint position = QPoint(pos());
           position.setX(position.x()+120);
           position.setY(position.y()+70);
           add.move(position);
+
+          // Disable main form
+          setDisabled(true);
 
           // Make settings add window visible
           add.show();
@@ -647,6 +685,9 @@ void HighScore::on_actionRelease_Notes_triggered()
     position.setY(position.y()+70);
     releaseNotes.move(position);
 
+    // Disable main form
+    setDisabled(true);
+
     // Make ReleaseNotes window visible
     releaseNotes.show();
 }
@@ -658,6 +699,9 @@ void HighScore::on_actionDonate_triggered()
     position.setX(position.x()+120);
     position.setY(position.y()+70);
     donate.move(position);
+
+    // Disable main form
+    setDisabled(true);
 
     // Make settings window visible
     donate.show();
@@ -671,6 +715,9 @@ void HighScore::on_actionCredits_triggered()
     position.setY(position.y()+70);
     credits.move(position);
 
+    // Disable main form
+    setDisabled(true);
+
     // Make settings window visible
     credits.show();
 }
@@ -682,6 +729,20 @@ void HighScore::on_actionNew_Entry_triggered()
     position.setX(position.x()+120);
     position.setY(position.y()+70);
     add.move(position);
+
+    // Disable main window.
+    setDisabled(true);
+
+    // Clean form data.
+    add.setApplication(1);
+    add.setName("");
+    add.setLevel(0);
+    add.setScore(0);
+    QDateTime dt = QDateTime::currentDateTime();
+    add.setDate(dt.toTime_t());
+    add.setVersion("");
+    add.setMap(0);
+    add.setAddress("");
 
     // Make settings window visible
     add.show();

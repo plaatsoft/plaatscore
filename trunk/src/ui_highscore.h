@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'highscore.ui'
 **
-** Created: Wed 7. Apr 23:05:32 2010
+** Created: Thu 8. Apr 18:46:15 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -127,8 +127,6 @@ public:
         menuActions->addSeparator();
         menuActions->addAction(actionSettings);
         menuActions->addSeparator();
-        menuFetch_Data->addAction(actionPong2);
-        menuFetch_Data->addAction(actionBibleQuiz);
         menuFetch_Data->addAction(actionRedSquare);
         menuFetch_Data->addAction(actionSpaceBubble);
         menuFetch_Data->addAction(actionTowerDefense);

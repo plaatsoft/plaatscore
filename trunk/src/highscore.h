@@ -34,7 +34,7 @@
 #include "credits.h"
 #include "add.h"
 
-#define VERSION  "0.70"
+#define VERSION  "0.60"
 
 enum
 {
@@ -42,6 +42,14 @@ enum
     STATE_VERSION_CHECK=1,
     STATE_REQUEST_DATA=2,
     STATE_RELEASE_NOTES=3
+};
+
+enum
+{
+    APPL_NONE=0,
+    APPL_REDSQUARE = 1,
+    APPL_SPACEBUBBLE = 2,
+    APPL_TOWERDEFENSE = 3
 };
 
 namespace Ui {
@@ -74,7 +82,8 @@ private slots:
     void on_actionExit_triggered();
 
     // HTTP related methods
-    void fetchData();
+    void fetchData(int applId);
+    void fetchRemove(int applId, QString id);
     void fetchVersion();
     void fetchReleaseNotes();
     void replyFinished(QNetworkReply*);
@@ -85,14 +94,11 @@ protected:
 private:
     Ui::HighScore *ui;
     QNetworkAccessManager *manager;
-    QByteArray applValue;
-    QByteArray applAction;
-    QByteArray applId;
     QAction *removeAct;
     QAction *copyAct;
-
     int stateMachine;
     QString data[20][100];
+    int applId;
 
     // Other child windows
     Settings settings;
@@ -107,6 +113,7 @@ private:
     void parseVersion(QString response);
     void parseReleaseNotes(QString response);
     void setProxy();
+    QString convertApplication(int applId);
 
     // Settings methods
     void readSettings();
@@ -144,6 +151,7 @@ private:
  *  - Added new entry window.
  *  - Added copy row data to new entry window.
  *  - Disable inline table editing.
+ *  - Disable main window if subwindow is open.
  *  - Build with QtCreator v1.3.1
  *
  *  <b>30-03-2010 Version 0.50</b>

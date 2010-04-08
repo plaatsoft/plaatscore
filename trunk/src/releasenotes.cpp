@@ -22,6 +22,10 @@
 #include "releasenotes.h"
 #include "ui_releasenotes.h"
 
+#include "highscore.h"
+
+extern HighScore *highscore;
+
 // *************************************
 // Constructor & Destructor
 // *************************************
@@ -42,9 +46,20 @@ ReleaseNotes::~ReleaseNotes()
     delete ui;
 }
 
+
 // *************************************
 // other
 // *************************************
+
+
+/**
+ * Close event
+ */
+void ReleaseNotes::closeEvent(QCloseEvent *event)
+{
+    highscore->setDisabled(false);
+}
+
 
 void ReleaseNotes::changeEvent(QEvent *e)
 {
@@ -70,6 +85,7 @@ void ReleaseNotes::setText(QString text)
 void ReleaseNotes::on_pushButton_pressed()
 {
     close();
+    highscore->setDisabled(false);
 }
 
 // *************************************

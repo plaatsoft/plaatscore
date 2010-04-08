@@ -24,6 +24,11 @@
 
 #include <QtGui>
 
+#include "highscore.h"
+
+extern HighScore *highscore;
+
+
 // ********************************************
 // Constructor & Destructor
 // ********************************************
@@ -53,6 +58,14 @@ About::~About()
 // Other
 // ********************************************
 
+/**
+ * Close event
+ */
+void About::closeEvent(QCloseEvent *event)
+{
+    highscore->setDisabled(false);
+}
+
 void About::changeEvent(QEvent *e)
 {
     QWidget::changeEvent(e);
@@ -72,8 +85,9 @@ void About::changeEvent(QEvent *e)
 void About::on_pushButton_pressed()
 {
     close();
+    highscore->setDisabled(false);
 }
 
 // ********************************************
-// The end
+// The End
 // ********************************************

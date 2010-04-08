@@ -22,6 +22,11 @@
 #include "credits.h"
 #include "ui_credits.h"
 
+#include "highscore.h"
+
+extern HighScore *highscore;
+
+
 Credits::Credits(QWidget *parent) : QWidget(parent), ui(new Ui::Credits)
 {
     ui->setupUi(this);
@@ -36,6 +41,18 @@ Credits::Credits(QWidget *parent) : QWidget(parent), ui(new Ui::Credits)
 Credits::~Credits()
 {
     delete ui;
+}
+
+// *******************************
+// Other
+// *******************************
+
+/**
+ * Close event
+ */
+void Credits::closeEvent(QCloseEvent *event)
+{
+    highscore->setDisabled(false);
 }
 
 void Credits::changeEvent(QEvent *e)
@@ -53,4 +70,9 @@ void Credits::changeEvent(QEvent *e)
 void Credits::on_pushButton_clicked()
 {
     close();
+    highscore->setDisabled(false);
 }
+
+// ********************************************
+// The End
+// ********************************************

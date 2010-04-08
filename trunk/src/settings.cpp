@@ -24,6 +24,10 @@
 #include "settings.h"
 #include "ui_settings.h"
 
+#include "highscore.h"
+
+extern HighScore *highscore;
+
 // ************************************
 // Constructor & Destructor
 // ************************************
@@ -56,6 +60,14 @@ Settings::~Settings()
 // ************************************
 // Logic
 // ************************************
+
+/**
+ * Close event
+ */
+void Settings::closeEvent(QCloseEvent *event)
+{
+    highscore->setDisabled(false);
+}
 
 /**
  * Encrypt QString (Very easy but unsave approach)
@@ -183,6 +195,7 @@ void Settings::on_cancelButton_pressed()
 {
     readSettings();
     close();
+    highscore->setDisabled(false);
 }
 
 /**
@@ -192,6 +205,7 @@ void Settings::on_OkButton_pressed()
 {
     writeSettings();
     close();
+    highscore->setDisabled(false);
 }
 
 /**

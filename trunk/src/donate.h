@@ -39,9 +39,14 @@ protected:
 
 private:
     Ui::Donate *ui;
+    void closeEvent(QCloseEvent *event);
 
 private slots:
     void on_pushButton_clicked();
 };
 
 #endif // DONATE_H
+
+// ********************************************
+// The End
+// ********************************************

@@ -46,6 +46,7 @@ private:
     void writeSettings();
     void updateScreen();
     void paintEvent();
+    void closeEvent(QCloseEvent *event);
 
 private slots:
     void on_enabledCheckBox_clicked();

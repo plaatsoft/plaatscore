@@ -22,6 +22,11 @@
 #include "donate.h"
 #include "ui_donate.h"
 
+#include "highscore.h"
+
+extern HighScore *highscore;
+
+
 Donate::Donate(QWidget *parent) : QWidget(parent), ui(new Ui::Donate)
 {
     ui->setupUi(this);
@@ -36,6 +41,14 @@ Donate::Donate(QWidget *parent) : QWidget(parent), ui(new Ui::Donate)
 Donate::~Donate()
 {
     delete ui;
+}
+
+/**
+ * Close event
+ */
+void Donate::closeEvent(QCloseEvent *event)
+{
+    highscore->setDisabled(false);
 }
 
 void Donate::changeEvent(QEvent *e)
@@ -53,4 +66,9 @@ void Donate::changeEvent(QEvent *e)
 void Donate::on_pushButton_clicked()
 {
     close();
+    highscore->setDisabled(false);
 }
+
+// ********************************************
+// The End
+// ********************************************

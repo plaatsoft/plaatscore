@@ -40,6 +40,7 @@ protected:
 private:
     Ui::About *ui;
     QGraphicsScene *scene;
+    void closeEvent(QCloseEvent *event);
 
 private slots:
     void on_pushButton_pressed();
