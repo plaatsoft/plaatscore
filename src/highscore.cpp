@@ -92,15 +92,13 @@ void HighScore::closeEvent(QCloseEvent *event)
    writeSettings();
 }
 
-
-
-
-
 /**
  * Parse XML data and fill Qt table
  */
 void HighScore::parseData(QString response)
 {
+    qDebug() << "parseData enter";
+
    // Filter out illigal characters.
    response=response.replace("&","");
    response=response.replace(";","");
@@ -184,6 +182,8 @@ void HighScore::parseData(QString response)
       }
    }
    ui->tableWidget->resizeColumnsToContents();
+
+    qDebug() << "parseData leave";
 }
 
 /**
@@ -250,6 +250,8 @@ void HighScore::setProxy()
  */
 void HighScore::fetchData()
 {
+    qDebug() << "fetchData enter";
+
     // Disable all menu items
     disableMenu(true);
 
@@ -269,6 +271,8 @@ void HighScore::fetchData()
 
     manager->get(request);
     stateMachine=STATE_REQUEST_DATA;
+
+     qDebug() << "fetchData leave";
 }
 
 /**
@@ -276,6 +280,8 @@ void HighScore::fetchData()
  */
 void HighScore::fetchAdd()
 {
+    qDebug() << "fetchAdd enter";
+
     QString tmp;
 
     // Disable all menu items
@@ -308,6 +314,8 @@ void HighScore::fetchAdd()
 
     manager->get(request);
     stateMachine=STATE_REQUEST_DATA;
+
+     qDebug() << "fetchAdd leave";
 }
 
 /**
@@ -315,6 +323,8 @@ void HighScore::fetchAdd()
  */
 void HighScore::fetchVersion()
 {
+    qDebug() << "fetchVersion enter";
+
     // Disable all menu items
     disableMenu(true);
 
@@ -325,6 +335,8 @@ void HighScore::fetchVersion()
 
     manager->get(request);
     stateMachine=STATE_VERSION_CHECK;
+
+     qDebug() << "fetchVersion leave ";
 }
 
 /**
@@ -332,6 +344,8 @@ void HighScore::fetchVersion()
  */
 void HighScore::fetchReleaseNotes()
 {
+    qDebug() << "fetchReleaseNotes enter";
+
     // Disable all menu items
     disableMenu(true);
 
@@ -342,6 +356,8 @@ void HighScore::fetchReleaseNotes()
 
     manager->get(request);
     stateMachine=STATE_RELEASE_NOTES;
+
+     qDebug() << "fetchReleaseNotes leave";
 }
 
 /**
