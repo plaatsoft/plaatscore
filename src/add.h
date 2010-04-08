@@ -34,7 +34,7 @@ public:
     Add(QWidget *parent = 0);
     ~Add();
 
-    void setApplication(QByteArray application);
+    void setApplication(int applId);
     void setName(QString name);
     void setLevel(int level);
     void setScore(int score);
@@ -43,7 +43,7 @@ public:
     void setMap(int map);
     void setAddress(QString address);
 
-    QString getApplication();
+    int getApplication();
     QString getName();
     int getLevel();
     int getScore();
@@ -58,6 +58,7 @@ protected:
 private:
     Ui::Add *ui;
     QWidget *parent1;
+    void closeEvent(QCloseEvent *event);
 
 private slots:
     void on_okPushButton_clicked();
@@ -65,3 +66,7 @@ private slots:
 };
 
 #endif // ADD_H
+
+// ********************************************
+// The End
+// ********************************************

@@ -67,27 +67,35 @@ void Add::changeEvent(QEvent *e)
 void Add::on_cancelPushButton_clicked()
 {
     close();
+    highscore->setDisabled(false);
 }
 
 void Add::on_okPushButton_clicked()
 {
-    highscore->fetchAdd();
     close();
+    highscore->fetchAdd();
+    highscore->setDisabled(false);
+}
+
+// *******************************
+// Other
+// *******************************
+
+/**
+ * Close event
+ */
+void Add::closeEvent(QCloseEvent *event)
+{
+    highscore->setDisabled(false);
 }
 
 // *******************************
 // Getter and Setters
 // *******************************
 
-void Add::setApplication(QByteArray application)
+void Add::setApplication(int applId)
 {
-    if (application.contains("redsquare")) {
-        ui->applicationComboBox->setCurrentIndex(0);
-    } else if (application.contains("spacebubble")) {
-        ui->applicationComboBox->setCurrentIndex(1);
-    } else if (application.contains("towerdefense")) {
-        ui->applicationComboBox->setCurrentIndex(2);
-    }
+    ui->applicationComboBox->setCurrentIndex(applId-1);
 }
 
 void Add::setName(QString name)
@@ -127,21 +135,9 @@ void Add::setAddress(QString address)
     ui->addressEdit->setText(address);
 }
 
-QString Add::getApplication(void)
+int Add::getApplication(void)
 {
-    switch (ui->applicationComboBox->currentIndex())
-    {
-        case 1: return "redsquare";
-                break;
-
-        case 2: return "spacebubble";
-                break;
-
-        case 3: return "towerdefense";
-                break;
-
-        default: return "";
-    }
+    return ui->applicationComboBox->currentIndex()+1;
 }
 
 QString Add::getName()

@@ -93,8 +93,6 @@
      <property name="title">
       <string>Fetch Entries</string>
      </property>
-     <addaction name="actionPong2"/>
-     <addaction name="actionBibleQuiz"/>
      <addaction name="actionRedSquare"/>
      <addaction name="actionSpaceBubble"/>
      <addaction name="actionTowerDefense"/>

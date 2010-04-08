@@ -40,9 +40,14 @@ protected:
 
 private:
     Ui::ReleaseNotes *ui;
+    void closeEvent(QCloseEvent *event);
 
 private slots:
     void on_pushButton_pressed();
 };
 
 #endif // RELEASENOTES_H
+
+// ********************************************
+// The End
+// ********************************************

@@ -254,6 +254,18 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>applicationComboBox</tabstop>
+  <tabstop>scoreSpinBox</tabstop>
+  <tabstop>nameEdit</tabstop>
+  <tabstop>levelSpinBox</tabstop>
+  <tabstop>addressEdit</tabstop>
+  <tabstop>mapSpinBox</tabstop>
+  <tabstop>dateTimeEdit</tabstop>
+  <tabstop>versionEdit</tabstop>
+  <tabstop>okPushButton</tabstop>
+  <tabstop>cancelPushButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

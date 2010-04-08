@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'add.ui'
 **
-** Created: Wed 7. Apr 23:05:33 2010
+** Created: Thu 8. Apr 20:00:05 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -110,6 +110,15 @@ public:
         dateTimeEdit = new QDateTimeEdit(Add);
         dateTimeEdit->setObjectName(QString::fromUtf8("dateTimeEdit"));
         dateTimeEdit->setGeometry(QRect(15, 165, 128, 22));
+        QWidget::setTabOrder(applicationComboBox, scoreSpinBox);
+        QWidget::setTabOrder(scoreSpinBox, nameEdit);
+        QWidget::setTabOrder(nameEdit, levelSpinBox);
+        QWidget::setTabOrder(levelSpinBox, addressEdit);
+        QWidget::setTabOrder(addressEdit, mapSpinBox);
+        QWidget::setTabOrder(mapSpinBox, dateTimeEdit);
+        QWidget::setTabOrder(dateTimeEdit, versionEdit);
+        QWidget::setTabOrder(versionEdit, okPushButton);
+        QWidget::setTabOrder(okPushButton, cancelPushButton);
 
         retranslateUi(Add);
 

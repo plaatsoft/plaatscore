@@ -39,9 +39,14 @@ protected:
 
 private:
     Ui::Credits *ui;
+    void closeEvent(QCloseEvent *event);
 
 private slots:
     void on_pushButton_clicked();
 };
 
 #endif // CREDITS_H
+
+// ********************************************
+// The End
+// ********************************************
