@@ -7,7 +7,7 @@
 
 [Setup]
 AppName=PlaatScore
-AppVerName=PlaatSoft HighScore v0.60
+AppVerName=PlaatSoft HighScore v0.70
 DefaultDirName={pf}\PlaatScore
 DefaultGroupName=PlaatSoft
 UninstallDisplayIcon={app}\HighScore.exe
@@ -29,3 +29,8 @@ Source: "src\release\license.txt"; DestDir: "{app}"; Flags: isreadme
 Name: "{group}\PlaatScore\PlaatScore"; Filename: "{app}\HighScore.exe"
 Name: "{commondesktop}\PlaatSoft HighScore"; Filename: "{app}\HighScore.exe"
 Name: "{group}\PlaatScore\Uninstaller"; Filename: "{uninstallexe}"
+
+[Registry]
+Root: HKCU; Subkey: "Software\PlaatSoft\RedSquare"; ValueName: "target"; ValueData: {app}; ValueType: string;  Flags: uninsdeletekeyifempty
+Root: HKCU; Subkey: "Software\PlaatSoft\RedSquare"; ValueName: "username"; ValueData: {username}; ValueType: string;  Flags: uninsdeletekeyifempty
+
