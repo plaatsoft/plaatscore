@@ -34,7 +34,7 @@
 #include "credits.h"
 #include "add.h"
 
-#define VERSION  "0.60"
+#define VERSION  "0.70"
 
 enum
 {
@@ -146,8 +146,13 @@ private:
  * @section WishList
  *  - Table column sorting.
  *
- * @section ReleaseNotes
- *  <b>08-04-2010 Version 0.60 (Next release)</b>
+ * @section ReleaseNotes  
+ *  <b>26-09-2010 Version 0.70 (Next Development release)</b>
+ *  - Maintenance release.
+ *  - Added Qt 4.7.0 libraries.
+ *  - Build with QtCreator v2.0.0
+ *
+ *  <b>08-04-2010 Version 0.60 </b>
  *  - Added new entry window.
  *  - Added copy row data to new entry window.
  *  - Disable inline table editing.
