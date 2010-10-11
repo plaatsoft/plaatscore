@@ -6,8 +6,13 @@
 ; All Copyrights Reserved (c) PlaatSoft 2008-2010
 
 [Setup]
+AppPublisher=PlaatSoft
+AppPublisherURL=http://www.plaatsoft.nl
 AppName=PlaatScore
 AppVerName=PlaatSoft HighScore v0.70
+AppVersion=0.70
+AppCopyright=Copyright (C) 2008-2010 PlaatSoft
+
 DefaultDirName={pf}\PlaatScore
 DefaultGroupName=PlaatSoft
 UninstallDisplayIcon={app}\HighScore.exe
