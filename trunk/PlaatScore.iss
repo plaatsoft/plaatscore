@@ -9,9 +9,9 @@
 AppPublisher=PlaatSoft
 AppPublisherURL=http://www.plaatsoft.nl
 AppName=PlaatScore
-AppVerName=PlaatSoft HighScore v0.70
-AppVersion=0.70
-AppCopyright=Copyright (C) 2008-2010 PlaatSoft
+AppVerName=PlaatSoft HighScore v1.0
+AppVersion=1.0
+AppCopyright=Copyright (C) 2008-2011 PlaatSoft
 
 DefaultDirName={pf}\PlaatScore
 DefaultGroupName=PlaatSoft

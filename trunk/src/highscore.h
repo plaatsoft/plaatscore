@@ -34,7 +34,7 @@
 #include "credits.h"
 #include "add.h"
 
-#define VERSION  "0.70"
+#define VERSION  "1.0"
 
 enum
 {
@@ -147,24 +147,29 @@ private:
  *  - Table column sorting.
  *
  * @section ReleaseNotes  
- *  <b>26-09-2010 Version 0.70 (Next Development release)</b>
+ *  <b>11-10-2011 Version 1.0</b>
+ *  - Maintenance release.
+ *  - Added Qt 4.7.4 libraries.
+ *  - PlaatScore is build with QtCreator v2.3.0
+ *
+ *  <b>26-09-2010 Version 0.70</b>
  *  - Maintenance release.
  *  - Added Qt 4.7.0 libraries.
- *  - Build with QtCreator v2.0.0
+ *  - PlaatScore is build with QtCreator v2.0.0
  *
  *  <b>08-04-2010 Version 0.60 </b>
  *  - Added new entry window.
  *  - Added copy row data to new entry window.
  *  - Disable inline table editing.
  *  - Disable main window if subwindow is open.
- *  - Build with QtCreator v1.3.1
+ *  - PlaatScore is build with QtCreator v1.3.1
  *
  *  <b>30-03-2010 Version 0.50</b>
  *  - Show popup window when internet connect fails.
  *  - Added release notes window.
  *  - Added donate window.
  *  - Added credits window.
- *  - Build with QtCreator v1.3.1
+ *  - PlaatScore is build with QtCreator v1.3.1
  *
  *  <b>28-03-2010 Version 0.40</b>
  *  - Encrypt / Decrypt entered passwords in windows registry.
@@ -172,7 +177,7 @@ private:
  *  - Improve screen layout.
  *  - Add new version detection.
  *  - Disable menu buttons when http request is executed.
- *  - Build with QtCreator v1.3.1
+ *  - PlaatScore is build with QtCreator v1.3.1
  *
  *  <b>27-03-2010 Version 0.30</b>
  *  - Added support for dynamic xml data.
@@ -180,14 +185,14 @@ private:
  *  - Added popup menu.
  *  - Disable column sorting (Did not work good).
  *  - Improve screen layout.
- *  - Build with QtCreator v1.3.1
+ *  - PlaatScore is build with QtCreator v1.3.1
  *
  *  <b>25-03-2010 Version 0.20</b>
  *  - First release for the windows (Qt) scene.
  *  - Added settings page.
  *  - Added Http Proxy support.
  *  - Cleanup code.
- *  - Build with QtCreator v1.3.1
+ *  - PlaatScore is build with QtCreator v1.3.1
  *
  *  <b>24-03-2010 Version 0.10</b>
  *  - Start building.
@@ -196,5 +201,5 @@ private:
  *  - Added basic about box.
  *  - Load / Save window position on start / exit.
  *  - Added application icon.
- *  - Build with QtCreator v1.3.1
+ *  - PlaatScore is build with QtCreator v1.3.1
  */
