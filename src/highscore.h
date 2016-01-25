@@ -130,7 +130,6 @@ private:
 
 /**
  * @mainpage PlaatScore Documentation
- * @image html PlaatScore.jpg
  * Welcome to the PlaatScore documentation.
  *
  * @section Introduction
